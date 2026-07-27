@@ -1,4 +1,44 @@
 {
+  "Nav": {
+    "about": "The school",
+    "courses": "Classes",
+    "teachers": "Teachers",
+    "results": "Results",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Common": {
+    "call": "Call us",
+    "viewCourses": "See our classes",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address"
+  },
+  "Hero": {
+    "eyebrow": "Tutoring school in Venerato",
+    "titleStart": "We get to know the student",
+    "titleMiddle": "before we teach the",
+    "titleHighlight": "lesson.",
+    "description": "Small classes for middle and high school, weekly updates for parents and teachers who stay beside every student all the way to the national exams.",
+    "highlightGroupSize": "Up to 6 students per class",
+    "highlightLevels": "Middle and high school",
+    "highlightLocation": "In the centre of Venerato",
+    "badgeValue": "9 out of 10",
+    "badgeLabel": "get into the school they wanted",
+    "imageAlt": "Students in a classroom of the school"
+  },
+  "Footer": {
+    "tagline": "Tutoring school for middle and high school in Venerato, Heraklion.",
+    "navTitle": "Navigation",
+    "contactTitle": "Contact",
+    "followTitle": "Follow us",
+    "rights": "All rights reserved."
+  },
+  "Metadata": {
+    "homeTitle": "Peri Paideias, tutoring school in Venerato, Heraklion",
+    "homeDescription": "Small middle and high school classes in Venerato, Heraklion, with personal follow-up for every student all the way to the national exams."
+  },
   "HomePage": {
     "title": "Welcome",
     "description": "Get started by editing this page.",
