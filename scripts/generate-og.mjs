@@ -19,7 +19,18 @@ import puppeteer from "puppeteer";
 import sharp from "sharp";
 
 const url = process.argv[2] || "http://localhost:3000/el";
-const OUTPUT = path.join("app", "[locale]", "opengraph-image.jpg");
+/**
+ * A plain asset in `public/`, NOT Next's `opengraph-image` file convention.
+ *
+ * That convention generates a route, and inside `app/[locale]/` it cannot
+ * enumerate the locales, so it builds as `/-/opengraph-image.jpg` and registers
+ * the prerender under the literal `/[locale]/opengraph-image.jpg`. Local builds
+ * tolerate it; Vercel fails with "Invariant: failed to find source route".
+ * Moving it to the app root builds but emits no tag, because there is no root
+ * `layout.tsx` to attach the metadata to. So the tag is declared by hand in
+ * `app/[locale]/layout.tsx` and this is just a file.
+ */
+const OUTPUT = path.join("public", "og-image.jpg");
 
 const run = async () => {
   const browser = await puppeteer.launch({ headless: true });

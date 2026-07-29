@@ -20,6 +20,15 @@ Rules learned from actual corrections. These are binding.
 
 - **A wrong canonical origin is permanent damage.** Never paste a `*.vercel.app` URL as the site base to unblock a build. Full rule: `.claude/rules/deployment-urls.md`.
 - **`tsc` + `lint` passing does not mean it works.** next-intl message caching, Prisma client staleness, and env-var inlining all survive a green typecheck. Drive the feature in the running app.
+- **A green local `pnpm build` does not mean Vercel will build.** Vercel validates the prerender manifest more strictly than `next build` does. The tell is `Invariant: failed to find source route X for prerender X`. Check it locally without deploying:
+
+  ```bash
+  rm -rf .next && pnpm build
+  node -e "const r=Object.keys(require('./.next/prerender-manifest.json').routes); console.log(r.filter(x=>x.includes('[')||x.includes('/-/')))"
+  ```
+
+  Every PRERENDERED route must be concrete. A `[param]` or `/-/` in that list is the bug (placeholders under `dynamicRoutes` are normal). Also `rm -rf .next` first, since a warm cache hides it.
+- **Never put `opengraph-image.*` inside `app/[locale]/`.** A metadata image route does not inherit `generateStaticParams` from the layout above it, so Next cannot enumerate the locales, builds it as `/-/opengraph-image.jpg` and registers the prerender under the literal `/[locale]/opengraph-image.jpg`, which is exactly the invariant above. Moving it to the app root builds fine and then silently emits **no tag at all**, because there is no root `layout.tsx` for the metadata to attach to (`favicon.ico` survives there only because icons are injected separately). Put the file in `public/` and declare `openGraph.images` by hand in the locale layout. Verify the tag, not just the build: `curl -s localhost:3000/el | grep og:image`.
 - **Restart the dev server** after changing `messages/*.json`, the Prisma schema, or any `NEXT_PUBLIC_*` variable. A running server holds stale caches and will lie to you.
 - **Never run a second `pnpm dev` while one is already up.** Next falls back to port 3001, both instances write the same `.next` directory, and the manifests corrupt: every route then 500s with `SyntaxError: Unexpected non-whitespace character after JSON`. Recovery is kill every `next dev` process, `rm -rf .next`, start exactly one. Before starting one, check: `netstat -ano | grep LISTENING | grep :300`.
 - **"It did not update" is often a ghost service worker, not the code.** Another project

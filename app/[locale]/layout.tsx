@@ -40,6 +40,30 @@ const mansalva = Mansalva({
 /** BCP 47 tags for hreflang and og:locale, keyed by the routing locale. */
 const OG_LOCALE = { el: "el_GR", en: "en_US" } as const;
 
+/**
+ * The share card, declared explicitly rather than through Next's
+ * `opengraph-image` file convention.
+ *
+ * That convention generates a route, and inside the dynamic `[locale]` segment
+ * it cannot enumerate the locales, because a metadata image route does not
+ * inherit `generateStaticParams` from the layout above it. It builds as
+ * `/-/opengraph-image.jpg` with an unfilled param and registers the prerender
+ * under the literal `/[locale]/opengraph-image.jpg`. A local build tolerates
+ * that; the Vercel adapter fails with "Invariant: failed to find source route".
+ * Moving the file to the app root builds, but silently emits no tag at all,
+ * because there is no root `layout.tsx` for the metadata to attach to.
+ *
+ * A plain file in `public/` sidesteps all of it: no generated route, nothing in
+ * the prerender manifest, and the path resolves to an absolute URL through
+ * `metadataBase`.
+ */
+const OG_IMAGE = (alt: string) => ({
+  url: "/og-image.jpg",
+  width: 1920,
+  height: 1080,
+  alt,
+});
+
 export const generateMetadata = async ({ params }: BaseLayoutProps): Promise<Metadata> => {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
@@ -82,11 +106,15 @@ export const generateMetadata = async ({ params }: BaseLayoutProps): Promise<Met
         .map((code) => OG_LOCALE[code as keyof typeof OG_LOCALE]),
       title,
       description,
+      images: [OG_IMAGE(t("ogImageAlt"))],
       ...(SITE_URL ? { url: `${SITE_URL}/${locale}` } : {}),
     },
-    /* The image itself comes from `app/[locale]/opengraph-image.jpg`, which Next
-       resolves into both og:image and twitter:image on its own. */
-    twitter: { card: "summary_large_image", title, description },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [OG_IMAGE(t("ogImageAlt"))],
+    },
   };
 };
 
