@@ -83,6 +83,7 @@ Radix's Viewport uses `display: table` internally, which breaks height calculati
 - CSS variables live in `app/[locale]/globals.css` (including brand colors like `--forest`, `--leaf`, `--cream`). Dark mode via `next-themes`, class strategy, `@custom-variant dark (&:is(.dark *))`.
 - **Semantic tokens only:** `text-foreground`, `bg-background`. Never raw color values. New brand colors become CSS variables with semantic names, referenced as `bg-forest` or `text-leaf`.
 - **Tailwind 4 canonical class names:** `z-100` not `z-[100]`, `bg-linear-to-t` not `bg-gradient-to-t`.
+- **Anything positioned against `clamp()` text is offset in `em`, never `rem`.** The headings run `text-[clamp(2.35rem,7vw,4.75rem)]`, so a fixed `-bottom-1` that clears the descenders on a phone sits straight through the letters on a desktop. This bit the chalk underline under the hero word. Same rule for decorations tied to any fluid type: `-bottom-[0.17em]`, not `-bottom-1`.
 - **Transitions use `transition-all duration-300` or `transition-colors`** on interactive elements, so nothing changes state abruptly. Animate `transform` and `opacity` only, never width/height/top/left.
 - **Never toggle a CSS property on/off under `transition-all`.** Toggling `border-b` flickers because the property appears and disappears. Keep it present and toggle the VALUE: `border-transparent` to `border-border`.
 

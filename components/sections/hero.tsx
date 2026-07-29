@@ -69,7 +69,10 @@ export const Hero = async () => {
                 <span className="relative z-10 font-chalk text-[1.06em] leading-none text-yellow">
                   {t("titleEmphasis")}
                 </span>
-                <ChalkUnderline className="absolute -bottom-1 left-[-2%] h-[0.42em] w-[104%] text-yellow" />
+                {/* Offset in em, not rem: the heading scales from 2.35rem to
+                    4.75rem, and a fixed offset that clears the descenders at one
+                    end sits through the letters at the other. */}
+                <ChalkUnderline className="absolute -bottom-[0.17em] left-[-2%] h-[0.42em] w-[104%] text-yellow" />
               </span>{" "}
               {t("titleAfter")}
             </span>
