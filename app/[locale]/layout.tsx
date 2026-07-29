@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { EB_Garamond,Roboto } from "next/font/google";
+import { Alegreya_Sans, Mansalva, Sofia_Sans_Condensed } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getMessages,setRequestLocale } from "next-intl/server";
@@ -12,16 +12,29 @@ import { SITE_URL } from "@/lib/general/site-url";
 import { routing } from "@/lib/i18n/routing";
 import { BaseLayoutProps } from "@/types/page-props";
 
-const roboto = Roboto({
-  variable: "--font-roboto",
+/* Every face here was picked for its Greek, not its Latin. Sofia Sans Condensed
+   carries the headlines the way the condensed yellow band of the logo does,
+   Alegreya Sans is a humanist text face that stays readable as light-on-dark,
+   and Mansalva is the hand that writes on the board. */
+const sofiaCondensed = Sofia_Sans_Condensed({
+  variable: "--font-sofia-condensed",
   subsets: ["latin", "greek"],
-  weight: ["400", "500", "700"],
+  weight: ["600", "700", "800", "900"],
+  display: "swap",
 });
 
-const ebGaramond = EB_Garamond({
-  variable: "--font-eb-garamond",
+const alegreyaSans = Alegreya_Sans({
+  variable: "--font-alegreya-sans",
   subsets: ["latin", "greek"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+});
+
+const mansalva = Mansalva({
+  variable: "--font-mansalva",
+  subsets: ["latin", "greek"],
+  weight: ["400"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -47,7 +60,9 @@ const LocaleLayout = async ({ children, params }: BaseLayoutProps) => {
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${roboto.variable} ${ebGaramond.variable} font-sans antialiased`}>
+      <body
+        className={`${alegreyaSans.variable} ${sofiaCondensed.variable} ${mansalva.variable} font-sans antialiased`}
+      >
         <Providers messages={messages} locale={locale}>
           {children}
         </Providers>

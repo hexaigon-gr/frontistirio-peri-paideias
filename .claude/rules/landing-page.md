@@ -10,6 +10,27 @@ paths:
 
 # Landing Page Patterns
 
+## The brand is a blackboard
+
+Design context lives in `.impeccable.md` and is binding. The short version:
+
+- Master assets are `logo/image.png` and `photos/image.png` (the client's roll-up
+  banners). Derived assets in `public/images/` were cut from them: `logo/wordmark.png`,
+  `logo/chalk-sticks.png`, `texture/blackboard.jpg`.
+- Palette tokens live in `globals.css`: `board-deep/board/board-soft`, `chalk/chalk-dim/chalk-faint`,
+  `yellow`, and the coloured chalks `sky`, `rose`, `violet`. Never introduce a colour
+  that is not in the logo or the banners.
+- `.on-board` remaps the shadcn tokens to the slate palette. Put it on the site wrapper,
+  never on admin routes.
+- Fonts: **Sofia Sans Condensed** (display), **Alegreya Sans** (body), **Mansalva**
+  (the handwritten chalk accent). All three were chosen for their Greek, and all three
+  need `subsets: ["latin", "greek"]`. Only 118 Google fonts ship a Greek subset and only
+  4 of those are handwriting faces, so check before swapping any of them:
+  `fonts.google.com/metadata/fonts`, filter `subsets.includes("greek")`.
+- Chalk marks are hand-authored SVG paths in `components/chalk/chalk-marks.tsx`, roughened
+  by the `chalk-rough` filter. Never replace them with an icon set.
+- Yellow is emphasis only. If everything is yellow, nothing is.
+
 - **Business constants live in `lib/general/constants.ts`:** phone, email, address, social URLs, map coordinates, opening hours. One exported object. Never scatter these as magic strings across components.
 - **Server/client split** for sections that need i18n plus interactivity. See `.claude/rules/i18n.md`.
 - **Navbar:** fixed, transparent over the hero, solid on scroll. Keep the border always present and toggle `border-transparent` to `border-border`. Never toggle `border-b` on and off, because it flickers.

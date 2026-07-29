@@ -6,16 +6,24 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-roboto);
-  --font-display: var(--font-eb-garamond);
+  --font-sans: var(--font-alegreya-sans);
+  --font-display: var(--font-sofia-condensed);
+  --font-chalk: var(--font-mansalva);
 
-  /* Brand palette, taken from the logo: charcoal #282828 and yellow #f8b800 */
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-amber: var(--amber);
-  --color-amber-deep: var(--amber-deep);
-  --color-paper: var(--paper);
+  /* Brand palette, sampled from the logo and the roll-up banners: blackboard
+     slate, chalk white, the yellow of the set square, and the three chalk
+     colours the banner doodles are drawn in. */
+  --color-board-deep: var(--board-deep);
+  --color-board: var(--board);
+  --color-board-soft: var(--board-soft);
   --color-chalk: var(--chalk);
+  --color-chalk-dim: var(--chalk-dim);
+  --color-chalk-faint: var(--chalk-faint);
+  --color-yellow: var(--yellow);
+  --color-yellow-soft: var(--yellow-soft);
+  --color-sky: var(--sky);
+  --color-rose: var(--rose);
+  --color-violet: var(--violet);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -55,15 +63,25 @@
 }
 
 :root {
-  /* Brand palette, taken from the logo: charcoal #282828 and yellow #f8b800.
-     `amber` is a fill colour only, because it fails contrast as text on paper.
-     Use `amber-deep` when yellow has to carry text. */
-  --ink: oklch(0.277 0.004 80);
-  --ink-soft: oklch(0.4 0.006 80);
-  --amber: oklch(0.82 0.168 83);
-  --amber-deep: oklch(0.62 0.135 68);
-  --paper: oklch(0.979 0.007 89);
-  --chalk: oklch(0.86 0.055 320);
+  /* Blackboard surfaces. The neutrals are tinted toward the brand yellow
+     (hue 85) so slate and chalk read as one material rather than grey on grey. */
+  --board-deep: oklch(0.185 0.005 85);
+  --board: oklch(0.262 0.006 85);
+  --board-soft: oklch(0.325 0.007 85);
+
+  /* Chalk is never pure white. It is warm and dusty. */
+  --chalk: oklch(0.955 0.005 85);
+  --chalk-dim: oklch(0.795 0.006 85);
+  --chalk-faint: oklch(0.62 0.007 85);
+
+  /* The yellow of the set square in the logo, #ebaf09. Emphasis only. */
+  --yellow: oklch(0.802 0.163 83);
+  --yellow-soft: oklch(0.88 0.105 88);
+
+  /* Coloured chalks from the banner doodles: turquoise, pink, violet. */
+  --sky: oklch(0.795 0.078 208);
+  --rose: oklch(0.81 0.062 329);
+  --violet: oklch(0.66 0.095 305);
 
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -150,5 +168,119 @@ html body[data-scroll-locked] {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* ── Blackboard scope ──
+   Everything inside the marketing site sits on slate, so the shadcn tokens are
+   remapped once here instead of being overridden component by component. The
+   admin panel lives outside this scope and keeps the default light tokens. */
+.on-board {
+  --background: var(--board);
+  --foreground: var(--chalk);
+  --card: var(--board-soft);
+  --card-foreground: var(--chalk);
+  --popover: var(--board-soft);
+  --popover-foreground: var(--chalk);
+  --primary: var(--yellow);
+  --primary-foreground: var(--board-deep);
+  --secondary: var(--board-soft);
+  --secondary-foreground: var(--chalk);
+  --muted: var(--board-soft);
+  --muted-foreground: var(--chalk-dim);
+  --accent: var(--board-soft);
+  --accent-foreground: var(--chalk);
+  --border: color-mix(in oklch, var(--chalk) 16%, transparent);
+  --input: color-mix(in oklch, var(--chalk) 22%, transparent);
+  --ring: var(--yellow);
+
+  background-color: var(--board);
+  color: var(--chalk);
+}
+
+/* Photographed slate lifted out of the client's own logo file, mirror-tiled so
+   it repeats without a seam. Multiply keeps the grain in the shadows and stops
+   the tile from lightening the surface. */
+.board-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/texture/blackboard.jpg");
+  background-size: 800px auto;
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Chalk dust: brighter toward the middle of the board where hands rub it,
+   darker at the edges, plus two faint sweeps left behind by the eraser. */
+.board-dust::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      110% 80% at 50% 42%,
+      color-mix(in oklch, var(--chalk) 7%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      60% 26% at 22% 74%,
+      color-mix(in oklch, var(--chalk) 5%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 20% at 82% 26%,
+      color-mix(in oklch, var(--chalk) 4%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(120% 100% at 50% 50%, transparent 45%, var(--board-deep) 100%);
+}
+
+/* ── Chalk strokes ──
+   Hand-drawn SVG paths draw themselves on, the way a teacher underlines a word
+   after saying it. The dash length is set per path with --stroke-length. */
+@keyframes chalk-draw {
+  from {
+    stroke-dashoffset: var(--stroke-length);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.9rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.chalk-stroke {
+  stroke-dasharray: var(--stroke-length);
+  stroke-dashoffset: var(--stroke-length);
+  animation: chalk-draw 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--stroke-delay, 0s);
+}
+
+.rise-in {
+  opacity: 0;
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--rise-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chalk-stroke,
+  .rise-in {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms;
+    opacity: 1;
+    stroke-dashoffset: 0;
   }
 }

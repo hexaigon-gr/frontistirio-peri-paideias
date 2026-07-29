@@ -2,18 +2,14 @@
  * Every business detail the site renders comes from here. Never scatter a phone
  * number, address or social URL across components.
  *
- * Values marked PLACEHOLDER are invented and MUST be replaced with the real ones
- * before the site goes live. Only the social URLs and the area are confirmed.
+ * The staff, the mobile numbers and the slogan are taken from the client's own
+ * roll-up banners (`photos/image.png`). Values marked PLACEHOLDER are still
+ * invented and MUST be replaced before the site goes live.
  */
 export const BUSINESS = {
   name: "Περί Παιδείας",
   legalName: "Περί Παιδείας, Φροντιστήριο Μέσης Εκπαίδευσης",
-
-  /** PLACEHOLDER */
-  phone: {
-    display: "2810 000 000",
-    href: "tel:+302810000000",
-  },
+  slogan: "Μαζί σχεδιάζουμε το Μέλλον σας!",
 
   /** PLACEHOLDER */
   email: "info@example.gr",
@@ -39,6 +35,26 @@ export const BUSINESS = {
   },
 } as const;
 
+/**
+ * Διεύθυνση σπουδών. The first entry is the number the main call button dials.
+ */
+export const STAFF = [
+  {
+    key: "manthaiaki",
+    name: "Μανθαιάκη Μαρία",
+    role: "Φιλόλογος",
+    phone: { display: "698 163 9440", href: "tel:+306981639440" },
+  },
+  {
+    key: "karatzis",
+    name: "Καρατζής Βασίλης",
+    role: "Μαθηματικός",
+    phone: { display: "697 923 6257", href: "tel:+306979236257" },
+  },
+] as const;
+
+export const PRIMARY_PHONE = STAFF[0].phone;
+
 /** Route slugs, shared by the navbar, the footer and the sitemap. */
 export const ROUTES = {
   home: "/",
@@ -56,3 +72,6 @@ export const NAV_LINKS = [
   { key: "results", href: ROUTES.results },
   { key: "contact", href: ROUTES.contact },
 ] as const;
+
+/** Anchor for the contact block in the footer, used by the hero's second CTA. */
+export const CONTACT_ANCHOR = "epikoinonia";

@@ -5,31 +5,49 @@
     "teachers": "Teachers",
     "results": "Results",
     "contact": "Contact",
+    "call": "Call us",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
   "Common": {
     "call": "Call us",
-    "viewCourses": "See our classes",
     "phone": "Phone",
     "email": "Email",
     "address": "Address"
   },
   "Hero": {
-    "eyebrow": "Tutoring school in Venerato",
-    "titleStart": "We get to know the student",
-    "titleMiddle": "before we teach the",
-    "titleHighlight": "lesson.",
-    "description": "Small classes for middle and high school, weekly updates for parents and teachers who stay beside every student all the way to the national exams.",
-    "highlightGroupSize": "Up to 6 students per class",
-    "highlightLevels": "Middle and high school",
-    "highlightLocation": "In the centre of Venerato",
-    "badgeValue": "9 out of 10",
-    "badgeLabel": "get into the school they wanted",
-    "imageAlt": "Students in a classroom of the school"
+    "eyebrow": "Tutoring school · Venerato, Heraklion",
+    "titleBefore": "We design your",
+    "titleEmphasis": "Future",
+    "titleAfter": "together.",
+    "description": "A philologist and a mathematician, beside the children of Malevizi from the first year of middle school to the national exams. The phone rings with us, not with a front desk.",
+    "secondaryCta": "Where to find us",
+    "staffTitle": "Head of studies"
+  },
+  "Pages": {
+    "about": {
+      "title": "The school",
+      "intro": "Our history, our approach and our rooms are being written for this page. Until then, call us and we will tell you first hand."
+    },
+    "courses": {
+      "title": "Classes",
+      "intro": "The middle and high school classes, the subjects and the timetable are going up here. Call us and ask what runs for your child's year."
+    },
+    "teachers": {
+      "title": "Teachers",
+      "intro": "The teaching staff will be introduced on this page shortly. The head of studies is listed on the home page and in the footer."
+    },
+    "results": {
+      "title": "Results",
+      "intro": "Our students' results are going up here, with names and schools. We publish only what we can back up."
+    },
+    "contact": {
+      "title": "Contact",
+      "intro": "We are in Venerato, Heraklion. The head of studies numbers ring straight through to us, with no front desk in between."
+    }
   },
   "Footer": {
-    "tagline": "Tutoring school for middle and high school in Venerato, Heraklion.",
+    "tagline": "Tutoring school for middle and high school in Venerato, Heraklion, with teachers who know every child by name.",
     "navTitle": "Navigation",
     "contactTitle": "Contact",
     "followTitle": "Follow us",
@@ -37,18 +55,7 @@
   },
   "Metadata": {
     "homeTitle": "Peri Paideias, tutoring school in Venerato, Heraklion",
-    "homeDescription": "Small middle and high school classes in Venerato, Heraklion, with personal follow-up for every student all the way to the national exams."
-  },
-  "HomePage": {
-    "title": "Welcome",
-    "description": "Get started by editing this page.",
-    "components": {
-      "title": "Available Components",
-      "button": "Button",
-      "input": "Input",
-      "card": "Card",
-      "label": "Label"
-    }
+    "homeDescription": "Tutoring school for middle and high school in Venerato, Heraklion, with a philologist and a mathematician beside every student up to the national exams."
   },
   "Admin": {
     "nav": {

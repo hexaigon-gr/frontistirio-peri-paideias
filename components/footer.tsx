@@ -1,12 +1,17 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
 import { FacebookIcon, InstagramIcon } from "@/components/brand-icons";
 import { SocialIcon } from "@/components/social-icon";
-import { BUSINESS, NAV_LINKS } from "@/lib/general/constants";
+import { BUSINESS, CONTACT_ANCHOR, NAV_LINKS, STAFF } from "@/lib/general/constants";
 import { Link } from "@/lib/i18n/navigation";
 
+/**
+ * Only verified details are printed here. The street address, the postal code
+ * and the email are still placeholders in `constants.ts`, so they are left out
+ * rather than published as invented facts.
+ */
 const Footer = async () => {
   const t = await getTranslations("Footer");
   const tNav = await getTranslations("Nav");
@@ -14,29 +19,46 @@ const Footer = async () => {
   const { address } = BUSINESS;
 
   return (
-    <footer className="border-t border-ink/10 bg-ink text-paper">
-      <div className="mx-auto grid w-full max-w-7xl gap-12 px-6 py-16 md:grid-cols-2 lg:grid-cols-4">
-        <div className="lg:col-span-2">
+    <footer id={CONTACT_ANCHOR} className="board-texture relative overflow-hidden bg-board-deep">
+      <div className="relative mx-auto grid w-full max-w-[84rem] gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 lg:grid-cols-12 lg:py-20">
+        <div className="lg:col-span-5">
           <Image
-            src="/images/logo/wordmark-light.png"
+            src="/images/logo/wordmark.png"
             alt={BUSINESS.name}
-            width={565}
-            height={237}
-            className="h-12 w-auto"
+            width={1459}
+            height={616}
+            className="h-14 w-auto"
           />
-          <p className="mt-6 max-w-sm text-sm leading-relaxed text-paper/60">{t("tagline")}</p>
+          <p className="mt-7 max-w-[42ch] leading-relaxed text-chalk-dim">{t("tagline")}</p>
+
+          {/* `color="board"` is deliberately not a key in SocialIcon's map, so the
+              buttons fall back to the primary tint and stay chalk-and-yellow.
+              The saturated Facebook blue is the only foreign colour on a
+              blackboard and it wrecks the palette. */}
+          <div className="mt-8 flex gap-3">
+            <SocialIcon
+              url={BUSINESS.social.facebook}
+              color="board"
+              icon={<FacebookIcon className="size-5" />}
+              isMobile
+            />
+            <SocialIcon
+              url={BUSINESS.social.instagram}
+              color="board"
+              icon={<InstagramIcon className="size-5" />}
+              isMobile
+            />
+          </div>
         </div>
 
-        <div>
-          <h2 className="text-sm font-semibold tracking-wide text-amber uppercase">
-            {t("navTitle")}
-          </h2>
+        <div className="lg:col-span-3">
+          <h2 className="font-chalk text-xl text-yellow">{t("navTitle")}</h2>
           <ul className="mt-5 space-y-3">
             {NAV_LINKS.map((link) => (
               <li key={link.key}>
                 <Link
                   href={link.href}
-                  className="text-sm text-paper/70 transition-colors hover:text-amber"
+                  className="text-chalk-dim transition-colors duration-200 hover:text-yellow"
                 >
                   {tNav(link.key)}
                 </Link>
@@ -45,61 +67,36 @@ const Footer = async () => {
           </ul>
         </div>
 
-        <div>
-          <h2 className="text-sm font-semibold tracking-wide text-amber uppercase">
-            {t("contactTitle")}
-          </h2>
-          <ul className="mt-5 space-y-3 text-sm text-paper/70">
-            <li>
-              <a
-                href={BUSINESS.phone.href}
-                className="flex items-center gap-2.5 transition-colors hover:text-amber"
-              >
-                <Phone className="size-4 shrink-0 text-amber" />
-                {BUSINESS.phone.display}
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${BUSINESS.email}`}
-                className="flex items-center gap-2.5 transition-colors hover:text-amber"
-              >
-                <Mail className="size-4 shrink-0 text-amber" />
-                {BUSINESS.email}
-              </a>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-amber" />
-              <span>
-                {address.street}, {address.area}
-                <br />
-                {address.postalCode} {address.city}
-              </span>
-            </li>
+        <div className="lg:col-span-4">
+          <h2 className="font-chalk text-xl text-yellow">{t("contactTitle")}</h2>
+
+          <ul className="mt-5 space-y-5">
+            {STAFF.map((person) => (
+              <li key={person.key}>
+                <p className="font-display text-lg font-bold text-chalk">{person.name}</p>
+                <p className="text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
+                  {person.role}
+                </p>
+                <a
+                  href={person.phone.href}
+                  className="mt-1.5 flex items-center gap-2.5 font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
+                >
+                  <Phone className="size-4 shrink-0 text-yellow" strokeWidth={2.5} />
+                  {person.phone.display}
+                </a>
+              </li>
+            ))}
           </ul>
 
-          <h2 className="mt-8 text-sm font-semibold tracking-wide text-amber uppercase">
-            {t("followTitle")}
-          </h2>
-          <div className="mt-4 flex gap-3">
-            <SocialIcon
-              url={BUSINESS.social.facebook}
-              color="facebook"
-              icon={<FacebookIcon className="size-5" />}
-              isMobile
-            />
-            <SocialIcon
-              url={BUSINESS.social.instagram}
-              color="instagram"
-              icon={<InstagramIcon className="size-5" />}
-              isMobile
-            />
-          </div>
+          <p className="mt-6 flex items-start gap-2.5 text-chalk-dim">
+            <MapPin className="mt-0.5 size-4 shrink-0 text-yellow" />
+            {address.area}, {address.city}
+          </p>
         </div>
       </div>
 
-      <div className="border-t border-paper/10">
-        <div className="mx-auto w-full max-w-7xl px-6 py-6 text-center text-xs text-paper/50">
+      <div className="relative border-t border-chalk/10">
+        <div className="mx-auto w-full max-w-[84rem] px-5 py-6 text-center text-xs text-chalk-faint sm:px-8">
           © {year} {BUSINESS.legalName}. {t("rights")}
         </div>
       </div>
