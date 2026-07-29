@@ -66,3 +66,44 @@ const resolveSiteUrl = (): string | null => {
 };
 
 export const SITE_URL = resolveSiteUrl();
+
+/**
+ * The origin used ONLY to turn relative asset paths into absolute ones, which
+ * in practice means `metadataBase` and therefore the og:image and
+ * twitter:image URLs.
+ *
+ * THIS IS NOT THE CANONICAL ORIGIN AND MUST NEVER BE USED AS ONE. Keep it out
+ * of `robots.ts`, `sitemap.ts`, `alternates.canonical`, hreflang and JSON-LD:
+ * those stay on `SITE_URL` and stay absent until the real domain exists.
+ *
+ * Why it may fall back to the Vercel host when `SITE_URL` is null, when the
+ * rest of this file exists to stop exactly that: a share image has to be
+ * fetchable or it is not a share image. With no `metadataBase`, Next resolves
+ * og:image against `http://localhost:3000`, which every scraper fails to fetch,
+ * so the card silently renders with no image at all.
+ *
+ * The rule's invariant is "nothing is ever indexed under an origin that is not
+ * the real one". That still holds here: with no canonical origin every page
+ * ships `noindex, nofollow`, robots.txt disallows everything, the sitemap is
+ * empty and no canonical or hreflang tag is emitted. An image URL on a page no
+ * crawler may index cannot be indexed either. And if someone shares the Vercel
+ * link, the Vercel host is genuinely the right origin for that image.
+ *
+ * `VERCEL_PROJECT_PRODUCTION_URL` is preferred over `VERCEL_URL` because the
+ * latter changes on every single deployment, which would break the preview of
+ * any link shared more than a few minutes ago.
+ */
+const resolveAssetOrigin = (): string | null => {
+  if (SITE_URL) return SITE_URL;
+
+  const vercelHost =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() || process.env.VERCEL_URL?.trim();
+
+  if (vercelHost) return `https://${vercelHost.replace(/^https?:\/\//, "")}`;
+
+  if (process.env.NODE_ENV !== "production") return DEV_SITE_URL;
+
+  return null;
+};
+
+export const ASSET_ORIGIN = resolveAssetOrigin();

@@ -21,8 +21,23 @@ The invariant to protect is that **no content is ever indexed under an origin th
 | --- | --- |
 | `app/robots.ts` | `User-Agent: * / Disallow: /`, no `Sitemap:` line |
 | `app/sitemap.ts` | empty `<urlset>` |
-| `app/[locale]/layout.tsx` | no `metadataBase`, `robots: { index: false, follow: false }` |
+| `app/[locale]/layout.tsx` | `robots: { index: false, follow: false }`, no canonical, no hreflang |
 | `components/seo/school-jsonld.tsx` | renders `null` |
+
+### The one exception: `ASSET_ORIGIN` and `metadataBase`
+
+`metadataBase` is NOT a canonical signal. It exists only to turn a relative asset path into an absolute one, which here means the og:image and twitter:image URLs. It gets its own export, `ASSET_ORIGIN`, which prefers `SITE_URL` and falls back to `VERCEL_PROJECT_PRODUCTION_URL` (then `VERCEL_URL`).
+
+This is the single place a `*.vercel.app` host may legitimately appear, and it is not a loophole to widen:
+
+- Leaving `metadataBase` unset does not produce "no image", it produces a **wrong** one. Next silently resolves og:image against `http://localhost:3000`, which no scraper can fetch, so every shared link renders with a blank card and nothing warns you at runtime.
+- The invariant still holds. With no canonical origin the page is `noindex, nofollow`, robots.txt disallows everything, the sitemap is empty and no canonical or hreflang is emitted. An image on a page no crawler may index cannot be indexed either.
+- If someone shares the Vercel link, the Vercel host genuinely IS the correct origin for that image.
+- `VERCEL_PROJECT_PRODUCTION_URL` is preferred over `VERCEL_URL` because the latter changes on every deployment, breaking the preview of any link shared more than minutes ago.
+
+The moment `NEXT_PUBLIC_SITE_URL` is set, `ASSET_ORIGIN` returns it and the Vercel host disappears from the output entirely. Verified: with the real domain set, `vercel.app` appears zero times in the rendered page even with the Vercel env vars still present.
+
+**Do not route robots, sitemap, canonical, hreflang or JSON-LD through `ASSET_ORIGIN`.** Those stay on `SITE_URL` and stay absent until the domain exists.
 
 Setting the variable to the real domain flips all four on at once. The build log prints a loud `[site-url]` warning whenever it runs in this mode, so the state is never silent.
 

@@ -8,7 +8,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 
 import { Providers } from "@/components/providers";
 import { BUSINESS } from "@/lib/general/constants";
-import { SITE_URL } from "@/lib/general/site-url";
+import { ASSET_ORIGIN, SITE_URL } from "@/lib/general/site-url";
 import { routing } from "@/lib/i18n/routing";
 import { BaseLayoutProps } from "@/types/page-props";
 
@@ -52,9 +52,14 @@ export const generateMetadata = async ({ params }: BaseLayoutProps): Promise<Met
        until the real domain is set. `alternates` is omitted for the same
        reason: hreflang has to be absolute, and a guessed origin in it is worse
        than no hreflang. See `.claude/rules/deployment-urls.md`. */
+    /* `metadataBase` resolves the og:image path and nothing else, so it uses
+       ASSET_ORIGIN, which falls back to the deployment host. Without it Next
+       resolves the share image against localhost and every scraper fails to
+       fetch it. The canonical identity below is a different question and stays
+       on SITE_URL. */
+    ...(ASSET_ORIGIN ? { metadataBase: new URL(ASSET_ORIGIN) } : {}),
     ...(SITE_URL
       ? {
-          metadataBase: new URL(SITE_URL),
           alternates: {
             canonical: `${SITE_URL}/${locale}`,
             languages: Object.fromEntries(
