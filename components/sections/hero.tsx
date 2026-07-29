@@ -1,4 +1,4 @@
-import { MapPin, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
@@ -12,7 +12,8 @@ import {
   ChalkPlus,
   ChalkUnderline,
 } from "@/components/chalk/chalk-marks";
-import { CONTACT_ANCHOR, PRIMARY_PHONE, STAFF } from "@/lib/general/constants";
+import { FOUNDERS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
+import { Link } from "@/lib/i18n/navigation";
 
 const delay = (seconds: number) => ({ "--rise-delay": `${seconds}s` }) as CSSProperties;
 
@@ -132,16 +133,16 @@ export const Hero = async () => {
               <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
             </a>
 
-            <a
-              href={`#${CONTACT_ANCHOR}`}
+            <Link
+              href={ROUTES.about}
               className="group flex cursor-pointer items-center justify-center gap-2.5 px-2 py-3 text-base font-medium text-chalk-dim transition-colors duration-200 hover:text-chalk sm:justify-start"
             >
-              <MapPin className="size-4.5 shrink-0 text-chalk-faint transition-colors duration-200 group-hover:text-yellow" />
               <span className="relative">
                 {t("secondaryCta")}
                 <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-chalk/50 transition-transform duration-300 group-hover:scale-x-100" />
               </span>
-            </a>
+              <ArrowRight className="size-4.5 shrink-0 text-chalk-faint transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-yellow" />
+            </Link>
           </div>
         </div>
 
@@ -155,7 +156,7 @@ export const Hero = async () => {
           <ChalkRule className="mt-2 h-1.5 w-40 text-yellow/60" />
 
           <ul className="mt-7 space-y-7">
-            {STAFF.map((person) => (
+            {FOUNDERS.map((person) => (
               <li key={person.key}>
                 <p className="font-display text-2xl font-bold text-chalk sm:text-[1.75rem]">
                   {person.name}

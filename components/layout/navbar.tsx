@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 import { LocaleSwitch } from "@/components/layout/locale-switch";
-import { BUSINESS, NAV_LINKS, PRIMARY_PHONE, ROUTES, STAFF } from "@/lib/general/constants";
+import { BUSINESS, FOUNDERS, NAV_LINKS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
 import { cn } from "@/lib/general/utils";
 import { Link } from "@/lib/i18n/navigation";
 
@@ -168,7 +168,7 @@ export const Navbar = () => {
         </nav>
 
         <div className="relative mt-auto space-y-4 p-6">
-          {STAFF.map((person) => (
+          {FOUNDERS.map((person) => (
             <a
               key={person.key}
               href={person.phone.href}

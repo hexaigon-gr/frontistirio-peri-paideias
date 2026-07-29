@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 import { FacebookIcon, InstagramIcon } from "@/components/brand-icons";
 import { SocialIcon } from "@/components/social-icon";
-import { BUSINESS, CONTACT_ANCHOR, NAV_LINKS, STAFF } from "@/lib/general/constants";
+import { BUSINESS, FOUNDERS, NAV_LINKS } from "@/lib/general/constants";
 import { Link } from "@/lib/i18n/navigation";
 
 /**
@@ -20,7 +20,7 @@ const Footer = async () => {
   const { address } = BUSINESS;
 
   return (
-    <footer id={CONTACT_ANCHOR} className="board-texture relative overflow-hidden bg-board-deep">
+    <footer className="board-texture relative overflow-hidden bg-board-deep">
       <div className="relative mx-auto grid w-full max-w-[84rem] gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-5">
           <Image
@@ -72,7 +72,7 @@ const Footer = async () => {
           <h2 className="font-chalk text-xl text-yellow">{t("contactTitle")}</h2>
 
           <ul className="mt-5 space-y-5">
-            {STAFF.map((person) => (
+            {FOUNDERS.map((person) => (
               <li key={person.key}>
                 <p className="font-display text-lg font-bold text-chalk">{person.name}</p>
                 <p className="text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">

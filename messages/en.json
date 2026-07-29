@@ -1,9 +1,9 @@
 {
   "Nav": {
-    "about": "The school",
-    "courses": "Classes",
-    "teachers": "Teachers",
-    "results": "Results",
+    "about": "About us",
+    "services": "Our services",
+    "programme": "Study programme",
+    "activities": "Activities",
     "contact": "Contact",
     "call": "Call us",
     "openMenu": "Open menu",
@@ -14,45 +14,210 @@
     "phone": "Phone",
     "email": "Email",
     "address": "Address",
-    "switchLanguage": "Change language"
+    "hours": "Opening hours",
+    "switchLanguage": "Change language",
+    "opensInNewTab": "Opens in a new tab"
   },
   "Staff": {
     "philologist": "Philologist",
-    "mathematician": "Mathematician"
+    "mathematician": "Mathematician",
+    "informatics": "Computer science",
+    "founder": "Founding member",
+    "bio": {
+      "karatzis": "Maths from the first year of middle school to advanced high school maths, patiently and methodically, until the student solves it alone.",
+      "manthaiaki": "Language, literature and ancient Greek. She starts on essay writing early, so that by the final year it is not the frightening part.",
+      "athanasaki": "Language subjects across middle and high school, with the emphasis on understanding a text before memorising it.",
+      "triamatakis": "Maths for middle and high school. He starts from where the gap was left, not from today's chapter.",
+      "kallergi": "Computer science and digital tools, so that a computer becomes a way to learn rather than only a way to pass the time."
+    }
   },
   "Hero": {
     "eyebrow": "Tutoring school · Venerato, Heraklion",
     "titleBefore": "We design your",
     "titleEmphasis": "Future",
     "titleAfter": "together.",
-    "description": "A philologist and a mathematician, beside the children of Malevizi from the first year of middle school to the national exams. The phone rings with us, not with a front desk.",
-    "secondaryCta": "Where to find us",
+    "description": "Small classes for primary, middle and high school in Venerato. The phone is answered by the head of studies, not by a front desk.",
+    "secondaryCta": "About us",
     "staffTitle": "Head of studies"
   },
-  "Pages": {
-    "about": {
-      "title": "The school",
-      "intro": "Our history, our approach and our rooms are being written for this page. Until then, call us and we will tell you first hand."
+  "About": {
+    "title": "About us",
+    "intro": "Two teachers who opened their own school in Venerato, and a team that grew around them.",
+    "storyTitle": "Our story",
+    "storyOne": "Peri Paideias was founded by Vasilis Karatzis and Maria Manthaiaki, after many years of teaching in classrooms and one to one.",
+    "storyTwo": "Through daily contact with students and families they understood something simple: supporting a child does not stop at the syllabus. It needs a place they are happy to come to, a timetable that holds up, and someone who notices that something is wrong before the grade says so.",
+    "storyThree": "So they built a school of small classes for the children of Malevizi, from primary school all the way to the national exams.",
+    "teamTitle": "Our team",
+    "teamIntro": "Five teachers. The student knows who is in front of them, and we know what each of us is doing."
+  },
+  "Services": {
+    "title": "Our services",
+    "intro": "Daily study, supplementary teaching and exam preparation for primary, middle and high school. The aim is solid foundations, not temporary grades.",
+    "methodTitle": "How we teach",
+    "methodIntro": "Results are built on solid foundations and on an approach that changes from student to student.",
+    "method": {
+      "smallGroups": {
+        "title": "Small classes",
+        "text": "We work in small groups, so every child has time to ask and to answer within the hour."
+      },
+      "personalTracking": {
+        "title": "Personal follow-up",
+        "text": "Every student moves at their own pace. We track each one separately and adjust accordingly."
+      },
+      "parentContact": {
+        "title": "Constant contact",
+        "text": "We keep parents honestly informed, both when things go well and when they do not."
+      },
+      "readingRoom": {
+        "title": "Study room",
+        "text": "A quiet, purpose-built space where children study in an organised way and with supervision."
+      },
+      "diagnosticTests": {
+        "title": "Diagnostic tests",
+        "text": "At the start and during the year, so gaps are found early and the teaching adapts."
+      },
+      "revisions": {
+        "title": "Revisions and mock papers",
+        "text": "Regularly, so the material sticks and exams find the student prepared and calm."
+      },
+      "notes": {
+        "title": "Our own notes",
+        "text": "Material written by our teachers, matched to the level of our own classes."
+      }
     },
-    "courses": {
-      "title": "Classes",
-      "intro": "The middle and high school classes, the subjects and the timetable are going up here. Call us and ask what runs for your child's year."
+    "specialistsTitle": "Specialists we work with",
+    "specialistsIntro": "When a child needs something beyond the lesson, they do not have to find it alone.",
+    "specialists": {
+      "psychologist": {
+        "title": "Psychologist",
+        "text": "Psychological support and counselling for the emotional resilience of our students."
+      },
+      "speechTherapist": {
+        "title": "Speech therapist",
+        "text": "Specialised intervention to improve language and communication skills."
+      },
+      "specialEducator": {
+        "title": "Special educator",
+        "text": "Individual teaching programmes for students with learning difficulties."
+      },
+      "careerAdvisor": {
+        "title": "Careers advisor",
+        "text": "Guidance on choosing studies and a profession, based on the student's own strengths."
+      }
     },
-    "teachers": {
-      "title": "Teachers",
-      "intro": "The teaching staff will be introduced on this page shortly. The head of studies is listed on the home page and in the footer."
-    },
-    "results": {
-      "title": "Results",
-      "intro": "Our students' results are going up here, with names and schools. We publish only what we can back up."
-    },
-    "contact": {
-      "title": "Contact",
-      "intro": "We are in Venerato, Heraklion. The head of studies numbers ring straight through to us, with no front desk in between."
+    "extrasTitle": "Also included",
+    "extras": {
+      "oefeSimulation": {
+        "title": "OEFE mock examinations",
+        "text": "Real exam conditions with authentic papers, so the national exams are not the first time."
+      },
+      "personalityTest": {
+        "title": "Personality and careers testing",
+        "text": "Specialised tests that show a student their strengths and the studies that suit them."
+      }
     }
   },
+  "Programme": {
+    "title": "Study programme",
+    "intro": "Built around each student, from the first steps in primary school to the final preparation for university.",
+    "levels": {
+      "primary": {
+        "title": "Primary school",
+        "text": "Daily study and consolidation of the basics, so the child builds good study habits early."
+      },
+      "middle": {
+        "title": "Middle school",
+        "text": "Closing gaps and organising the week, to build the foundations high school will ask for."
+      },
+      "high": {
+        "title": "High school",
+        "text": "Intensive preparation for the national exams, going deep into the material and supporting the student to the last paper."
+      }
+    },
+    "hoursTitle": "Hours and the shape of the year",
+    "hoursText": "We are open every weekday from {opens} to {closes}, with flexible groups that fit around the student's timetable. The week is organised so progress is steady without wearing the child out.",
+    "weeklyTitle": "Hours per year group",
+    "weeklyPending": "The high school tables are being finalised and will go up here. Call us about the year you are interested in.",
+    "classes": {
+      "middleAll": "Middle school, years 1 to 3"
+    },
+    "subjects": {
+      "modernGreek": "Modern Greek",
+      "maths": "Maths",
+      "physics": "Physics"
+    },
+    "hoursPerWeek": "{hours, plural, one {# hour} other {# hours}} per week",
+    "toolsTitle": "Useful tools",
+    "toolsIntro": "We give these to our students and leave them open to anyone who needs them.",
+    "tools": {
+      "oefePlatform": {
+        "title": "OEFE digital platform",
+        "text": "Material and tests to practise with from home, with access through the school. One of the tools we single out."
+      },
+      "careerGuide": {
+        "title": "Careers guide",
+        "text": "Departments, professions and entry marks, so the choice is made deliberately and not at the last minute."
+      },
+      "panhellenicTopics": {
+        "title": "National exam papers",
+        "text": "Search past papers by year and subject."
+      },
+      "topicBank": {
+        "title": "Question bank",
+        "text": "The official question bank of the Institute of Educational Policy."
+      },
+      "oefeRevision": {
+        "title": "OEFE revision papers",
+        "text": "An archive of revision papers to practise with."
+      }
+    }
+  },
+  "Activities": {
+    "title": "Activities and events",
+    "intro": "Talks, conferences and trips. What happens outside the classroom counts too.",
+    "eventsTitle": "Events",
+    "outdoorTitle": "Outside the classroom",
+    "items": {
+      "careerAdvisor2024": {
+        "title": "Careers advisor",
+        "text": "Guidance on choosing studies, so students reach their application with less uncertainty."
+      },
+      "sifmeni2024": {
+        "title": "SIFMENI conference",
+        "text": "Taking part in the conference of the Heraklion tutoring schools association."
+      },
+      "sifmeni2025": {
+        "title": "SIFMENI conference",
+        "text": "A second year of taking part, with access to professionals and academics."
+      },
+      "escapeRoom2025": {
+        "title": "Escape room",
+        "text": "A team activity where the children solve puzzles together and work their critical thinking."
+      },
+      "careerAdvisor2026": {
+        "title": "Careers advisor",
+        "text": "Individual support, so students discover their strengths and set realistic goals."
+      },
+      "anxietyTalk2026": {
+        "title": "Psychologist's talk on anxiety",
+        "text": "Practical ways to manage exam anxiety for students, and guidance for parents."
+      },
+      "excursion2026": {
+        "title": "School trip, years 2 and 3",
+        "text": "Argyroupoli, Lake Kournas and Bali, an educational trip away from the desks."
+      }
+    }
+  },
+  "Contact": {
+    "title": "Contact",
+    "intro": "The phones ring straight through to the head of studies. There is no front desk in between.",
+    "hoursValue": "Weekdays {opens} to {closes}",
+    "whereTitle": "Where to find us",
+    "addressPending": "The exact address and the map will go up as soon as they are confirmed.",
+    "socialTitle": "On social media"
+  },
   "Footer": {
-    "tagline": "Tutoring school for middle and high school in Venerato, Heraklion, with teachers who know every child by name.",
+    "tagline": "Tutoring school in Venerato, Heraklion, for primary, middle and high school, with teachers who know every child by name.",
     "navTitle": "Navigation",
     "contactTitle": "Contact",
     "followTitle": "Follow us",
@@ -60,7 +225,7 @@
   },
   "Metadata": {
     "homeTitle": "Peri Paideias, tutoring school in Venerato, Heraklion",
-    "homeDescription": "Tutoring school for middle and high school in Venerato, Heraklion, with a philologist and a mathematician beside every student up to the national exams."
+    "homeDescription": "Tutoring school in Venerato, Heraklion for primary, middle and high school. Small classes, personal follow-up and preparation for the national exams."
   },
   "Admin": {
     "nav": {
