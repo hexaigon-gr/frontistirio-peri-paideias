@@ -1,11 +1,23 @@
 /**
- * The site's canonical public origin, without a trailing slash.
+ * The site's canonical public origin, without a trailing slash, or `null` when
+ * no real domain exists yet.
  *
  * NEVER hardcode a `*.vercel.app` URL as the canonical base: not here, not in
- * `NEXT_PUBLIC_SITE_URL`, not "just for now". Before the real domain exists,
- * leave `NEXT_PUBLIC_SITE_URL` unset: the production build then fails loudly
- * instead of silently shipping a wrong canonical origin into sitemap.xml,
- * robots.txt, OG tags and canonical links.
+ * `NEXT_PUBLIC_SITE_URL`, not "just for now". A wrong canonical origin leaks
+ * into sitemap.xml, robots.txt, canonical links and OG tags, search engines
+ * index the preview host, and the real domain later competes with it.
+ *
+ * Before the domain exists, leave `NEXT_PUBLIC_SITE_URL` unset. `SITE_URL` is
+ * then `null`, which is not a "broken" state to paper over: it is the signal
+ * that the site has no canonical identity yet, and every consumer must degrade
+ * to something that CANNOT be indexed under the wrong origin.
+ *
+ *   `app/robots.ts`      -> disallow everything, advertise no sitemap
+ *   `app/sitemap.ts`     -> empty
+ *   `app/[locale]/layout.tsx` -> `robots: { index: false, follow: false }`
+ *   `components/seo/school-jsonld.tsx` -> render nothing
+ *
+ * Setting the variable to the real domain flips all of that on at once.
  *
  * Dev (`pnpm dev`) falls back to http://localhost:3000 so local work is unblocked.
  *
@@ -14,20 +26,23 @@
 
 const DEV_SITE_URL = "http://localhost:3000";
 
-const UNSET_MESSAGE = [
-  "NEXT_PUBLIC_SITE_URL is not set.",
-  "Set it to the site's exact public origin (e.g. https://example.com) in the Vercel",
-  "project env vars and in .env.local, then redeploy.",
-  "Do NOT paste the *.vercel.app deployment URL, because a wrong canonical origin",
-  "leaks into sitemap.xml, robots.txt, canonical links and OG tags.",
+const UNSET_WARNING = [
+  "NEXT_PUBLIC_SITE_URL is not set, so this build has no canonical origin.",
+  "The site will deploy but is marked noindex, robots.txt disallows everything,",
+  "sitemap.xml is empty and structured data is omitted, so nothing can be indexed",
+  "under a wrong origin. Set it to the site's exact public origin",
+  "(e.g. https://example.com) once the domain exists, then REDEPLOY.",
+  "Do NOT paste the *.vercel.app deployment URL.",
 ].join(" ");
 
-const resolveSiteUrl = (): string => {
+const resolveSiteUrl = (): string | null => {
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 
   if (!raw) {
-    if (process.env.NODE_ENV === "production") throw new Error(UNSET_MESSAGE);
-    return DEV_SITE_URL;
+    if (process.env.NODE_ENV !== "production") return DEV_SITE_URL;
+
+    console.warn(`\n[site-url] ${UNSET_WARNING}\n`);
+    return null;
   }
 
   let parsed: URL;
@@ -40,6 +55,8 @@ const resolveSiteUrl = (): string => {
     );
   }
 
+  /* Still a hard failure. An unset variable is an honest "not yet"; a deployment
+     URL pasted in is an active mistake that would ship a wrong canonical origin. */
   if (parsed.hostname.endsWith(".vercel.app"))
     throw new Error(
       `NEXT_PUBLIC_SITE_URL points at a Vercel deployment URL (${parsed.hostname}). Use the real domain, or leave the variable unset until it exists.`,

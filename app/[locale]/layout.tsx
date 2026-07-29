@@ -38,7 +38,11 @@ const mansalva = Mansalva({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  /* No canonical origin yet, so the deployment is held back from every index
+     until the real domain is set. See `.claude/rules/deployment-urls.md`. */
+  ...(SITE_URL
+    ? { metadataBase: new URL(SITE_URL) }
+    : { robots: { index: false, follow: false } }),
   title: {
     default: BUSINESS.legalName,
     template: `%s | ${BUSINESS.name}`,

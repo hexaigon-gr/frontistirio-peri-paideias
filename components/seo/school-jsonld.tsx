@@ -9,6 +9,11 @@ import { SITE_URL } from "@/lib/general/site-url";
 export const SchoolJsonLd = ({ locale }: { locale: string }) => {
   const { address, coordinates, hours, social } = BUSINESS;
 
+  /* `@id`, `url` and `logo` are all absolute. Publishing them against a guessed
+     origin would bind the school's identity to a throwaway host, so until the
+     domain exists this emits nothing at all. */
+  if (!SITE_URL) return null;
+
   const data = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
