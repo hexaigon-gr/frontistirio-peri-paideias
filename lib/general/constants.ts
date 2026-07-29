@@ -12,8 +12,14 @@ export const BUSINESS = {
   legalName: "Περί Παιδείας, Φροντιστήριο Μέσης Εκπαίδευσης",
   slogan: "Μαζί σχεδιάζουμε το Μέλλον σας!",
 
-  /** PLACEHOLDER */
-  email: "info@example.gr",
+  /** Landline, read off the business card in `photos/`. */
+  phone: { display: "2815 306051", href: "tel:+302815306051" },
+
+  /**
+   * PLACEHOLDER. The card shows an address that reads pp.peripaideias@gmail.com
+   * but the photo is too blurry to publish it. Confirm before rendering it.
+   */
+  email: "",
 
   address: {
     /** Empty until the client confirms it. The UI hides the line rather than inventing one. */

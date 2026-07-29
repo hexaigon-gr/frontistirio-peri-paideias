@@ -71,6 +71,14 @@ const Footer = async () => {
         <div className="lg:col-span-4">
           <h2 className="font-chalk text-xl text-yellow">{t("contactTitle")}</h2>
 
+          <a
+            href={BUSINESS.phone.href}
+            className="mt-5 flex items-center gap-2.5 font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
+          >
+            <Phone className="size-4 shrink-0 text-yellow" strokeWidth={2.5} />
+            {BUSINESS.phone.display}
+          </a>
+
           <ul className="mt-5 space-y-5">
             {FOUNDERS.map((person) => (
               <li key={person.key}>

@@ -17,12 +17,12 @@ import sharp from "sharp";
 const [latArg, lonArg, zoomArg] = process.argv.slice(2);
 const LAT = Number(latArg ?? 35.1981073);
 const LON = Number(lonArg ?? 25.0386127);
-const ZOOM = Number(zoomArg ?? 15);
+const ZOOM = Number(zoomArg ?? 16);
 
 const TILE = 256;
 const RETINA = 2;
-const OUT_WIDTH = 1600;
-const OUT_HEIGHT = 900;
+const OUT_WIDTH = 1800;
+const OUT_HEIGHT = 1000;
 const COLS = [-2, -1, 0, 1];
 const ROWS = [-1, 0, 1];
 const USER_AGENT = "peri-paideias-website/1.0 (static map for a single location)";
@@ -36,7 +36,10 @@ const latToY = (lat, zoom) => {
 };
 
 const fetchTile = async (zoom, x, y) => {
-  const url = `https://a.basemaps.cartocdn.com/dark_all/${zoom}/${x}/${y}@${RETINA}x.png`;
+  // `dark_nolabels`, not `dark_all`: the baked-in map typography competes with the
+  // chalk lettering and collides with the pin. The labels we actually need are
+  // drawn in the component, in the site's own hand.
+  const url = `https://a.basemaps.cartocdn.com/dark_nolabels/${zoom}/${x}/${y}@${RETINA}x.png`;
   const response = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
 
   if (!response.ok) throw new Error(`Tile ${zoom}/${x}/${y} failed with ${response.status}`);
@@ -80,10 +83,13 @@ const run = async () => {
 
   await sharp(stitched)
     .extract({ left, top, width: OUT_WIDTH, height: OUT_HEIGHT })
-    // Deep black with bright roads, so the map reads as chalk lines on slate.
-    .modulate({ saturation: 0.35, brightness: 1.06 })
-    .linear(4.0, -42)
-    .modulate({ saturation: 0.25 })
+    // Deep slate with bright roads, so the map reads as chalk lines on a board.
+    // Two passes: the first crushes the background to black, the second lifts the
+    // remaining road network up to chalk.
+    .greyscale()
+    .linear(5.2, -46)
+    .linear(1.75, -8)
+    .tint({ r: 244, g: 240, b: 231 })
     .jpeg({ quality: 88, mozjpeg: true })
     .toFile(OUT_FILE);
 

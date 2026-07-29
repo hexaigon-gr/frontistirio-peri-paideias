@@ -18,9 +18,10 @@ export const SchoolJsonLd = ({ locale }: { locale: string }) => {
     slogan: BUSINESS.slogan,
     url: `${SITE_URL}/${locale}`,
     logo: `${SITE_URL}/images/logo/wordmark.png`,
-    telephone: STAFF.flatMap((person) =>
-      person.phone ? [person.phone.href.replace("tel:", "")] : [],
-    ),
+    telephone: [
+      BUSINESS.phone.href.replace("tel:", ""),
+      ...STAFF.flatMap((person) => (person.phone ? [person.phone.href.replace("tel:", "")] : [])),
+    ],
     address: {
       "@type": "PostalAddress",
       ...(address.street ? { streetAddress: address.street } : {}),

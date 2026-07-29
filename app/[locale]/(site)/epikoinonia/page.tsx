@@ -57,7 +57,20 @@ const ContactPage = async ({ params }: BasePageProps) => {
           ))}
         </ul>
 
-        <div className="mt-14 grid gap-10 sm:grid-cols-2">
+        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-chalk">
+              <Phone className="size-4.5 text-yellow" strokeWidth={2.5} />
+              {tCommon("phone")}
+            </h2>
+            <a
+              href={BUSINESS.phone.href}
+              className="mt-3 inline-block cursor-pointer font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
+            >
+              {BUSINESS.phone.display}
+            </a>
+          </div>
+
           <div>
             <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-chalk">
               <Clock className="size-4.5 text-yellow" strokeWidth={2.5} />
