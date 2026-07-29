@@ -1,10 +1,10 @@
-import { MapPin, Phone } from "lucide-react";
+import { Hexagon, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
 import { FacebookIcon, InstagramIcon } from "@/components/brand-icons";
 import { SocialIcon } from "@/components/social-icon";
-import { BUSINESS, FOUNDERS, NAV_LINKS } from "@/lib/general/constants";
+import { BUSINESS, CREDIT, FOUNDERS, NAV_LINKS } from "@/lib/general/constants";
 import { Link } from "@/lib/i18n/navigation";
 
 /**
@@ -109,8 +109,20 @@ const Footer = async () => {
       </div>
 
       <div className="relative border-t border-chalk/10">
-        <div className="mx-auto w-full max-w-[84rem] px-5 py-6 text-center text-xs text-chalk-faint sm:px-8">
-          © {year} {BUSINESS.legalName}. {t("rights")}
+        <div className="mx-auto flex w-full max-w-[84rem] flex-col items-center gap-3 px-5 py-6 text-xs text-chalk-faint sm:flex-row sm:justify-between sm:px-8">
+          <p>
+            © {year} {BUSINESS.legalName}. {t("rights")}
+          </p>
+
+          <a
+            href={CREDIT.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex cursor-pointer items-center gap-1.5 transition-colors duration-300 hover:text-chalk"
+          >
+            <Hexagon className="size-3.5 shrink-0 text-primary" strokeWidth={2.5} />
+            {t("madeBy", { name: CREDIT.name })}
+          </a>
         </div>
       </div>
     </footer>

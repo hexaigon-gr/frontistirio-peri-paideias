@@ -2,6 +2,7 @@ import { Phone } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 
+import { Button } from "@/components/ui/button";
 import { PRIMARY_PHONE } from "@/lib/general/constants";
 
 interface PageIntroProps {
@@ -38,18 +39,17 @@ export const PageIntro = async ({ title, intro, doodle, children }: PageIntroPro
 
         {children}
 
-        <a
-          href={PRIMARY_PHONE.href}
-          className="group mt-10 inline-flex cursor-pointer items-center gap-3 rounded-full bg-yellow px-6 py-3.5 font-display text-base font-extrabold tracking-wide text-board-deep transition-transform duration-200 hover:-translate-y-0.5 sm:text-lg"
-        >
-          <Phone
-            className="size-5 shrink-0 transition-transform duration-300 group-hover:-rotate-12"
-            strokeWidth={2.5}
-          />
-          {tCommon("call")}
-          <span className="opacity-45">·</span>
-          <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
-        </a>
+        <Button asChild variant="chalk" size="pill" className="group mt-10">
+          <a href={PRIMARY_PHONE.href}>
+            <Phone
+              className="size-5 shrink-0 transition-transform duration-300 group-hover:-rotate-12"
+              strokeWidth={2.5}
+            />
+            {tCommon("call")}
+            <span className="opacity-45">·</span>
+            <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
+          </a>
+        </Button>
       </div>
     </section>
   );

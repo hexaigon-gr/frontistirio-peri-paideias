@@ -47,6 +47,25 @@ paths:
 - **Fonts via `next/font`**, third-party scripts via `next/script` (`lazyOnload` for analytics, `afterInteractive` for tag managers). Never a raw `<script>`.
 - **`useTransition` and `useDeferredValue`** for non-urgent updates.
 
+## Motion (framer-motion)
+
+The only primitives are `Reveal`, `Stagger` and `StaggerItem` in `components/motion/reveal.tsx`. Sections get their scroll reveal from `BoardSection`, so a new section is animated for free. `PageIntro` is deliberately excluded: it holds the LCP heading, which must never wait on a scroll.
+
+- **Import from `framer-motion`**, not `motion/react`. That is the installed package; adding `motion` beside it ships the same library twice.
+- **`m` + `LazyMotion features={domAnimation}`**, never the full `motion` component. `domAnimation` covers animations, variants and the viewport detection `whileInView` needs. It cut roughly 14 KB off every page.
+- **Handle reduced motion by changing the VALUES, never the element type.** This one is silent and severe:
+
+  ```tsx
+  // BAD, leaves the section invisible for reduced-motion users
+  if (shouldReduceMotion) return <div className={className}>{children}</div>;
+  return <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} />;
+
+  // GOOD, same element either way
+  <m.div initial={shouldReduceMotion ? RESTING : OFFSCREEN} whileInView={RESTING} />
+  ```
+
+  `useReducedMotion()` returns `null` on the first render, so the animated element mounts first carrying an inline `opacity: 0`. When the hook resolves and the branch swaps in a plain `<div>`, React reuses the same DOM node and never clears a style it did not set. The content stays at zero opacity permanently, for exactly the users who asked for less motion. `tsc`, `lint` and a normal screenshot all pass. Verify with `emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}])` and assert nothing has a computed opacity near 0.
+
 ## Drag & drop (dnd-kit)
 
 - `@dnd-kit/core` + `@dnd-kit/sortable` + `@dnd-kit/utilities`.

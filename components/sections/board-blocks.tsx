@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { Reveal } from "@/components/motion/reveal";
 import { cn } from "@/lib/general/utils";
 
 /**
@@ -17,6 +18,10 @@ interface BoardSectionProps {
   id?: string;
 }
 
+/* Every section below the fold reveals as it arrives. Doing it here rather than
+   per page means a new section is animated the moment it is written, and there
+   is exactly one place to change the timing. `PageIntro` deliberately does NOT
+   use this: it holds the LCP heading, which must never wait on a scroll. */
 export const BoardSection = ({ children, className, tone = "board", id }: BoardSectionProps) => (
   <section
     id={id}
@@ -26,9 +31,9 @@ export const BoardSection = ({ children, className, tone = "board", id }: BoardS
       className,
     )}
   >
-    <div className="relative mx-auto w-full max-w-[84rem] px-5 py-16 sm:px-8 md:py-24">
+    <Reveal className="relative mx-auto w-full max-w-[84rem] px-5 py-16 sm:px-8 md:py-24">
       {children}
-    </div>
+    </Reveal>
   </section>
 );
 

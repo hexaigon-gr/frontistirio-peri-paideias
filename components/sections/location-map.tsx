@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
 import { ChalkFrame } from "@/components/sections/board-blocks";
+import { Button } from "@/components/ui/button";
 import { BUSINESS } from "@/lib/general/constants";
 /* Static import, not a string path. next/image caches optimised output by URL, so
    regenerating the map in place keeps serving the old bytes. A static import gives
@@ -12,11 +13,12 @@ import mapImage from "@/public/images/map/venerato.jpg";
 /**
  * A real map, not a decoration.
  *
- * `components/expand-map.tsx` draws an invented street grid with a pin in the
- * middle, which is fine as an ornament and actively misleading when the point of
- * the section is "here is where we are". This renders OpenStreetMap data for the
- * actual coordinates, rendered dark so it sits on the board, with the pin placed
- * on the exact point the tiles were centred on.
+ * There used to be an `ExpandMap` beside this that drew an invented street grid
+ * with a pin in the middle, which is fine as an ornament and actively misleading
+ * when the point of the section is "here is where we are". It has been deleted.
+ * This renders OpenStreetMap data for the actual coordinates, rendered dark so it
+ * sits on the board, with the pin placed on the exact point the tiles were
+ * centred on.
  *
  * The image is generated offline and committed. If the coordinates change, it has
  * to be regenerated: see `tasks/todo.md`.
@@ -113,18 +115,15 @@ export const LocationMap = async () => {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <a
-            href={directionsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex cursor-pointer items-center gap-2.5 rounded-full bg-yellow px-6 py-3.5 font-display text-base font-extrabold tracking-wide text-board-deep transition-transform duration-200 hover:-translate-y-0.5"
-          >
-            <Navigation
-              className="size-4.5 shrink-0 transition-transform duration-300 group-hover:rotate-12"
-              strokeWidth={2.5}
-            />
-            {t("directions")}
-          </a>
+          <Button asChild variant="chalk" size="pill" className="group">
+            <a href={directionsUrl} target="_blank" rel="noopener noreferrer">
+              <Navigation
+                className="size-4.5 shrink-0 transition-transform duration-300 group-hover:rotate-12"
+                strokeWidth={2.5}
+              />
+              {t("directions")}
+            </a>
+          </Button>
 
           <a
             href={mapsUrl}

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 import { LocaleSwitch } from "@/components/layout/locale-switch";
+import { Button } from "@/components/ui/button";
 import { BUSINESS, FOUNDERS, NAV_LINKS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
 import { cn } from "@/lib/general/utils";
 import { Link, usePathname } from "@/lib/i18n/navigation";
@@ -133,14 +134,13 @@ export const Navbar = () => {
           <div className="flex items-center gap-2.5">
             <LocaleSwitch className="hidden lg:flex" />
 
-            <a
-              href={PRIMARY_PHONE.href}
-              className="group flex cursor-pointer items-center gap-2.5 rounded-full bg-yellow px-4 py-2.5 font-display text-base font-extrabold tracking-wide text-board-deep transition-transform duration-200 hover:-translate-y-0.5 sm:px-5"
-            >
-              <Phone className="size-4 shrink-0" strokeWidth={2.5} />
-              <span className="hidden tabular-nums sm:inline">{PRIMARY_PHONE.display}</span>
-              <span className="sr-only sm:hidden">{t("call")}</span>
-            </a>
+            <Button asChild variant="chalk" size="pill-sm">
+              <a href={PRIMARY_PHONE.href}>
+                <Phone className="size-4 shrink-0" strokeWidth={2.5} />
+                <span className="hidden tabular-nums sm:inline">{PRIMARY_PHONE.display}</span>
+                <span className="sr-only sm:hidden">{t("call")}</span>
+              </a>
+            </Button>
 
             <button
               type="button"

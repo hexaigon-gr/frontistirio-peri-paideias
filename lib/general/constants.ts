@@ -214,3 +214,9 @@ export const NAV_LINKS = [
   { key: "activities", href: ROUTES.activities },
   { key: "contact", href: ROUTES.contact },
 ] as const;
+
+/** Who built the site. Kept out of the translations so the name is written once. */
+export const CREDIT = {
+  name: "Hexaigon",
+  href: "https://hexaigon.gr",
+} as const;

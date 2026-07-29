@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
 
 import { ChalkUnderline } from "@/components/chalk/chalk-marks";
+import { Button } from "@/components/ui/button";
 import { FOUNDERS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
 import { Link } from "@/lib/i18n/navigation";
 /* Static import so the file carries a content hash and next/image cannot serve a
@@ -89,18 +90,17 @@ export const Hero = async () => {
             className="rise-in mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center md:mt-9 md:gap-4"
             style={delay(0.26)}
           >
-            <a
-              href={PRIMARY_PHONE.href}
-              className="group flex cursor-pointer items-center justify-center gap-2.5 rounded-full bg-yellow px-6 py-4 font-display text-base font-extrabold tracking-wide text-board-deep transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 sm:gap-3 sm:px-7 sm:text-lg"
-            >
-              <Phone
-                className="size-5 shrink-0 transition-transform duration-300 group-hover:-rotate-12"
-                strokeWidth={2.5}
-              />
-              <span>{tCommon("call")}</span>
-              <span className="opacity-45">·</span>
-              <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
-            </a>
+            <Button asChild variant="chalk" size="pill" className="group">
+              <a href={PRIMARY_PHONE.href}>
+                <Phone
+                  className="size-5 shrink-0 transition-transform duration-300 group-hover:-rotate-12"
+                  strokeWidth={2.5}
+                />
+                <span>{tCommon("call")}</span>
+                <span className="opacity-45">·</span>
+                <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
+              </a>
+            </Button>
 
             <Link
               href={ROUTES.about}

@@ -248,7 +248,8 @@
     "navTitle": "Navigation",
     "contactTitle": "Contact",
     "followTitle": "Follow us",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "madeBy": "Made by {name}"
   },
   "Metadata": {
     "homeTitle": "Peri Paideias, tutoring school in Venerato, Heraklion",

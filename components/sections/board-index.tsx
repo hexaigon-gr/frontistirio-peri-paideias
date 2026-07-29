@@ -8,6 +8,7 @@ import {
   ChalkPi,
   ChalkPlane,
 } from "@/components/chalk/chalk-marks";
+import { Stagger, StaggerItem } from "@/components/motion/reveal";
 import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/board-blocks";
 import { ROUTES } from "@/lib/general/constants";
 import { cn } from "@/lib/general/utils";
@@ -77,9 +78,9 @@ export const BoardIndex = async () => {
       <ChalkHeading title={t("exploreTitle")} intro={t("exploreIntro")} />
 
       {/* Six columns so the five notes break 3 + 2 instead of leaving a hole. */}
-      <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+      <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
         {entries.map(({ ns, href, Doodle, tone, span, title, intro }) => (
-          <li key={ns} className={span}>
+          <StaggerItem key={ns} className={span}>
             <Link
               href={href}
               className="group relative flex h-full cursor-pointer flex-col p-7 transition-transform duration-300 hover:-translate-y-1"
@@ -112,9 +113,9 @@ export const BoardIndex = async () => {
                 <ArrowRight className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </Stagger>
     </BoardSection>
   );
 };
