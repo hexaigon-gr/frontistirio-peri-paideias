@@ -15,6 +15,7 @@ import { Link } from "@/lib/i18n/navigation";
 const Footer = async () => {
   const t = await getTranslations("Footer");
   const tNav = await getTranslations("Nav");
+  const tStaff = await getTranslations("Staff");
   const year = new Date().getFullYear();
   const { address } = BUSINESS;
 
@@ -75,7 +76,7 @@ const Footer = async () => {
               <li key={person.key}>
                 <p className="font-display text-lg font-bold text-chalk">{person.name}</p>
                 <p className="text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
-                  {person.role}
+                  {tStaff(person.roleKey)}
                 </p>
                 <a
                   href={person.phone.href}

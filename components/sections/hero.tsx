@@ -39,6 +39,7 @@ const ChalkRule = ({ className }: { className?: string }) => (
 export const Hero = async () => {
   const t = await getTranslations("Hero");
   const tCommon = await getTranslations("Common");
+  const tStaff = await getTranslations("Staff");
 
   return (
     <section className="board-texture board-dust relative isolate flex min-h-svh flex-col overflow-hidden bg-board">
@@ -160,7 +161,7 @@ export const Hero = async () => {
                   {person.name}
                 </p>
                 <p className="mt-0.5 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
-                  {person.role}
+                  {tStaff(person.roleKey)}
                 </p>
                 <a
                   href={person.phone.href}
@@ -182,6 +183,7 @@ export const Hero = async () => {
           alt=""
           width={295}
           height={130}
+          loading="eager"
           className="pointer-events-none absolute right-[6%] bottom-[2.6rem] w-24 drop-shadow-[0_8px_10px_rgba(0,0,0,0.55)] sm:bottom-[3rem] sm:w-32 lg:right-[9%] lg:w-36"
         />
         <div className="absolute inset-x-0 bottom-0 h-9 bg-linear-to-b from-board-soft to-board-deep sm:h-10" />

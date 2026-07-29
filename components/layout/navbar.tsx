@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
+import { LocaleSwitch } from "@/components/layout/locale-switch";
 import { BUSINESS, NAV_LINKS, PRIMARY_PHONE, ROUTES, STAFF } from "@/lib/general/constants";
 import { cn } from "@/lib/general/utils";
 import { Link } from "@/lib/i18n/navigation";
@@ -33,6 +34,7 @@ const LinkStroke = () => (
 
 export const Navbar = () => {
   const t = useTranslations("Nav");
+  const tStaff = useTranslations("Staff");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -99,6 +101,8 @@ export const Navbar = () => {
           </nav>
 
           <div className="flex items-center gap-2.5">
+            <LocaleSwitch className="hidden lg:flex" />
+
             <a
               href={PRIMARY_PHONE.href}
               className="group flex cursor-pointer items-center gap-2.5 rounded-full bg-yellow px-4 py-2.5 font-display text-base font-extrabold tracking-wide text-board-deep transition-transform duration-200 hover:-translate-y-0.5 sm:px-5"
@@ -137,7 +141,8 @@ export const Navbar = () => {
         )}
         aria-hidden={!isMenuOpen}
       >
-        <div className="relative flex h-20 items-center justify-end px-5">
+        <div className="relative flex h-20 items-center justify-between px-5">
+          <LocaleSwitch className="pl-1" />
           <button
             type="button"
             className="flex size-11 cursor-pointer items-center justify-center rounded-full text-chalk transition-colors duration-200 hover:bg-chalk/10"
@@ -172,7 +177,7 @@ export const Navbar = () => {
             >
               <span className="block font-display text-lg font-bold text-chalk">{person.name}</span>
               <span className="block text-xs tracking-[0.16em] text-chalk-faint uppercase">
-                {person.role}
+                {tStaff(person.roleKey)}
               </span>
               <span className="mt-1 block font-display text-xl font-extrabold tabular-nums text-yellow">
                 {person.phone.display}

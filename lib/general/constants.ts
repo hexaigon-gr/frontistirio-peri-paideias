@@ -37,18 +37,20 @@ export const BUSINESS = {
 
 /**
  * Διεύθυνση σπουδών. The first entry is the number the main call button dials.
+ * Names stay as written, they are proper nouns. The role is a translation key,
+ * so it reads "Philologist" on the English site instead of "Φιλόλογος".
  */
 export const STAFF = [
   {
     key: "manthaiaki",
     name: "Μανθαιάκη Μαρία",
-    role: "Φιλόλογος",
+    roleKey: "philologist",
     phone: { display: "698 163 9440", href: "tel:+306981639440" },
   },
   {
     key: "karatzis",
     name: "Καρατζής Βασίλης",
-    role: "Μαθηματικός",
+    roleKey: "mathematician",
     phone: { display: "697 923 6257", href: "tel:+306979236257" },
   },
 ] as const;

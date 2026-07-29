@@ -59,7 +59,10 @@ const LocaleLayout = async ({ children, params }: BaseLayoutProps) => {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    /* `data-scroll-behavior` tells the router that the smooth scrolling in
+       globals.css is deliberate, so it suppresses it during route changes
+       instead of animating the whole page on every navigation. */
+    <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body
         className={`${alegreyaSans.variable} ${sofiaCondensed.variable} ${mansalva.variable} font-sans antialiased`}
       >

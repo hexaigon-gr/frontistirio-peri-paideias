@@ -13,7 +13,12 @@
     "call": "Call us",
     "phone": "Phone",
     "email": "Email",
-    "address": "Address"
+    "address": "Address",
+    "switchLanguage": "Change language"
+  },
+  "Staff": {
+    "philologist": "Philologist",
+    "mathematician": "Mathematician"
   },
   "Hero": {
     "eyebrow": "Tutoring school · Venerato, Heraklion",

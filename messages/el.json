@@ -13,7 +13,12 @@
     "call": "Καλέστε μας",
     "phone": "Τηλέφωνο",
     "email": "Email",
-    "address": "Διεύθυνση"
+    "address": "Διεύθυνση",
+    "switchLanguage": "Αλλαγή γλώσσας"
+  },
+  "Staff": {
+    "philologist": "Φιλόλογος",
+    "mathematician": "Μαθηματικός"
   },
   "Hero": {
     "eyebrow": "Φροντιστήριο Μέσης Εκπαίδευσης · Βενεράτο Ηρακλείου",
