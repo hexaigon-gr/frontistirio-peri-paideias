@@ -275,6 +275,49 @@ html body[data-scroll-locked] {
   animation-delay: var(--rise-delay, 0s);
 }
 
+/* ── Chalk underline on a nav link ──
+   The stroke draws itself in on hover and retracts the same way, because
+   `stroke-dashoffset` is transitioned rather than animated.
+
+   `path-length="1"` normalises the geometry so the dash values are fractions and
+   nothing has to be measured. The opacity is not decoration: a dash boundary
+   sitting exactly on the end of the path leaves the round cap showing as a stray
+   speck, and how visible it is depends on where the roughening filter samples its
+   noise, so it appears under some links and not others. Fading over 120ms kills it
+   outright and is far too fast to read against the 420ms draw.
+
+   The second pass is thinner, fainter and slightly late, the way a teacher goes
+   back over an underline without quite retracing it. */
+.chalk-underline path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  transition:
+    stroke-dashoffset 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 120ms linear;
+}
+
+.chalk-underline path + path {
+  transition-delay: 110ms;
+}
+
+.group:hover .chalk-underline path,
+.group:focus-visible .chalk-underline path {
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+.group:hover .chalk-underline path + path,
+.group:focus-visible .chalk-underline path + path {
+  opacity: 0.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chalk-underline path {
+    transition: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .chalk-stroke,
   .rise-in {

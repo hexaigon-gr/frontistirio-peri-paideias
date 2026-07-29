@@ -12,22 +12,38 @@ import { Link } from "@/lib/i18n/navigation";
 
 const SCROLL_THRESHOLD = 20;
 
-/** A chalk squiggle that wipes in under a nav link on hover. */
+/**
+ * A chalk stroke that draws itself under a nav link on hover. A scaleX reveal was
+ * the obvious alternative and it is wrong here: it squashes the wobble instead of
+ * laying chalk down. The drawing and the timing live in `.chalk-underline` in
+ * globals.css.
+ */
 const LinkStroke = () => (
   <svg
-    viewBox="0 0 100 8"
+    viewBox="0 0 100 10"
     preserveAspectRatio="none"
     aria-hidden
     focusable="false"
     filter="url(#chalk-rough-soft)"
-    className="absolute -bottom-1.5 left-0 h-1.5 w-full origin-left scale-x-0 text-yellow transition-transform duration-300 ease-out group-hover:scale-x-100"
+    className="chalk-underline absolute -bottom-2 left-0 h-2 w-full overflow-visible text-yellow"
   >
     <path
-      d="M1 5c18-3 34-4 50-3 15 1 32 2 48 4"
+      d="M1.5 5.4C19 2.8 35 2 51 2.5c16 .5 31.5 1.6 47.5 3.6"
+      pathLength={1}
       fill="none"
       stroke="currentColor"
       strokeWidth={3}
       strokeLinecap="round"
+      vectorEffect="non-scaling-stroke"
+    />
+    <path
+      d="M4 8.4C21 6.6 38 6 54 6.4c14 .4 27 1 41 2.2"
+      pathLength={1}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.4}
+      strokeLinecap="round"
+      vectorEffect="non-scaling-stroke"
     />
   </svg>
 );
