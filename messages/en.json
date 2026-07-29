@@ -16,7 +16,8 @@
     "address": "Address",
     "hours": "Opening hours",
     "switchLanguage": "Change language",
-    "opensInNewTab": "Opens in a new tab"
+    "opensInNewTab": "Opens in a new tab",
+    "seeMore": "See more"
   },
   "Staff": {
     "philologist": "Philologist",
@@ -39,6 +40,10 @@
     "description": "Small classes for primary, middle and high school in Venerato. The phone is answered by the head of studies, not by a front desk.",
     "secondaryCta": "About us",
     "imageAlt": "Hands writing with chalk on a blackboard"
+  },
+  "Home": {
+    "exploreTitle": "What you will find here",
+    "exploreIntro": "Five pages, one for each part of what we do. Pick where you want to start."
   },
   "About": {
     "title": "About us",
