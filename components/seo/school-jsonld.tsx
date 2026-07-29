@@ -43,7 +43,7 @@ export const SchoolJsonLd = ({ locale }: { locale: string }) => {
       closes: hours.closes,
     },
     sameAs: [social.facebook, social.instagram],
-    hasMap: `https://www.google.com/maps/search/?api=1&query=${coordinates.lat},${coordinates.lng}`,
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(BUSINESS.mapsQuery)}`,
     employee: STAFF.map((person) => ({ "@type": "Person", name: person.name })),
   };
 

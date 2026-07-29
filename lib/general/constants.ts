@@ -22,9 +22,8 @@ export const BUSINESS = {
   email: "",
 
   address: {
-    /** Empty until the client confirms it. The UI hides the line rather than inventing one. */
-    street: "",
-    area: "Βενεράτο",
+    street: "Επαρχιακή Οδός Ηρακλείου - Πενταμοδίου 12",
+    area: "Νέο Βενεράτο",
     /** Venerato sits in Δημοτική Ενότητα Παλιανής, Δήμος Ηρακλείου. Not Malevizi. */
     municipality: "Δήμος Ηρακλείου",
     city: "Ηράκλειο Κρήτης",
@@ -32,9 +31,21 @@ export const BUSINESS = {
   },
 
   /**
-   * Centre of Venerato, from OpenStreetMap. This is the village, not the door of
-   * the building. Replace with the exact point once the address is confirmed, and
-   * regenerate `public/images/map/venerato.jpg` at a closer zoom.
+   * The exact string to hand to a maps service, in the Latin form Google itself
+   * returns for this address. Every "directions" link searches by address rather
+   * than by coordinates: neither OpenStreetMap nor Photon knows this provincial
+   * road or the Neo Venerato settlement, while Google resolves the address to the
+   * door. Letting the maps app do the geocoding beats shipping a guessed point.
+   */
+  mapsQuery: "Epar.Od. Irakliou-Pentamodiou 12, Neo Venerato 700 11, Heraklion, Greece",
+
+  /** What the static map frames. The image covers the wider Venerato area. */
+  mapLabel: "Βενεράτο",
+
+  /**
+   * Centre of the Venerato area, from OpenStreetMap. Used only to frame the static
+   * map image, never for navigation. Once the exact point is known, put it here and
+   * run `node scripts/generate-map.mjs <lat> <lon> 17`.
    */
   coordinates: {
     lat: 35.1981073,

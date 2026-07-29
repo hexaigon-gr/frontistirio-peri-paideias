@@ -99,7 +99,11 @@ const Footer = async () => {
 
           <p className="mt-6 flex items-start gap-2.5 text-chalk-dim">
             <MapPin className="mt-0.5 size-4 shrink-0 text-yellow" />
-            {address.area}, {address.city}
+            <span>
+              {address.street}
+              <br />
+              {address.area}, {address.postalCode} {address.city}
+            </span>
           </p>
         </div>
       </div>

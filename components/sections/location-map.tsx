@@ -27,11 +27,11 @@ const PIN_POSITION = { left: "50%", top: "50.05%" };
 
 export const LocationMap = async () => {
   const t = await getTranslations("Contact");
-  const { address, coordinates, name } = BUSINESS;
+  const { address, mapLabel, mapsQuery, name } = BUSINESS;
 
-  const point = `${coordinates.lat},${coordinates.lng}`;
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${point}`;
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${point}`;
+  const query = encodeURIComponent(mapsQuery);
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${query}`;
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
 
   return (
     <div>
@@ -51,7 +51,7 @@ export const LocationMap = async () => {
 
         {/* The tiles carry no place names, so the village is named in chalk here. */}
         <span className="pointer-events-none absolute bottom-5 left-5 font-display text-sm font-bold tracking-[0.28em] text-chalk/45 uppercase sm:bottom-7 sm:left-8 sm:text-base">
-          {address.area}
+          {mapLabel}
         </span>
 
         <div className="pointer-events-none absolute" style={PIN_POSITION}>
@@ -101,18 +101,15 @@ export const LocationMap = async () => {
 
       <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <p className="font-display text-xl font-bold text-chalk sm:text-2xl">
-            {address.street ? `${address.street}, ` : ""}
-            {address.area}
+          <p className="max-w-[26ch] font-display text-xl font-bold text-chalk sm:text-2xl">
+            {address.street}
           </p>
           <p className="mt-1.5 text-chalk-dim">
-            {address.postalCode} {address.city}
+            {address.area}, {address.postalCode} {address.city}
           </p>
-          {address.street ? null : (
-            <p className="mt-3 max-w-[46ch] text-[0.9rem] leading-[1.7] text-chalk-faint">
-              {t("addressPending")}
-            </p>
-          )}
+          <p className="mt-3 max-w-[46ch] text-[0.9rem] leading-[1.7] text-chalk-faint">
+            {t("addressPending")}
+          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
