@@ -22,6 +22,13 @@ Rules learned from actual corrections. These are binding.
 - **`tsc` + `lint` passing does not mean it works.** next-intl message caching, Prisma client staleness, and env-var inlining all survive a green typecheck. Drive the feature in the running app.
 - **Restart the dev server** after changing `messages/*.json`, the Prisma schema, or any `NEXT_PUBLIC_*` variable. A running server holds stale caches and will lie to you.
 - **Never run a second `pnpm dev` while one is already up.** Next falls back to port 3001, both instances write the same `.next` directory, and the manifests corrupt: every route then 500s with `SyntaxError: Unexpected non-whitespace character after JSON`. Recovery is kill every `next dev` process, `rm -rf .next`, start exactly one. Before starting one, check: `netstat -ano | grep LISTENING | grep :300`.
+- **"It did not update" is often a ghost service worker, not the code.** Another project
+  that once ran on the same `localhost` port can leave a service worker registered on
+  that origin, and it will keep serving its own cache. The tell is repeated `GET /sw.js`
+  in the dev log, plus requests for routes that no longer exist. This repo never
+  registers a worker, so `public/sw.js` is a kill switch that wipes the caches and
+  unregisters itself. Confirm the server is innocent with a headless browser before
+  touching any code.
 - **Verify what the browser actually got, not what the file says.** A screenshot showing old colours usually means stale served CSS, not a wrong value. Fetch the page, pull the `<link rel=stylesheet>` href, and grep the served CSS for the variable before touching the source again.
 - **`next/image` caches by URL path.** After regenerating an image file in place, the optimizer keeps serving the old bytes even after `rm -rf .next/cache/images`. Rename the file instead.
 - **Fonts need `subsets: ["latin", "greek"]`.** The starter shipped Roboto with `latin` only, so every Greek glyph silently fell back to a system font.
