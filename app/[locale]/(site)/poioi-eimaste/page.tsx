@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ChalkBulb, ChalkPi } from "@/components/chalk/chalk-marks";
 import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/board-blocks";
+import { Gallery } from "@/components/sections/gallery";
 import { PageIntro } from "@/components/sections/page-intro";
 import { BUSINESS, STAFF } from "@/lib/general/constants";
 import { BasePageProps } from "@/types/page-props";
@@ -98,6 +99,8 @@ const AboutPage = async ({ params }: BasePageProps) => {
           ))}
         </ul>
       </BoardSection>
+
+      <Gallery />
     </>
   );
 };

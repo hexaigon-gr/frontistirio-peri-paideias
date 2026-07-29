@@ -3,90 +3,54 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
 
-import {
-  ChalkAtom,
-  ChalkBulb,
-  ChalkFlask,
-  ChalkPi,
-  ChalkPlane,
-  ChalkPlus,
-  ChalkUnderline,
-} from "@/components/chalk/chalk-marks";
+import { ChalkUnderline } from "@/components/chalk/chalk-marks";
 import { FOUNDERS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
 import { Link } from "@/lib/i18n/navigation";
+/* Static import so the file carries a content hash and next/image cannot serve a
+   stale optimisation after the photo is regenerated. */
+import heroImage from "@/public/images/hero/board-hands.webp";
 
 const delay = (seconds: number) => ({ "--rise-delay": `${seconds}s` }) as CSSProperties;
 
-/** A wobbly chalk rule, the kind drawn freehand under a heading. */
-const ChalkRule = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 240 6"
-    preserveAspectRatio="none"
-    aria-hidden
-    focusable="false"
-    filter="url(#chalk-rough-soft)"
-    className={className}
-  >
-    <path
-      d="M2 4c40-3 78-4 118-3 38 1 78 2 118 4"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.5}
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
+/**
+ * The photograph is the board here, so the section drops the drawn chalk marks
+ * and the slate tile it used to carry: two boards stacked on each other read as
+ * a mess.
+ *
+ * Legibility is handled by two scrims rather than one, because the crop differs
+ * per orientation. On a wide screen the photo keeps its dark left third and the
+ * scrim only has to deepen it, so it runs left to right. On a phone the frame
+ * crops to the chalk drawings and there is no dark side left, so the scrim runs
+ * bottom to top and the text sits in the half it darkens.
+ */
 export const Hero = async () => {
   const t = await getTranslations("Hero");
   const tCommon = await getTranslations("Common");
   const tStaff = await getTranslations("Staff");
 
   return (
-    <section className="board-texture board-dust relative isolate flex min-h-svh flex-col overflow-hidden bg-board">
-      {/* Doodles fill the empty parts of the board the way a teacher does, so every
-          placement is checked against the text columns rather than scattered. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-        {/* Phone: only the two gaps that stay empty once the content stacks. */}
-        <ChalkAtom
-          className="rise-in absolute top-[58%] right-[-4%] size-24 text-sky/30 md:hidden"
-          style={delay(0.85)}
-        />
-        <ChalkFlask
-          className="rise-in absolute bottom-[3%] left-[-3%] size-20 text-rose/22 md:hidden"
-          style={delay(0.95)}
-        />
+    <section className="relative isolate flex min-h-svh flex-col justify-end overflow-hidden bg-board md:justify-center">
+      <Image
+        src={heroImage}
+        alt={t("imageAlt")}
+        fill
+        priority
+        placeholder="blur"
+        sizes="100vw"
+        className="object-cover object-[62%_center] md:object-center"
+      />
 
-        {/* Desktop: the top band, the corridor between the two columns, and the
-            strip under the buttons. */}
-        <ChalkPlane
-          className="rise-in absolute top-[9%] left-[48%] hidden size-16 text-chalk/22 md:block lg:size-20"
-          style={delay(0.75)}
-        />
-        <ChalkBulb
-          className="rise-in absolute top-[13%] right-[5%] hidden size-24 text-yellow/65 md:block lg:size-28"
-          style={delay(0.55)}
-        />
-        <ChalkAtom
-          className="rise-in absolute right-[24%] bottom-[27%] hidden size-24 text-sky/32 md:block lg:size-28"
-          style={delay(0.9)}
-        />
-        <ChalkFlask
-          className="rise-in absolute bottom-[9%] left-[4%] hidden size-20 text-rose/25 md:block lg:size-24"
-          style={delay(1)}
-        />
-        <ChalkPi
-          className="rise-in absolute bottom-[12%] left-[38%] hidden size-14 text-violet/22 lg:block"
-          style={delay(1.1)}
-        />
-        <ChalkPlus
-          className="rise-in absolute top-[26%] right-[38%] hidden size-7 text-chalk/18 lg:block"
-          style={delay(1.2)}
-        />
-      </div>
+      {/* Phone: darken the lower half the text sits in. */}
+      <div className="absolute inset-0 bg-linear-to-t from-board via-board/85 via-40% to-board/20 md:hidden" />
+      {/* Wide: deepen the empty left side and let the drawings breathe on the right. */}
+      <div className="absolute inset-0 hidden bg-linear-to-r from-board from-15% via-board/80 via-45% to-transparent md:block" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-board to-transparent" />
+      {/* The navbar is transparent over the hero, so the links need something
+          behind them where the photo is brightest. */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-board/85 to-transparent" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[84rem] flex-1 grid-cols-1 items-center gap-x-16 gap-y-14 px-5 pt-28 pb-24 sm:px-8 md:pt-32 lg:grid-cols-12 lg:pb-28">
-        <div className="lg:col-span-7">
+      <div className="relative z-10 mx-auto w-full max-w-[84rem] px-5 pt-28 pb-14 sm:px-8 md:py-24">
+        <div className="max-w-[34rem] lg:max-w-[38rem]">
           <p
             className="rise-in flex items-center gap-3 font-display text-[0.72rem] font-bold tracking-[0.16em] text-yellow uppercase sm:text-xs sm:tracking-[0.28em]"
             style={delay(0)}
@@ -96,28 +60,30 @@ export const Hero = async () => {
           </p>
 
           <h1
-            className="rise-in mt-6 font-display text-[clamp(2.6rem,7.2vw,5.4rem)] leading-[0.98] font-black tracking-[-0.015em] text-chalk"
+            className="rise-in mt-5 font-display text-[clamp(2.35rem,7vw,4.75rem)] leading-[1.05] font-black tracking-[-0.015em] text-chalk md:mt-6 md:leading-[0.98]"
             style={delay(0.08)}
           >
-            {t("titleBefore")}{" "}
-            <span className="relative inline-block whitespace-nowrap">
-              <span className="inline-block rotate-[-1.6deg] font-chalk text-[1.06em] leading-none text-yellow">
-                {t("titleEmphasis")}
-              </span>
-              <ChalkUnderline className="absolute -bottom-1 left-[-2%] h-[0.42em] w-[104%] text-yellow" />
-            </span>{" "}
-            {t("titleAfter")}
+            <span className="md:block">{t("titleBefore")}</span>{" "}
+            <span className="md:block">
+              <span className="relative inline-block">
+                <span className="relative z-10 font-chalk text-[1.06em] leading-none text-yellow">
+                  {t("titleEmphasis")}
+                </span>
+                <ChalkUnderline className="absolute -bottom-1 left-[-2%] h-[0.42em] w-[104%] text-yellow" />
+              </span>{" "}
+              {t("titleAfter")}
+            </span>
           </h1>
 
           <p
-            className="rise-in mt-8 max-w-[54ch] text-[clamp(1.03rem,1.15vw,1.2rem)] leading-[1.75] text-chalk-dim"
+            className="rise-in mt-5 max-w-[46ch] leading-[1.75] text-chalk-dim md:mt-7 md:text-lg"
             style={delay(0.18)}
           >
             {t("description")}
           </p>
 
           <div
-            className="rise-in mt-10 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center"
+            className="rise-in mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center md:mt-9 md:gap-4"
             style={delay(0.26)}
           >
             <a
@@ -144,29 +110,19 @@ export const Hero = async () => {
               <ArrowRight className="size-4.5 shrink-0 text-chalk-faint transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-yellow" />
             </Link>
           </div>
-        </div>
 
-        {/* Written on the board rather than boxed in a card: the two people who
-            actually answer the phone, exactly as the roll-up banner lists them. */}
-        <div
-          className="rise-in rotate-[-0.7deg] lg:col-span-5 lg:justify-self-end"
-          style={delay(0.36)}
-        >
-          <p className="font-chalk text-xl text-yellow sm:text-2xl">{t("staffTitle")}</p>
-          <ChalkRule className="mt-2 h-1.5 w-40 text-yellow/60" />
-
-          <ul className="mt-7 space-y-7">
+          {/* The people who answer, kept off the phone layout where every extra
+              line pushes the call button under the fold. */}
+          <ul className="rise-in mt-10 hidden flex-wrap gap-x-10 gap-y-4 lg:flex" style={delay(0.36)}>
             {FOUNDERS.map((person) => (
-              <li key={person.key}>
-                <p className="font-display text-2xl font-bold text-chalk sm:text-[1.75rem]">
-                  {person.name}
-                </p>
-                <p className="mt-0.5 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
+              <li key={person.key} className="flex items-baseline gap-3">
+                <span className="font-display text-base font-bold text-chalk">{person.name}</span>
+                <span className="text-[0.65rem] tracking-[0.18em] text-chalk-faint uppercase">
                   {tStaff(person.roleKey)}
-                </p>
+                </span>
                 <a
                   href={person.phone.href}
-                  className="mt-2 inline-block cursor-pointer font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow sm:text-2xl"
+                  className="cursor-pointer font-display font-extrabold tabular-nums text-chalk-dim transition-colors duration-200 hover:text-yellow"
                 >
                   {person.phone.display}
                 </a>
@@ -174,21 +130,6 @@ export const Hero = async () => {
             ))}
           </ul>
         </div>
-      </div>
-
-      {/* The chalk ledge closes the board. The sticks are cut out of the client's
-          own logo file, so the site rests the same two pieces of chalk on it. */}
-      <div className="relative z-10 h-14 shrink-0 sm:h-16">
-        <Image
-          src="/images/logo/chalk-sticks.png"
-          alt=""
-          width={295}
-          height={130}
-          loading="eager"
-          className="pointer-events-none absolute right-[6%] bottom-[2.6rem] w-24 drop-shadow-[0_8px_10px_rgba(0,0,0,0.55)] sm:bottom-[3rem] sm:w-32 lg:right-[9%] lg:w-36"
-        />
-        <div className="absolute inset-x-0 bottom-0 h-9 bg-linear-to-b from-board-soft to-board-deep sm:h-10" />
-        <div className="absolute inset-x-0 bottom-9 h-1.5 bg-chalk/22 sm:bottom-10" />
       </div>
     </section>
   );

@@ -35,6 +35,18 @@ Extract a new shared component once 3+ duplications exist, into `components/`, n
 - Built-in props: `loading={true}` renders a `<Loader2>` spinner and auto-disables; `icon={<Plus />}` renders before children and is hidden while loading; `variant="brand"` uses the `--brand-primary` CSS variable.
 - Pattern: `<Button loading={isPending} icon={<Save className="size-4" />}>Save</Button>`
 
+## Dialogs over media
+
+- `DialogContent` takes `showCloseButton={false}` when the dialog holds a photo. The
+  built-in close is a 16px glyph meant for forms and it disappears against an image.
+  Replace it with ~44px controls that match the other buttons.
+- **A `bg-black/50` backdrop does not hide a fixed navbar, it tints it.** The z-index can
+  be perfectly correct and the navigation still reads as sitting on top. Verify with
+  `document.elementFromPoint()` before chasing stacking contexts, then pass a heavier
+  backdrop through `overlayClassName`.
+- The dialog is `z-100`, above the navbar at `z-50` and its mobile panel at `z-70`.
+  Any new fixed layer has to stay under 100.
+
 ## Forms & interactivity
 
 - **Every input, textarea and select gets a Lucide icon**, at the start of the label or inside the field. Use `inline size-3.5`: `<FormLabel><User className="inline size-3.5" /> {t("name")}</FormLabel>`. For an icon inside the input, absolutely position it at the start and add `pl-9` to the input.
