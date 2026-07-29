@@ -315,14 +315,19 @@ html body[data-scroll-locked] {
   transition-delay: 110ms;
 }
 
+/* `is-drawn` is the current page: the same stroke, left on the board rather than
+   drawn on approach. It sits in the same rule as :hover so the two never fight,
+   and the link the visitor is already on simply never retracts. */
 .group:hover .chalk-underline path,
-.group:focus-visible .chalk-underline path {
+.group:focus-visible .chalk-underline path,
+.chalk-underline.is-drawn path {
   stroke-dashoffset: 0;
   opacity: 1;
 }
 
 .group:hover .chalk-underline path + path,
-.group:focus-visible .chalk-underline path + path {
+.group:focus-visible .chalk-underline path + path,
+.chalk-underline.is-drawn path + path {
   opacity: 0.45;
 }
 

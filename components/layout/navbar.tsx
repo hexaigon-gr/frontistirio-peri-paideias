@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { LocaleSwitch } from "@/components/layout/locale-switch";
 import { BUSINESS, FOUNDERS, NAV_LINKS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
 import { cn } from "@/lib/general/utils";
-import { Link } from "@/lib/i18n/navigation";
+import { Link, usePathname } from "@/lib/i18n/navigation";
 
 const SCROLL_THRESHOLD = 20;
 
@@ -18,14 +18,17 @@ const SCROLL_THRESHOLD = 20;
  * laying chalk down. The drawing and the timing live in `.chalk-underline` in
  * globals.css.
  */
-const LinkStroke = () => (
+const LinkStroke = ({ isActive }: { isActive: boolean }) => (
   <svg
     viewBox="0 0 100 10"
     preserveAspectRatio="none"
     aria-hidden
     focusable="false"
     filter="url(#chalk-rough-soft)"
-    className="chalk-underline absolute -bottom-2 left-0 h-2 w-full overflow-visible text-yellow"
+    className={cn(
+      "chalk-underline absolute -bottom-2 left-0 h-2 w-full overflow-visible text-yellow",
+      isActive && "is-drawn",
+    )}
   >
     <path
       d="M1.5 5.4C19 2.8 35 2 51 2.5c16 .5 31.5 1.6 47.5 3.6"
@@ -51,6 +54,9 @@ const LinkStroke = () => (
 export const Navbar = () => {
   const t = useTranslations("Nav");
   const tStaff = useTranslations("Staff");
+  /* Locale-agnostic: next-intl strips the /el or /en prefix, so this compares
+     against the bare hrefs in NAV_LINKS without special-casing either locale. */
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -104,16 +110,24 @@ export const Navbar = () => {
           </Link>
 
           <nav className="hidden items-center gap-9 lg:flex">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.key}
-                href={link.href}
-                className="group relative cursor-pointer py-1 text-[0.95rem] font-medium text-chalk-dim transition-colors duration-200 hover:text-chalk"
-              >
-                {t(link.key)}
-                <LinkStroke />
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+
+              return (
+                <Link
+                  key={link.key}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "group relative cursor-pointer py-1 text-[0.95rem] transition-colors duration-200 hover:text-chalk",
+                    isActive ? "font-semibold text-chalk" : "font-medium text-chalk-dim",
+                  )}
+                >
+                  {t(link.key)}
+                  <LinkStroke isActive={isActive} />
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-2.5">
@@ -152,7 +166,7 @@ export const Navbar = () => {
 
       <aside
         className={cn(
-          "board-texture fixed inset-y-0 right-0 z-70 flex w-[19rem] max-w-[86vw] flex-col overflow-hidden bg-board-deep transition-transform duration-300 ease-out lg:hidden",
+          "board-texture fixed inset-y-0 right-0 z-70 flex w-76 max-w-[86vw] flex-col overflow-hidden bg-board-deep transition-transform duration-300 ease-out lg:hidden",
           isMenuOpen ? "translate-x-0" : "translate-x-full",
         )}
         aria-hidden={!isMenuOpen}
@@ -170,17 +184,34 @@ export const Navbar = () => {
         </div>
 
         <nav className="relative flex flex-col px-6">
-          {NAV_LINKS.map((link, index) => (
-            <Link
-              key={link.key}
-              href={link.href}
-              onClick={closeMenu}
-              className="border-b border-chalk/10 py-4 font-display text-2xl font-bold text-chalk transition-colors duration-200 hover:text-yellow"
-              style={{ animationDelay: `${index * 40}ms` }}
-            >
-              {t(link.key)}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link, index) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <Link
+                key={link.key}
+                href={link.href}
+                onClick={closeMenu}
+                aria-current={isActive ? "page" : undefined}
+                /* No room for a drawn stroke in the panel, so the current page
+                   is marked with a chalk tick in the margin instead. */
+                className={cn(
+                  "flex items-center gap-3 border-b border-chalk/10 py-4 font-display text-2xl font-bold transition-colors duration-200 hover:text-yellow",
+                  isActive ? "text-yellow" : "text-chalk",
+                )}
+                style={{ animationDelay: `${index * 40}ms` }}
+              >
+                <span
+                  aria-hidden
+                  className={cn(
+                    "h-6 w-1 rounded-full bg-yellow transition-opacity duration-200",
+                    isActive ? "opacity-100" : "opacity-0",
+                  )}
+                />
+                {t(link.key)}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="relative mt-auto space-y-4 p-6">
