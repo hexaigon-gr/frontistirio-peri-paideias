@@ -16,7 +16,8 @@ Design context lives in `.impeccable.md` and is binding. The short version:
 
 - Master assets are `logo/image.png` and `photos/image.png` (the client's roll-up
   banners). Derived assets in `public/images/` were cut from them: `logo/wordmark.png`,
-  `logo/chalk-sticks.png`, `texture/blackboard.jpg`.
+  `texture/blackboard.jpg`. (`logo/chalk-sticks.png` was cut too but never used, so
+  it was deleted; re-derive it from the master if a use ever appears.)
 - Palette tokens live in `globals.css`: `board-deep/board/board-soft`, `chalk/chalk-dim/chalk-faint`,
   `yellow`, and the coloured chalks `sky`, `rose`, `violet`. Never introduce a colour
   that is not in the logo or the banners.
