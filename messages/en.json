@@ -46,7 +46,7 @@
     "storyTitle": "Our story",
     "storyOne": "Peri Paideias was founded by Vasilis Karatzis and Maria Manthaiaki, after many years of teaching in classrooms and one to one.",
     "storyTwo": "Through daily contact with students and families they understood something simple: supporting a child does not stop at the syllabus. It needs a place they are happy to come to, a timetable that holds up, and someone who notices that something is wrong before the grade says so.",
-    "storyThree": "So they built a school of small classes for the children of Malevizi, from primary school all the way to the national exams.",
+    "storyThree": "So they built a school of small classes for the children of Venerato and the villages around it, from primary school all the way to the national exams.",
     "teamTitle": "Our team",
     "teamIntro": "Five teachers. The student knows who is in front of them, and we know what each of us is doing."
   },
@@ -213,8 +213,12 @@
     "intro": "The phones ring straight through to the head of studies. There is no front desk in between.",
     "hoursValue": "Weekdays {opens} to {closes}",
     "whereTitle": "Where to find us",
-    "addressPending": "The exact address and the map will go up as soon as they are confirmed.",
-    "socialTitle": "On social media"
+    "addressPending": "The pin marks the centre of the village. The exact street and number goes in as soon as we have it.",
+    "socialTitle": "On social media",
+    "mapAlt": "Map of the {area} area",
+    "directions": "Directions",
+    "openInMaps": "Open in maps",
+    "mapAttribution": "Map data: OpenStreetMap and CARTO"
   },
   "Footer": {
     "tagline": "Tutoring school in Venerato, Heraklion, for primary, middle and high school, with teachers who know every child by name.",

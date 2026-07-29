@@ -1,10 +1,11 @@
-import { Clock, MapPin, Phone } from "lucide-react";
+import { Clock, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { FacebookIcon, InstagramIcon } from "@/components/brand-icons";
 import { ChalkBulb } from "@/components/chalk/chalk-marks";
 import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/board-blocks";
+import { LocationMap } from "@/components/sections/location-map";
 import { PageIntro } from "@/components/sections/page-intro";
 import { SocialIcon } from "@/components/social-icon";
 import { BUSINESS, FOUNDERS } from "@/lib/general/constants";
@@ -56,26 +57,13 @@ const ContactPage = async ({ params }: BasePageProps) => {
           ))}
         </ul>
 
-        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-10 sm:grid-cols-2">
           <div>
             <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-chalk">
               <Clock className="size-4.5 text-yellow" strokeWidth={2.5} />
               {tCommon("hours")}
             </h2>
             <p className="mt-3 text-chalk-dim">{t("hoursValue", { opens, closes })}</p>
-          </div>
-
-          <div>
-            <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-chalk">
-              <MapPin className="size-4.5 text-yellow" strokeWidth={2.5} />
-              {t("whereTitle")}
-            </h2>
-            <p className="mt-3 text-chalk-dim">
-              {BUSINESS.address.area}, {BUSINESS.address.city}
-            </p>
-            <p className="mt-2 text-[0.9rem] leading-[1.7] text-chalk-faint">
-              {t("addressPending")}
-            </p>
           </div>
 
           <div>
@@ -99,7 +87,8 @@ const ContactPage = async ({ params }: BasePageProps) => {
       </BoardSection>
 
       <BoardSection>
-        <ChalkHeading title={BUSINESS.slogan} />
+        <ChalkHeading title={t("whereTitle")} className="mb-12" />
+        <LocationMap />
       </BoardSection>
     </>
   );

@@ -16,18 +16,23 @@ export const BUSINESS = {
   email: "info@example.gr",
 
   address: {
-    /** PLACEHOLDER */
-    street: "Οδός και αριθμός",
+    /** Empty until the client confirms it. The UI hides the line rather than inventing one. */
+    street: "",
     area: "Βενεράτο",
+    /** Venerato sits in Δημοτική Ενότητα Παλιανής, Δήμος Ηρακλείου. Not Malevizi. */
+    municipality: "Δήμος Ηρακλείου",
     city: "Ηράκλειο Κρήτης",
-    /** PLACEHOLDER */
     postalCode: "70011",
   },
 
-  /** PLACEHOLDER, centre of Venerato rather than the actual building */
+  /**
+   * Centre of Venerato, from OpenStreetMap. This is the village, not the door of
+   * the building. Replace with the exact point once the address is confirmed, and
+   * regenerate `public/images/map/venerato.jpg` at a closer zoom.
+   */
   coordinates: {
-    lat: 35.2317,
-    lng: 25.0225,
+    lat: 35.1981073,
+    lng: 25.0386127,
   },
 
   /** Καθημερινά 14:00 έως 21:00, per the study programme page of the PDF. */
