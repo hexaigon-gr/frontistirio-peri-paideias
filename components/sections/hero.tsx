@@ -65,6 +65,7 @@ export const Hero = async () => {
           >
             <span className="md:block">{t("titleBefore")}</span>{" "}
             <span className="md:block">
+              {t("titleMiddle")}{" "}
               <span className="relative inline-block">
                 <span className="relative z-10 font-chalk text-[1.06em] leading-none text-yellow">
                   {t("titleEmphasis")}
@@ -73,7 +74,8 @@ export const Hero = async () => {
                     4.75rem, and a fixed offset that clears the descenders at one
                     end sits through the letters at the other. */}
                 <ChalkUnderline className="absolute -bottom-[0.17em] left-[-2%] h-[0.42em] w-[104%] text-yellow" />
-              </span>{" "}
+              </span>
+              {/* No space before it: the closing mark hangs on the emphasised word. */}
               {t("titleAfter")}
             </span>
           </h1>
