@@ -160,16 +160,30 @@
     "hoursTitle": "Hours and the shape of the year",
     "hoursText": "We are open every weekday from {opens} to {closes}, with flexible groups that fit around the student's timetable. The week is organised so progress is steady without wearing the child out.",
     "weeklyTitle": "Hours per year group",
-    "weeklyPending": "The high school tables are being finalised and will go up here. Call us about the year you are interested in.",
     "classes": {
-      "middleAll": "Middle school, years 1 to 3"
+      "primary": "Primary school",
+      "middleAll": "Middle school, years 1 to 3",
+      "highA": "High school, year 1",
+      "highB": "High school, year 2",
+      "epal": "Vocational high school, years 1 to 3"
     },
     "subjects": {
-      "modernGreek": "Modern Greek",
+      "dailyStudy": "Daily study",
       "maths": "Maths",
-      "physics": "Physics"
+      "ancientGreekOriginal": "Ancient Greek, from the original",
+      "ancientGreekTranslation": "Ancient Greek, from translation",
+      "ancientGreek": "Ancient Greek",
+      "modernGreekMiddle": "Modern Greek language and literature",
+      "modernGreekHigh": "Modern Greek language and literature",
+      "modernGreekEpal": "Modern Greek",
+      "physics": "Physics",
+      "algebra": "Algebra",
+      "geometry": "Geometry",
+      "latin": "Latin",
+      "history": "History",
+      "economics": "Economics",
+      "informatics": "Computer science"
     },
-    "hoursPerWeek": "{hours, plural, one {# hour} other {# hours}} per week",
     "toolsTitle": "Useful tools",
     "toolsIntro": "We give these to our students and leave them open to anyone who needs them.",
     "tools": {
@@ -193,7 +207,18 @@
         "title": "OEFE revision papers",
         "text": "An archive of revision papers to practise with."
       }
-    }
+    },
+    "tracks": {
+      "humanities": "Humanities orientation",
+      "sciences": "Science orientation"
+    },
+    "subjectNotes": {
+      "humanitiesExtraHour": "Plus one more hour for humanities students",
+      "startsJanuary": "Starts in January"
+    },
+    "hoursWeekly": "{hours, plural, one {# hour} other {# hours}}",
+    "hoursDaily": "{hours, plural, one {# hour} other {# hours}} per day",
+    "weeklyIntro": "Hours are weekly unless noted otherwise."
   },
   "Activities": {
     "title": "Activities and events",

@@ -158,14 +158,73 @@ export const EXTERNAL_TOOLS = [
   },
 ] as const;
 
-/** Weekly hours per class. The Λύκειο tables are still coming from the client. */
+/**
+ * Hours per class, as the client supplied them.
+ *
+ * Hours are weekly except where `unit` says otherwise: primary school is quoted
+ * per day, so the row has to carry its own unit rather than inherit the section's.
+ *
+ * `noteKey` renders under the subject instead of an asterisk and a footnote. A
+ * marker forces the reader to hunt for its meaning, and a dangling one that never
+ * got a note is worse than no marker at all.
+ *
+ * Β΄ Λυκείου splits by orientation, so it carries `tracks` on top of the subjects
+ * every student takes.
+ *
+ * MISSING: Γ΄ Λυκείου. The table the client sent stops at Β΄ and jumps to ΕΠΑΛ.
+ */
 export const WEEKLY_PROGRAMME = [
+  {
+    key: "primary",
+    subjects: [{ key: "dailyStudy", hours: 2, unit: "day" }],
+  },
   {
     key: "middleAll",
     subjects: [
-      { key: "modernGreek", hours: 2 },
       { key: "maths", hours: 2 },
-      { key: "physics", hours: 1 },
+      { key: "ancientGreekOriginal", hours: 2 },
+      { key: "ancientGreekTranslation", hours: 1 },
+      { key: "modernGreekMiddle", hours: 2 },
+      { key: "physics", hours: 2 },
+    ],
+  },
+  {
+    key: "highA",
+    subjects: [
+      { key: "modernGreekHigh", hours: 2 },
+      { key: "algebra", hours: 2 },
+      { key: "geometry", hours: 1 },
+      { key: "ancientGreek", hours: 2, noteKey: "humanitiesExtraHour" },
+      { key: "physics", hours: 2 },
+    ],
+  },
+  {
+    key: "highB",
+    subjects: [{ key: "modernGreekHigh", hours: 3 }],
+    tracks: [
+      {
+        key: "humanities",
+        subjects: [
+          { key: "ancientGreek", hours: 3 },
+          { key: "latin", hours: 2 },
+          { key: "history", hours: 1 },
+        ],
+      },
+      {
+        key: "sciences",
+        subjects: [
+          { key: "maths", hours: 5 },
+          { key: "economics", hours: 1, noteKey: "startsJanuary" },
+          { key: "informatics", hours: 1, noteKey: "startsJanuary" },
+        ],
+      },
+    ],
+  },
+  {
+    key: "epal",
+    subjects: [
+      { key: "maths", hours: 2 },
+      { key: "modernGreekEpal", hours: 2 },
     ],
   },
 ] as const;

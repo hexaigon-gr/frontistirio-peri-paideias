@@ -38,6 +38,11 @@ Rules learned from actual corrections. These are binding.
   registers a worker, so `public/sw.js` is a kill switch that wipes the caches and
   unregisters itself. Confirm the server is innocent with a headless browser before
   touching any code.
+- **A `fullPage` screenshot lies about scroll reveals.** Sections animate in with
+  `whileInView`, so anything that never entered the viewport is captured at opacity 0
+  and reads as a missing section with a tall empty gap. Scroll the page in steps first,
+  or assert on the DOM (`getComputedStyle(...).opacity`) before believing something
+  vanished.
 - **Verify what the browser actually got, not what the file says.** A screenshot showing old colours usually means stale served CSS, not a wrong value. Fetch the page, pull the `<link rel=stylesheet>` href, and grep the served CSS for the variable before touching the source again.
 - **A brand new rule in `globals.css` can survive a dev-server restart and still not be compiled.** Turbopack reuses the cached CSS chunk, and the served stylesheet keeps the same hash while the new selector is simply absent. Restarting is not enough: `rm -rf .next`. The tell is that every other custom class from the same file is present and only the new one is missing.
 - **`next/image` caches by URL path.** After regenerating an image file in place, the optimizer keeps serving the old bytes even after `rm -rf .next/cache/images`. Rename the file instead.
