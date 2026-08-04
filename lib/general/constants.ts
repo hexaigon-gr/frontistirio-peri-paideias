@@ -52,8 +52,13 @@ export const BUSINESS = {
     lng: 25.0386127,
   },
 
-  /** Καθημερινά 14:00 έως 21:00, per the study programme page of the PDF. */
-  hours: { opens: "14:00", closes: "21:00" },
+  /**
+   * Opening hours shift through the school year, so this holds the current
+   * season only and the copy around it says so rather than promising a fixed
+   * timetable. Changing the season is these three values and nothing else: they
+   * feed the programme page, the contact page and the structured data.
+   */
+  hours: { seasonKey: "winter", opens: "13:30", closes: "21:30" },
 
   social: {
     facebook: "https://www.facebook.com/peri.paideias.venerato/",
@@ -106,8 +111,12 @@ export const STAFF = [
 
 export const FOUNDERS = STAFF.filter((person) => person.isFounder);
 
-/** The number the main call button dials. */
-export const PRIMARY_PHONE = STAFF[1].phone;
+/**
+ * The number every call button dials: the school landline, not a personal
+ * mobile. The two mobiles stay listed as the διεύθυνση σπουδών for parents who
+ * want a specific teacher.
+ */
+export const PRIMARY_PHONE = BUSINESS.phone;
 
 /** Specialists the school works with, from the services page of the PDF. */
 export const PARTNER_SPECIALISTS = ["psychologist", "speechTherapist", "specialEducator", "careerAdvisor"] as const;

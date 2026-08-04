@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { FacebookIcon, InstagramIcon } from "@/components/brand-icons";
+import { CallButton } from "@/components/call-button";
 import { ChalkBulb } from "@/components/chalk/chalk-marks";
 import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/board-blocks";
 import { LocationMap } from "@/components/sections/location-map";
@@ -35,7 +36,10 @@ const ContactPage = async ({ params }: BasePageProps) => {
         doodle={
           <ChalkBulb className="absolute top-[30%] right-[8%] hidden size-24 text-yellow/45 md:block lg:size-32" />
         }
-      />
+      >
+        {/* The only call button outside the navbar and the home hero. */}
+        <CallButton className="mt-10" />
+      </PageIntro>
 
       <BoardSection tone="deep">
         <ul className="grid gap-8 sm:grid-cols-2">
@@ -57,26 +61,18 @@ const ContactPage = async ({ params }: BasePageProps) => {
           ))}
         </ul>
 
-        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-chalk">
-              <Phone className="size-4.5 text-yellow" strokeWidth={2.5} />
-              {tCommon("phone")}
-            </h2>
-            <a
-              href={BUSINESS.phone.href}
-              className="mt-3 inline-block cursor-pointer font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
-            >
-              {BUSINESS.phone.display}
-            </a>
-          </div>
-
+        {/* The landline is not repeated here: the call button at the top of the
+            page already dials it. */}
+        <div className="mt-14 grid gap-10 sm:grid-cols-2">
           <div>
             <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-chalk">
               <Clock className="size-4.5 text-yellow" strokeWidth={2.5} />
               {tCommon("hours")}
             </h2>
             <p className="mt-3 text-chalk-dim">{t("hoursValue", { opens, closes })}</p>
+            <p className="mt-2 max-w-[38ch] text-[0.9rem] leading-[1.7] text-chalk-faint">
+              {t("hoursNote")}
+            </p>
           </div>
 
           <div>

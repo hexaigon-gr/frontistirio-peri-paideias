@@ -1,11 +1,11 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
 
+import { CallButton } from "@/components/call-button";
 import { ChalkUnderline } from "@/components/chalk/chalk-marks";
-import { Button } from "@/components/ui/button";
-import { FOUNDERS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
+import { FOUNDERS, ROUTES } from "@/lib/general/constants";
 import { Link } from "@/lib/i18n/navigation";
 /* Static import so the file carries a content hash and next/image cannot serve a
    stale optimisation after the photo is regenerated. */
@@ -26,7 +26,6 @@ const delay = (seconds: number) => ({ "--rise-delay": `${seconds}s` }) as CSSPro
  */
 export const Hero = async () => {
   const t = await getTranslations("Hero");
-  const tCommon = await getTranslations("Common");
   const tStaff = await getTranslations("Staff");
 
   return (
@@ -90,17 +89,7 @@ export const Hero = async () => {
             className="rise-in mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center md:mt-9 md:gap-4"
             style={delay(0.26)}
           >
-            <Button asChild variant="chalk" size="pill" className="group">
-              <a href={PRIMARY_PHONE.href}>
-                <Phone
-                  className="size-5 shrink-0 transition-transform duration-300 group-hover:-rotate-12"
-                  strokeWidth={2.5}
-                />
-                <span>{tCommon("call")}</span>
-                <span className="opacity-45">·</span>
-                <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
-              </a>
-            </Button>
+            <CallButton />
 
             <Link
               href={ROUTES.about}

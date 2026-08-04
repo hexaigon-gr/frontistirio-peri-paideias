@@ -158,7 +158,7 @@
       }
     },
     "hoursTitle": "Hours and the shape of the year",
-    "hoursText": "We are open every weekday from {opens} to {closes}, with flexible groups that fit around the student's timetable. The week is organised so progress is steady without wearing the child out.",
+    "hoursText": "In winter we are usually open from {opens} to {closes}. The timetable shifts through the year, so call us for the current period. Groups are flexible and fit around the student, so progress is steady without wearing the child out.",
     "weeklyTitle": "Hours per year group",
     "classes": {
       "primary": "Primary school",
@@ -222,7 +222,7 @@
   },
   "Activities": {
     "title": "Activities and events",
-    "intro": "Talks, conferences and trips. What happens outside the classroom counts too.",
+    "intro": "Learning does not stop at the board. Conferences, talks and trips bring the theory to life and widen what our students see.",
     "eventsTitle": "Events",
     "outdoorTitle": "Outside the classroom",
     "items": {
@@ -259,14 +259,15 @@
   "Contact": {
     "title": "Contact",
     "intro": "The phones ring straight through to the head of studies. There is no front desk in between.",
-    "hoursValue": "Weekdays {opens} to {closes}",
+    "hoursValue": "Winter hours, weekdays {opens} to {closes}",
     "whereTitle": "Where to find us",
     "addressPending": "The map shows the wider area. Tap Directions and your navigation takes you to the door.",
     "socialTitle": "On social media",
     "mapAlt": "Map of the {area} area",
     "directions": "Directions",
     "openInMaps": "Open in maps",
-    "mapAttribution": "Map data: OpenStreetMap and CARTO"
+    "mapAttribution": "Map data: OpenStreetMap and CARTO",
+    "hoursNote": "The timetable changes through the year. Call us for the current period."
   },
   "Footer": {
     "tagline": "Tutoring school in Venerato, Heraklion, for primary, middle and high school, with teachers who know every child by name.",

@@ -1,9 +1,4 @@
-import { Phone } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
-
-import { Button } from "@/components/ui/button";
-import { PRIMARY_PHONE } from "@/lib/general/constants";
 
 interface PageIntroProps {
   title: string;
@@ -16,10 +11,12 @@ interface PageIntroProps {
 /**
  * The top of every inner page. The board carries on from the home page, so the
  * heading is written straight onto it instead of sitting in a banner.
+ *
+ * No call button here. The navbar carries one on every screen, and repeating the
+ * same yellow pill under every page heading made the site nag. Pages that want
+ * one pass `<CallButton />` through `children`, which today is only Contact.
  */
-export const PageIntro = async ({ title, intro, doodle, children }: PageIntroProps) => {
-  const tCommon = await getTranslations("Common");
-
+export const PageIntro = ({ title, intro, doodle, children }: PageIntroProps) => {
   return (
     <section className="board-texture board-dust relative isolate overflow-hidden bg-board">
       {doodle ? (
@@ -38,18 +35,6 @@ export const PageIntro = async ({ title, intro, doodle, children }: PageIntroPro
         </p>
 
         {children}
-
-        <Button asChild variant="chalk" size="pill" className="group mt-10">
-          <a href={PRIMARY_PHONE.href}>
-            <Phone
-              className="size-5 shrink-0 transition-transform duration-300 group-hover:-rotate-12"
-              strokeWidth={2.5}
-            />
-            {tCommon("call")}
-            <span className="opacity-45">·</span>
-            <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
-          </a>
-        </Button>
       </div>
     </section>
   );
