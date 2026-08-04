@@ -25,11 +25,18 @@
     "informatics": "Computer science",
     "founder": "Founding member",
     "bio": {
-      "karatzis": "Maths from the first year of middle school to advanced high school maths, patiently and methodically, until the student solves it alone.",
-      "manthaiaki": "Language, literature and ancient Greek. She starts on essay writing early, so that by the final year it is not the frightening part.",
+      "karatzis": "Maths from the first year of middle school to advanced high school maths. He starts from where the gap was left, not from today's chapter, and stays there patiently until the student solves it alone.",
+      "manthaiaki": "Language, literature and ancient Greek, from the first year of middle school to the national exams. Her second specialisation in learning difficulties means that when a child struggles, the route changes rather than the goal.",
       "athanasaki": "Language subjects across middle and high school, with the emphasis on understanding a text before memorising it.",
       "triamatakis": "Maths for middle and high school. He starts from where the gap was left, not from today's chapter.",
-      "kallergi": "Computer science and digital tools, so that a computer becomes a way to learn rather than only a way to pass the time."
+      "kallergi": "Computer science, from the basic ideas to the exam. She insists on understanding before recipes, so a student can solve something they have not seen before."
+    },
+    "credentials": {
+      "karatzis": "Special educator. Applied Mathematics, University of Crete, with a postgraduate degree in specific learning difficulties.",
+      "manthaiaki": "Special educator. Philology, University of Crete, with postgraduate degrees in classical studies and in specific learning difficulties.",
+      "athanasaki": "",
+      "triamatakis": "",
+      "kallergi": "Computer Science, University of Crete, undergraduate and postgraduate."
     }
   },
   "Hero": {

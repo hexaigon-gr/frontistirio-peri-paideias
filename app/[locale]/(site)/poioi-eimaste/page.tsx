@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ChalkBulb, ChalkPi } from "@/components/chalk/chalk-marks";
@@ -6,6 +7,7 @@ import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/bo
 import { Gallery } from "@/components/sections/gallery";
 import { PageIntro } from "@/components/sections/page-intro";
 import { BUSINESS, STAFF } from "@/lib/general/constants";
+import { TEAM_PHOTOS } from "@/lib/general/team-blur";
 import { BasePageProps } from "@/types/page-props";
 
 export const generateMetadata = async ({ params }: BasePageProps): Promise<Metadata> => {
@@ -59,44 +61,67 @@ const AboutPage = async ({ params }: BasePageProps) => {
 
         <ChalkHeading title={t("teamTitle")} intro={t("teamIntro")} />
 
-        <ul className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {STAFF.map((person) => (
-            <li key={person.key} className="relative">
-              <div className="flex items-start gap-4">
-                {/* The initial, chalked inside a hand-drawn frame. No stock
-                    portraits: the ones in the brief were AI generated. */}
-                <span className="relative flex size-14 shrink-0 items-center justify-center">
-                  <ChalkFrame className="text-chalk/45" />
-                  <span className="font-display text-2xl font-black text-yellow">
-                    {person.name.charAt(0)}
-                  </span>
-                </span>
+        <ul className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {STAFF.map((person) => {
+            const photo = TEAM_PHOTOS[person.key];
+            const credentials = tStaff(`credentials.${person.key}`);
 
-                <div>
-                  <p className="font-display text-xl font-bold text-chalk sm:text-2xl">
-                    {person.name}
-                  </p>
-                  <p className="mt-1 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
-                    {tStaff(person.roleKey)}
-                    {person.isFounder ? (
-                      <span className="ml-2 text-yellow">· {tStaff("founder")}</span>
-                    ) : null}
-                  </p>
+            return (
+              <li key={person.key}>
+                {/* Everyone gets the same 4:5 frame whether or not they sent a
+                    portrait, so the grid stays level. The fallback is the initial
+                    in chalk, never a stock face. */}
+                <div className="relative aspect-4/5 overflow-hidden bg-board">
+                  {photo ? (
+                    <Image
+                      src={photo.src}
+                      alt={person.name}
+                      width={photo.width}
+                      height={photo.height}
+                      placeholder="blur"
+                      blurDataURL={photo.blurDataURL}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="size-full object-cover"
+                    />
+                  ) : (
+                    /* Not an empty box waiting for an image: a letter chalked on
+                       the board, at a size that reads as a deliberate placeholder. */
+                    <span className="board-texture relative flex size-full items-center justify-center overflow-hidden bg-board-deep">
+                      <span className="relative font-chalk text-[5rem] leading-none text-yellow/60 sm:text-[6rem]">
+                        {person.name.charAt(0)}
+                      </span>
+                    </span>
+                  )}
+                  <ChalkFrame className="text-chalk/30" />
                 </div>
-              </div>
 
-              <p className="mt-4 leading-[1.75] text-chalk-dim">{tStaff(`bio.${person.key}`)}</p>
+                <p className="mt-5 font-display text-xl font-bold text-chalk sm:text-2xl">
+                  {person.name}
+                </p>
+                <p className="mt-1 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
+                  {tStaff(person.roleKey)}
+                  {person.isFounder ? (
+                    <span className="ml-2 text-yellow">· {tStaff("founder")}</span>
+                  ) : null}
+                </p>
 
-              {person.phone ? (
-                <a
-                  href={person.phone.href}
-                  className="mt-3 inline-block cursor-pointer font-display text-lg font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
-                >
-                  {person.phone.display}
-                </a>
-              ) : null}
-            </li>
-          ))}
+                {credentials ? (
+                  <p className="mt-3 text-[0.9rem] leading-[1.7] text-chalk">{credentials}</p>
+                ) : null}
+
+                <p className="mt-3 leading-[1.75] text-chalk-dim">{tStaff(`bio.${person.key}`)}</p>
+
+                {person.phone ? (
+                  <a
+                    href={person.phone.href}
+                    className="mt-3 inline-block cursor-pointer font-display text-lg font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
+                  >
+                    {person.phone.display}
+                  </a>
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       </BoardSection>
 
