@@ -73,7 +73,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
                     in chalk, never a stock face. The frame is capped rather than
                     filling the column: at full width the portraits dominated the
                     page and pushed the bios out of the first screen. */}
-                <div className="relative aspect-4/5 w-full max-w-72 overflow-hidden bg-board">
+                <div className="relative aspect-4/5 w-full max-w-56 overflow-hidden bg-board">
                   {photo ? (
                     <Image
                       src={photo.src}
@@ -82,7 +82,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
                       height={photo.height}
                       placeholder="blur"
                       blurDataURL={photo.blurDataURL}
-                      sizes="288px"
+                      sizes="224px"
                       className="size-full object-cover"
                     />
                   ) : (
