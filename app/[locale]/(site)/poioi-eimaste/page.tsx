@@ -70,8 +70,10 @@ const AboutPage = async ({ params }: BasePageProps) => {
               <li key={person.key}>
                 {/* Everyone gets the same 4:5 frame whether or not they sent a
                     portrait, so the grid stays level. The fallback is the initial
-                    in chalk, never a stock face. */}
-                <div className="relative aspect-4/5 overflow-hidden bg-board">
+                    in chalk, never a stock face. The frame is capped rather than
+                    filling the column: at full width the portraits dominated the
+                    page and pushed the bios out of the first screen. */}
+                <div className="relative aspect-4/5 w-full max-w-72 overflow-hidden bg-board">
                   {photo ? (
                     <Image
                       src={photo.src}
@@ -80,7 +82,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
                       height={photo.height}
                       placeholder="blur"
                       blurDataURL={photo.blurDataURL}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      sizes="288px"
                       className="size-full object-cover"
                     />
                   ) : (
@@ -99,7 +101,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
                   {person.name}
                 </p>
                 <p className="mt-1 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
-                  {tStaff(person.roleKey)}
+                  {person.roles.map((role) => tStaff(role)).join(" · ")}
                   {person.isFounder ? (
                     <span className="ml-2 text-yellow">· {tStaff("founder")}</span>
                   ) : null}

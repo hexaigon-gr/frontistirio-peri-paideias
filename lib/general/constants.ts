@@ -68,42 +68,47 @@ export const BUSINESS = {
 
 /**
  * The teaching team. The first two founded the school, so they carry the phone
- * numbers printed on the banners. `roleKey` and `bioKey` are translation keys,
- * names are proper nouns and stay as written.
+ * numbers printed on the banners.
+ *
+ * `roles` is a list rather than one key, because a qualification like ειδικός
+ * παιδαγωγός belongs on the same line as the subject a parent is scanning for,
+ * not buried in the paragraph underneath it.
+ *
+ * Names are proper nouns and stay as written.
  */
 export const STAFF = [
   {
     key: "karatzis",
     name: "Βασίλης Καράτζης",
-    roleKey: "mathematician",
+    roles: ["mathematician", "specialEducatorM"],
     isFounder: true,
     phone: { display: "697 923 6257", href: "tel:+306979236257" },
   },
   {
     key: "manthaiaki",
     name: "Μαρία Μανθαιάκη",
-    roleKey: "philologist",
+    roles: ["philologist", "specialEducatorF"],
     isFounder: true,
     phone: { display: "698 163 9440", href: "tel:+306981639440" },
   },
   {
     key: "athanasaki",
     name: "Μαρία Αθανασάκη",
-    roleKey: "philologist",
+    roles: ["philologist", "studyCentreHead"],
     isFounder: false,
     phone: null,
   },
   {
     key: "triamatakis",
     name: "Κώστας Τριαματάκης",
-    roleKey: "mathematician",
+    roles: ["mathematician"],
     isFounder: false,
     phone: null,
   },
   {
     key: "kallergi",
     name: "Γιάννα Καλλέργη",
-    roleKey: "informatics",
+    roles: ["informatics"],
     isFounder: false,
     phone: null,
   },

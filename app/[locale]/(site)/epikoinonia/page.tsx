@@ -48,7 +48,7 @@ const ContactPage = async ({ params }: BasePageProps) => {
               <ChalkFrame className="text-chalk/25" />
               <p className="font-display text-2xl font-bold text-chalk">{person.name}</p>
               <p className="mt-1 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
-                {tStaff(person.roleKey)}
+                {person.roles.map((role) => tStaff(role)).join(" · ")}
               </p>
               <a
                 href={person.phone.href}

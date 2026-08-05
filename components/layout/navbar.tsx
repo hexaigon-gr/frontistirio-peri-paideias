@@ -224,7 +224,7 @@ export const Navbar = () => {
             >
               <span className="block font-display text-lg font-bold text-chalk">{person.name}</span>
               <span className="block text-xs tracking-[0.16em] text-chalk-faint uppercase">
-                {tStaff(person.roleKey)}
+                {person.roles.map((role) => tStaff(role)).join(" · ")}
               </span>
               <span className="mt-1 block font-display text-xl font-extrabold tabular-nums text-yellow">
                 {person.phone.display}

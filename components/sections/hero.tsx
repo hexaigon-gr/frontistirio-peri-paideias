@@ -106,13 +106,21 @@ export const Hero = async () => {
           </div>
 
           {/* The people who answer, kept off the phone layout where every extra
-              line pushes the call button under the fold. */}
-          <ul className="rise-in mt-10 hidden flex-wrap gap-x-10 gap-y-4 lg:flex" style={delay(0.36)}>
+              line pushes the call button under the fold. The label matters:
+              without it the two names and numbers read as a random pair. */}
+          <div className="rise-in mt-10 hidden lg:block" style={delay(0.36)}>
+            <p className="flex items-center gap-3 text-[0.65rem] tracking-[0.22em] text-chalk-faint uppercase">
+              <span className="h-px w-5 bg-chalk/25" />
+              {t("staffTitle")}
+            </p>
+          </div>
+
+          <ul className="rise-in mt-4 hidden flex-wrap gap-x-10 gap-y-4 lg:flex" style={delay(0.42)}>
             {FOUNDERS.map((person) => (
               <li key={person.key} className="flex items-baseline gap-3">
                 <span className="font-display text-base font-bold text-chalk">{person.name}</span>
                 <span className="text-[0.65rem] tracking-[0.18em] text-chalk-faint uppercase">
-                  {tStaff(person.roleKey)}
+                  {person.roles.map((role) => tStaff(role)).join(" · ")}
                 </span>
                 <a
                   href={person.phone.href}
