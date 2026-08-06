@@ -14,6 +14,7 @@ Rules learned from actual corrections. These are binding.
 - **Screenshot verification.** After each meaningful UI change, screenshot and visually inspect it. Do not batch every change and check once at the end.
 - **No em dashes anywhere.** See the Writing Style section of CLAUDE.md. This covers UI copy, translations, code comments, commit messages, docs, and chat responses.
 - **Corrections go in THIS file**, not the auto-memory system. After any correction from the user, add the abstracted rule here (or to the scoped rule file it belongs to) immediately.
+- **Never "fix" copy the client did not ask you to touch.** When a client rewrites some paragraphs, apply exactly those. Do not extend the change to neighbouring text for consistency. This bit the About page: the client moved the story paragraphs into first person, so the intro above them was "corrected" to match and had to be reverted. The intro introduces the founders from the reader's side ("δύο καθηγητές που άνοιξαν το δικό **τους** φροντιστήριο") while the story is the school speaking; that mix was deliberate. Flag a suspected inconsistency in the reply instead of editing it.
 - **Code-review mindset.** Question whether the implementation is actually correct, push back on wrong requirements, prefer native or library solutions over reinventing, and check current best practices (context7, web) rather than trusting recall.
 
 ## Known traps
