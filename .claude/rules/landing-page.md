@@ -30,7 +30,18 @@ Design context lives in `.impeccable.md` and is binding. The short version:
   `fonts.google.com/metadata/fonts`, filter `subsets.includes("greek")`.
 - Chalk marks are hand-authored SVG paths in `components/chalk/chalk-marks.tsx`, roughened
   by the `chalk-rough` filter. Never replace them with an icon set.
-- Yellow is emphasis only. If everything is yellow, nothing is.
+- Yellow is emphasis only. If everything is yellow, nothing is. Each page carries
+  its own chalk instead: `PAGE_ACCENTS` in `components/sections/board-blocks.tsx`
+  maps a route to the colour of its heading rules, its intro doodle and its card on
+  the landing page. Write the classes out in full, never build them with a template
+  literal, because Tailwind extracts class names from the source.
+- **A third party's logo is the one exception to the palette, and it goes on a white
+  plate.** Partner marks (ΟΕΦΕ, Οδηγός Σταδιοδρομίας) may not be recoloured into
+  chalk, because a recoloured mark misrepresents the organisation. Rather than
+  pretend they belong to the palette, `components/partner-logo.tsx` sets them on a
+  white rounded plate so they read as a badge applied to the board. Sources are
+  trimmed to the ink and padded identically by `scripts/prepare-partners.mjs`,
+  otherwise one logo floats while another touches its edges at the same box size.
 - Sections are assembled from `components/sections/board-blocks.tsx`. A group of items
   gets a `ChalkFrame`, never a rounded card with a drop shadow. Give each page a
   different presentation (numbered notes, timeline, level bands) so the site does not

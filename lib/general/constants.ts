@@ -149,26 +149,33 @@ export const EXTERNAL_TOOLS = [
     key: "oefePlatform",
     href: "https://oefe.cloud/el/static/home",
     featured: true,
+    /* Keys into PARTNER_LOGOS. Only the featured entries carry one: the same
+       ΟΕΦΕ mark next to three of the five links would read as wallpaper. */
+    logo: "oefe",
   },
   {
     key: "careerGuide",
     href: "https://odigos.stadiodromia.gr/login.php",
     featured: true,
+    logo: "odigos",
   },
   {
     key: "panhellenicTopics",
     href: "https://www.oefe.gr/el/normal/thematapanelliniwn.aspx",
     featured: false,
+    logo: null,
   },
   {
     key: "topicBank",
     href: "https://trapeza.iep.edu.gr/",
     featured: false,
+    logo: null,
   },
   {
     key: "oefeRevision",
     href: "https://epan.oefe.cloud/el/normal/EpanThemataArchive",
     featured: false,
+    logo: null,
   },
 ] as const;
 

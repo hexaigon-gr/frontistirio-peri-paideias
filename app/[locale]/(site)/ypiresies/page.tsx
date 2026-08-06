@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ChalkAtom, ChalkFlask } from "@/components/chalk/chalk-marks";
+import { PartnerLogo } from "@/components/partner-logo";
 import { BoardSection, ChalkFrame, ChalkHeading, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { PageIntro } from "@/components/sections/page-intro";
 import { EXTERNAL_TOOLS, METHOD_ITEMS, PARTNER_SPECIALISTS } from "@/lib/general/constants";
@@ -88,6 +89,8 @@ const ServicesPage = async ({ params }: BasePageProps) => {
               rel="noopener noreferrer"
               className="group block cursor-pointer"
             >
+              {tool.logo ? <PartnerLogo logo={tool.logo} className="mb-3 h-14" /> : null}
+
               <h3 className="flex items-center gap-2 font-display text-xl font-bold text-yellow">
                 {tProgramme(`tools.${tool.key}.title`)}
                 <ArrowUpRight className="size-5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

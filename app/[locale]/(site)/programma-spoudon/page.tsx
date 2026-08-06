@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ChalkSetSquare } from "@/components/chalk/chalk-marks";
+import { PartnerLogo } from "@/components/partner-logo";
 import { BoardSection, ChalkFrame, ChalkHeading, ChalkRule, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { PageIntro } from "@/components/sections/page-intro";
 import { BUSINESS, EXTERNAL_TOOLS, LEVELS, WEEKLY_PROGRAMME } from "@/lib/general/constants";
@@ -160,22 +161,28 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
             >
               <ChalkFrame className={tool.featured ? "text-yellow/55" : "text-chalk/22"} />
 
-              <h3
-                className={
-                  tool.featured
-                    ? "flex items-center gap-2.5 font-display text-2xl font-black text-yellow sm:text-3xl"
-                    : "flex items-center gap-2 font-display text-lg font-bold text-chalk"
-                }
-              >
-                {t(`tools.${tool.key}.title`)}
-                <ArrowUpRight
-                  className="size-5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  strokeWidth={2.5}
-                />
-              </h3>
-              <p className="mt-2.5 max-w-[54ch] leading-[1.7] text-chalk-dim">
-                {t(`tools.${tool.key}.text`)}
-              </p>
+              <div className="sm:flex sm:items-start sm:gap-6">
+                {tool.logo ? <PartnerLogo logo={tool.logo} /> : null}
+
+                <div>
+                  <h3
+                    className={
+                      tool.featured
+                        ? "flex items-center gap-2.5 font-display text-2xl font-black text-yellow sm:text-3xl"
+                        : "flex items-center gap-2 font-display text-lg font-bold text-chalk"
+                    }
+                  >
+                    {t(`tools.${tool.key}.title`)}
+                    <ArrowUpRight
+                      className="size-5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      strokeWidth={2.5}
+                    />
+                  </h3>
+                  <p className="mt-2.5 max-w-[54ch] leading-[1.7] text-chalk-dim">
+                    {t(`tools.${tool.key}.text`)}
+                  </p>
+                </div>
+              </div>
               <span className="sr-only">{tCommon("opensInNewTab")}</span>
             </a>
           ))}
