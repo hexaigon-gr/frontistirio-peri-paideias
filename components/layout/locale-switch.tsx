@@ -26,7 +26,12 @@ export const LocaleSwitch = ({ className }: { className?: string }) => {
     >
       {SUPPORTED_LOCALES.map((code, index) => (
         <span key={code} className="flex items-center gap-1">
-          {index > 0 && <span className="text-chalk-faint/50">/</span>}
+          {/* Full token, not a faded one: at 50% the slash fell under 4.5:1. */}
+          {index > 0 && (
+            <span aria-hidden className="text-chalk-faint">
+              /
+            </span>
+          )}
           <button
             type="button"
             lang={code}

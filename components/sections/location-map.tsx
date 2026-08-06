@@ -137,7 +137,7 @@ export const LocationMap = async () => {
         </div>
       </div>
 
-      <p className="mt-6 text-xs text-chalk-faint/70">{t("mapAttribution")}</p>
+      <p className="mt-6 text-xs text-chalk-faint">{t("mapAttribution")}</p>
     </div>
   );
 };

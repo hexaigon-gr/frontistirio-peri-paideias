@@ -72,7 +72,7 @@
   /* Chalk is never pure white. It is warm and dusty. */
   --chalk: oklch(0.955 0.005 85);
   --chalk-dim: oklch(0.795 0.006 85);
-  --chalk-faint: oklch(0.62 0.007 85);
+  --chalk-faint: oklch(0.65 0.007 85);
 
   /* The yellow of the set square in the logo, #ebaf09. Emphasis only. */
   --yellow: oklch(0.802 0.163 83);
