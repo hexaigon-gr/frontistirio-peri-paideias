@@ -105,12 +105,15 @@ export const Navbar = () => {
               priority
               className={cn(
                 "w-auto transition-all duration-300",
-                isScrolled ? "h-9" : "h-10 md:h-14",
+                isScrolled ? "h-9" : "h-10 md:h-12 xl:h-14",
               )}
             />
           </Link>
 
-          <nav className="hidden items-center gap-9 lg:flex">
+          {/* The sixth link does not fit at 1024 with the roomy gap, and a wrapped
+              nav row is worse than a tighter one, so the spacing only opens up
+              once there is width to spend on it. */}
+          <nav className="hidden items-center gap-4 lg:flex xl:gap-9">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
 
@@ -120,7 +123,7 @@ export const Navbar = () => {
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "group relative cursor-pointer py-1 text-[0.95rem] transition-colors duration-200 hover:text-chalk",
+                    "group relative cursor-pointer py-1 text-sm whitespace-nowrap transition-colors duration-200 hover:text-chalk xl:text-[0.95rem]",
                     isActive ? "font-semibold text-chalk" : "font-medium text-chalk-dim",
                   )}
                 >

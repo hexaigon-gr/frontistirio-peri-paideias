@@ -11,7 +11,12 @@ import { GALLERY_IMAGES } from "@/lib/general/gallery-blur";
  * state. Splitting it this way keeps `getTranslations` on the server and ships
  * only the interactive part to the browser.
  */
-export const Gallery = async () => {
+interface GalleryProps {
+  /** The accent of the page hosting the gallery, so its rule matches the rest. */
+  accent?: string;
+}
+
+export const Gallery = async ({ accent }: GalleryProps) => {
   const t = await getTranslations("Gallery");
 
   const items: GalleryItem[] = GALLERY.map((slug) => ({
@@ -22,7 +27,7 @@ export const Gallery = async () => {
 
   return (
     <BoardSection tone="deep" id="o-choros-mas">
-      <ChalkHeading title={t("title")} intro={t("intro")} className="mb-12" />
+      <ChalkHeading accent={accent} title={t("title")} intro={t("intro")} className="mb-12" />
 
       <GalleryGrid items={items} />
     </BoardSection>

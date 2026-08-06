@@ -9,7 +9,12 @@ import {
   ChalkPlane,
 } from "@/components/chalk/chalk-marks";
 import { Stagger, StaggerItem } from "@/components/motion/reveal";
-import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/board-blocks";
+import {
+  BoardSection,
+  ChalkFrame,
+  ChalkHeading,
+  PAGE_ACCENTS,
+} from "@/components/sections/board-blocks";
 import { ROUTES } from "@/lib/general/constants";
 import { cn } from "@/lib/general/utils";
 import { Link } from "@/lib/i18n/navigation";
@@ -28,35 +33,35 @@ const ENTRIES = [
     ns: "About",
     href: ROUTES.about,
     Doodle: ChalkBulb,
-    tone: "text-yellow/70",
+    tone: PAGE_ACCENTS.about.card,
     span: "lg:col-span-2",
   },
   {
     ns: "Services",
     href: ROUTES.services,
     Doodle: ChalkFlask,
-    tone: "text-rose/70",
+    tone: PAGE_ACCENTS.services.card,
     span: "lg:col-span-2",
   },
   {
     ns: "Programme",
     href: ROUTES.programme,
     Doodle: ChalkPi,
-    tone: "text-sky/70",
+    tone: PAGE_ACCENTS.programme.card,
     span: "lg:col-span-2",
   },
   {
     ns: "Activities",
     href: ROUTES.activities,
     Doodle: ChalkPlane,
-    tone: "text-violet/70",
+    tone: PAGE_ACCENTS.activities.card,
     span: "lg:col-span-3",
   },
   {
     ns: "Contact",
     href: ROUTES.contact,
     Doodle: ChalkAtom,
-    tone: "text-chalk/55",
+    tone: PAGE_ACCENTS.contact.card,
     span: "lg:col-span-3",
   },
 ] as const;

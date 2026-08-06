@@ -281,6 +281,9 @@ export const ROUTES = {
 } as const;
 
 export const NAV_LINKS = [
+  /* The wordmark already goes home, but only people who build sites know that,
+     so the way back gets a labelled link like every other destination. */
+  { key: "home", href: ROUTES.home },
   { key: "about", href: ROUTES.about },
   { key: "services", href: ROUTES.services },
   { key: "programme", href: ROUTES.programme },

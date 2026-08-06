@@ -3,13 +3,16 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ChalkAtom, ChalkFlask } from "@/components/chalk/chalk-marks";
-import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/board-blocks";
+import { BoardSection, ChalkFrame, ChalkHeading, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { PageIntro } from "@/components/sections/page-intro";
 import { EXTERNAL_TOOLS, METHOD_ITEMS, PARTNER_SPECIALISTS } from "@/lib/general/constants";
+import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
 
 const EXTRA_ITEMS = ["oefeSimulation", "personalityTest"] as const;
 const FEATURED_TOOLS = EXTERNAL_TOOLS.filter((tool) => tool.featured);
+
+const ACCENT = PAGE_ACCENTS.services;
 
 export const generateMetadata = async ({ params }: BasePageProps): Promise<Metadata> => {
   const { locale } = await params;
@@ -32,13 +35,13 @@ const ServicesPage = async ({ params }: BasePageProps) => {
         title={t("title")}
         intro={t("intro")}
         doodle={
-          <ChalkFlask className="absolute top-[30%] right-[8%] hidden size-24 text-rose/35 md:block lg:size-32" />
+          <ChalkFlask className={cn("absolute top-[30%] right-[8%] hidden size-24 md:block lg:size-32", ACCENT.doodle)} />
         }
       />
 
       {/* Numbered like notes taken off a board, not repeated in identical cards. */}
       <BoardSection tone="deep">
-        <ChalkHeading title={t("methodTitle")} intro={t("methodIntro")} />
+        <ChalkHeading accent={ACCENT.rule} title={t("methodTitle")} intro={t("methodIntro")} />
 
         <ol className="mt-14 grid gap-x-12 gap-y-10 md:grid-cols-2">
           {METHOD_ITEMS.map((item, index) => (
@@ -59,31 +62,11 @@ const ServicesPage = async ({ params }: BasePageProps) => {
         </ol>
       </BoardSection>
 
+      {/* What the school itself offers comes before who it calls in: a parent
+          reading top to bottom should finish our list before meeting outside
+          names. The tones keep alternating, so the swap moves `tone` too. */}
       <BoardSection>
-        <ChalkAtom
-          aria-hidden
-          className="pointer-events-none absolute top-16 right-[5%] hidden size-24 text-sky/30 lg:block"
-        />
-
-        <ChalkHeading title={t("specialistsTitle")} intro={t("specialistsIntro")} />
-
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {PARTNER_SPECIALISTS.map((specialist) => (
-            <li key={specialist} className="relative p-6">
-              <ChalkFrame className="text-chalk/25" />
-              <h3 className="font-display text-lg font-bold text-chalk">
-                {t(`specialists.${specialist}.title`)}
-              </h3>
-              <p className="mt-2.5 text-[0.95rem] leading-[1.7] text-chalk-dim">
-                {t(`specialists.${specialist}.text`)}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </BoardSection>
-
-      <BoardSection tone="deep">
-        <ChalkHeading title={t("extrasTitle")} />
+        <ChalkHeading accent={ACCENT.rule} title={t("extrasTitle")} />
 
         <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
           {EXTRA_ITEMS.map((item) => (
@@ -116,6 +99,29 @@ const ServicesPage = async ({ params }: BasePageProps) => {
             </a>
           ))}
         </div>
+      </BoardSection>
+
+      <BoardSection tone="deep">
+        <ChalkAtom
+          aria-hidden
+          className="pointer-events-none absolute top-16 right-[5%] hidden size-24 text-sky/30 lg:block"
+        />
+
+        <ChalkHeading accent={ACCENT.rule} title={t("specialistsTitle")} intro={t("specialistsIntro")} />
+
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {PARTNER_SPECIALISTS.map((specialist) => (
+            <li key={specialist} className="relative p-6">
+              <ChalkFrame className="text-chalk/25" />
+              <h3 className="font-display text-lg font-bold text-chalk">
+                {t(`specialists.${specialist}.title`)}
+              </h3>
+              <p className="mt-2.5 text-[0.95rem] leading-[1.7] text-chalk-dim">
+                {t(`specialists.${specialist}.text`)}
+              </p>
+            </li>
+          ))}
+        </ul>
       </BoardSection>
     </>
   );

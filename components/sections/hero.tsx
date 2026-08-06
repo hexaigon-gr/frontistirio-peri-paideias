@@ -51,17 +51,31 @@ export const Hero = async () => {
 
       <div className="relative z-10 mx-auto w-full max-w-[84rem] px-5 pt-28 pb-14 sm:px-8 md:py-24">
         <div className="max-w-[34rem] lg:max-w-[38rem]">
+          {/* The name is read first, written in the chalk hand rather than the
+              display face: on a photographed board a typeset brand line reads as
+              a sticker laid over the picture. */}
           <p
-            className="rise-in flex items-center gap-3 font-display text-[0.72rem] font-bold tracking-[0.16em] text-yellow uppercase sm:text-xs sm:tracking-[0.28em]"
+            className="rise-in font-chalk text-[clamp(1.9rem,4.4vw,2.9rem)] leading-none text-yellow"
             style={delay(0)}
           >
-            <span className="h-px w-7 bg-yellow/70" />
+            {t("brand")}
+          </p>
+
+          {/* Chalk white, not yellow: the brand line above it is already yellow,
+              and two golden lines in a row spend the emphasis colour on nothing. */}
+          <p
+            className="rise-in mt-3.5 flex items-start gap-3 font-display text-[0.72rem] font-bold tracking-[0.16em] text-chalk-dim uppercase sm:text-xs sm:tracking-[0.28em]"
+            style={delay(0.06)}
+          >
+            {/* Aligned to the first line, not to the block: on a phone the line
+                wraps and a vertically centred rule floats between the two. */}
+            <span className="mt-[0.55em] h-px w-7 shrink-0 bg-chalk/40" />
             {t("eyebrow")}
           </p>
 
           <h1
             className="rise-in mt-5 font-display text-[clamp(2.35rem,7vw,4.75rem)] leading-[1.05] font-black tracking-[-0.015em] text-chalk md:mt-6 md:leading-[0.98]"
-            style={delay(0.08)}
+            style={delay(0.14)}
           >
             <span className="md:block">{t("titleBefore")}</span>{" "}
             <span className="md:block">
@@ -82,14 +96,14 @@ export const Hero = async () => {
 
           <p
             className="rise-in mt-5 max-w-[46ch] leading-[1.75] text-chalk-dim md:mt-7 md:text-lg"
-            style={delay(0.18)}
+            style={delay(0.24)}
           >
             {t("description")}
           </p>
 
           <div
             className="rise-in mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center md:mt-9 md:gap-4"
-            style={delay(0.26)}
+            style={delay(0.32)}
           >
             <CallButton />
 
@@ -105,32 +119,36 @@ export const Hero = async () => {
             </Link>
           </div>
 
-          {/* The people who answer, kept off the phone layout where every extra
-              line pushes the call button under the fold. The label matters:
-              without it the two names and numbers read as a random pair. */}
-          <div className="rise-in mt-10 hidden lg:block" style={delay(0.36)}>
+          {/* The people who answer. Width alone is not enough of a test: a
+              1366x768 laptop is wide enough for the row and too short for it, and
+              the block pushed the call button off the bottom of the screen. So it
+              is hidden by default and appears only when the viewport has both. */}
+          <div
+            className="rise-in mt-10 hidden lg:[@media(min-height:820px)]:block"
+            style={delay(0.42)}
+          >
             <p className="flex items-center gap-3 text-[0.65rem] tracking-[0.22em] text-chalk-faint uppercase">
               <span className="h-px w-5 bg-chalk/25" />
               {t("staffTitle")}
             </p>
-          </div>
 
-          <ul className="rise-in mt-4 hidden flex-wrap gap-x-10 gap-y-4 lg:flex" style={delay(0.42)}>
-            {FOUNDERS.map((person) => (
-              <li key={person.key} className="flex items-baseline gap-3">
-                <span className="font-display text-base font-bold text-chalk">{person.name}</span>
-                <span className="text-[0.65rem] tracking-[0.18em] text-chalk-faint uppercase">
-                  {person.roles.map((role) => tStaff(role)).join(" · ")}
-                </span>
-                <a
-                  href={person.phone.href}
-                  className="cursor-pointer font-display font-extrabold tabular-nums text-chalk-dim transition-colors duration-200 hover:text-yellow"
-                >
-                  {person.phone.display}
-                </a>
-              </li>
-            ))}
-          </ul>
+            <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-4">
+              {FOUNDERS.map((person) => (
+                <li key={person.key} className="flex items-baseline gap-3">
+                  <span className="font-display text-base font-bold text-chalk">{person.name}</span>
+                  <span className="text-[0.65rem] tracking-[0.18em] text-chalk-faint uppercase">
+                    {person.roles.map((role) => tStaff(role)).join(" · ")}
+                  </span>
+                  <a
+                    href={person.phone.href}
+                    className="cursor-pointer font-display font-extrabold tabular-nums text-chalk-dim transition-colors duration-200 hover:text-yellow"
+                  >
+                    {person.phone.display}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

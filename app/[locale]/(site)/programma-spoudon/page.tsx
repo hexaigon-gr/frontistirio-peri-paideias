@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ChalkSetSquare } from "@/components/chalk/chalk-marks";
-import { BoardSection, ChalkFrame, ChalkHeading, ChalkRule } from "@/components/sections/board-blocks";
+import { BoardSection, ChalkFrame, ChalkHeading, ChalkRule, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { PageIntro } from "@/components/sections/page-intro";
 import { BUSINESS, EXTERNAL_TOOLS, LEVELS, WEEKLY_PROGRAMME } from "@/lib/general/constants";
+import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
 
 type ProgrammeGroup = (typeof WEEKLY_PROGRAMME)[number];
@@ -46,6 +47,8 @@ const SubjectList = ({
   </ul>
 );
 
+const ACCENT = PAGE_ACCENTS.programme;
+
 export const generateMetadata = async ({ params }: BasePageProps): Promise<Metadata> => {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Programme" });
@@ -67,7 +70,7 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
         title={t("title")}
         intro={t("intro")}
         doodle={
-          <ChalkSetSquare className="absolute top-[32%] right-[8%] hidden size-24 text-yellow/45 md:block lg:size-32" />
+          <ChalkSetSquare className={cn("absolute top-[32%] right-[8%] hidden size-24 md:block lg:size-32", ACCENT.doodle)} />
         }
       />
 
@@ -100,7 +103,7 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
         <div className="flex items-start gap-4">
           <Clock className="mt-1.5 size-6 shrink-0 text-yellow" strokeWidth={2.4} />
           <div>
-            <ChalkHeading title={t("hoursTitle")} />
+            <ChalkHeading accent={ACCENT.rule} title={t("hoursTitle")} />
             <p className="mt-6 max-w-[62ch] leading-[1.8] text-chalk-dim">
               {t("hoursText", { opens, closes })}
             </p>
@@ -112,7 +115,7 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
           kept whole by break-inside-avoid. A group split across a column break
           would put a subject under the wrong heading. */}
       <BoardSection tone="deep" id="ores-ana-taxi">
-        <ChalkHeading title={t("weeklyTitle")} intro={t("weeklyIntro")} />
+        <ChalkHeading accent={ACCENT.rule} title={t("weeklyTitle")} intro={t("weeklyIntro")} />
 
         <div className="mt-12 lg:columns-2 lg:gap-x-16">
           {WEEKLY_PROGRAMME.map((group) => (
@@ -140,7 +143,7 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
       </BoardSection>
 
       <BoardSection tone="deep" id="ergaleia">
-        <ChalkHeading title={t("toolsTitle")} intro={t("toolsIntro")} />
+        <ChalkHeading accent={ACCENT.rule} title={t("toolsTitle")} intro={t("toolsIntro")} />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {EXTERNAL_TOOLS.map((tool) => (

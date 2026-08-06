@@ -5,12 +5,15 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FacebookIcon, InstagramIcon } from "@/components/brand-icons";
 import { CallButton } from "@/components/call-button";
 import { ChalkBulb } from "@/components/chalk/chalk-marks";
-import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/board-blocks";
+import { BoardSection, ChalkFrame, ChalkHeading, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { LocationMap } from "@/components/sections/location-map";
 import { PageIntro } from "@/components/sections/page-intro";
 import { SocialIcon } from "@/components/social-icon";
 import { BUSINESS, FOUNDERS } from "@/lib/general/constants";
+import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
+
+const ACCENT = PAGE_ACCENTS.contact;
 
 export const generateMetadata = async ({ params }: BasePageProps): Promise<Metadata> => {
   const { locale } = await params;
@@ -34,7 +37,7 @@ const ContactPage = async ({ params }: BasePageProps) => {
         title={t("title")}
         intro={t("intro")}
         doodle={
-          <ChalkBulb className="absolute top-[30%] right-[8%] hidden size-24 text-yellow/45 md:block lg:size-32" />
+          <ChalkBulb className={cn("absolute top-[30%] right-[8%] hidden size-24 md:block lg:size-32", ACCENT.doodle)} />
         }
       >
         {/* The only call button outside the navbar and the home hero. */}
@@ -96,7 +99,7 @@ const ContactPage = async ({ params }: BasePageProps) => {
       </BoardSection>
 
       <BoardSection>
-        <ChalkHeading title={t("whereTitle")} className="mb-12" />
+        <ChalkHeading accent={ACCENT.rule} title={t("whereTitle")} className="mb-12" />
         <LocationMap />
       </BoardSection>
     </>

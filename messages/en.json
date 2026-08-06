@@ -7,7 +7,8 @@
     "contact": "Contact",
     "call": "Call us",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "home": "Home"
   },
   "Common": {
     "call": "Call us",
@@ -51,7 +52,8 @@
     "description": "Small classes for primary, middle and high school in Venerato. Teachers with postgraduate degrees and training in special education.",
     "secondaryCta": "About us",
     "imageAlt": "Hands writing with chalk on a blackboard",
-    "staffTitle": "Academic direction"
+    "staffTitle": "Academic direction",
+    "brand": "Περί...Παιδείας"
   },
   "Home": {
     "exploreTitle": "What you will find here",
@@ -59,17 +61,17 @@
   },
   "About": {
     "title": "About us",
-    "intro": "Two teachers who opened their own school in Venerato, and a team that grew around them.",
+    "intro": "Two teachers who opened our own school in Venerato, and a team that grew around us.",
     "storyTitle": "Our story",
-    "storyOne": "Peri Paideias was founded by Vasilis Karatzis and Maria Manthaiaki, after many years of teaching in classrooms and one to one.",
-    "storyTwo": "Through daily contact with students and families they understood something simple: supporting a child does not stop at the syllabus. It needs a place they are happy to come to, a timetable that holds up, and someone who notices that something is wrong before the grade says so.",
-    "storyThree": "So they built a school of small classes for the children of Venerato and the villages around it, from primary school all the way to the national exams.",
-    "teamTitle": "Our team",
-    "teamIntro": "Five teachers. The student knows who is in front of them, and we know what each of us is doing."
+    "storyOne": "«Peri Paideias» was created by Vasilis Karatzis and Maria Manthaiaki, after many years of teaching in classrooms and one to one.",
+    "storyTwo": "Through daily contact with students and families we understood something simple: supporting a child does not stop at the syllabus. It needs a space they come to gladly, a schedule that holds, and someone who notices that something is wrong before the grade says so.",
+    "storyThree": "So we built a school with small groups, one that supports children from their first steps in primary school to the «marathon» of the national exams.",
+    "teamTitle": "Our teachers",
+    "teamIntro": "A student knows who is in front of them, and we know what each of us is doing."
   },
   "Gallery": {
     "title": "Our rooms",
-    "intro": "The classrooms, the study room and the reception, exactly as they are. No stock photography.",
+    "intro": "The classrooms, the reception area and the front desk, as they are. No stock photography.",
     "open": "Open photo",
     "close": "Close",
     "previous": "Previous",
@@ -78,7 +80,7 @@
     "captions": {
       "classroom": "A classroom, with a board and a small-group table",
       "waiting-area": "The waiting area for parents",
-      "study-room": "The corridor leading to the study room",
+      "study-room": "A classroom. At the far end, the reception area and the front desk.",
       "office": "The office and the school library",
       "reception-desk": "The reception desk",
       "reception-corner": "Reception, with the blackboard behind",
@@ -270,7 +272,7 @@
   },
   "Contact": {
     "title": "Contact",
-    "intro": "Call us about anything you want to ask, from the classes and the timetable to how your child is doing.",
+    "intro": "Call us about anything you want to ask, from the groups and the hours to how your child is progressing.",
     "hoursValue": "Winter hours, weekdays {opens} to {closes}",
     "whereTitle": "Where to find us",
     "addressPending": "The map shows the wider area. Tap Directions and your navigation takes you to the door.",

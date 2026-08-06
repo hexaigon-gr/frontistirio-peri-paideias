@@ -3,12 +3,15 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ChalkBulb, ChalkPi } from "@/components/chalk/chalk-marks";
-import { BoardSection, ChalkFrame, ChalkHeading } from "@/components/sections/board-blocks";
+import { BoardSection, ChalkFrame, ChalkHeading, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { Gallery } from "@/components/sections/gallery";
 import { PageIntro } from "@/components/sections/page-intro";
 import { BUSINESS, STAFF } from "@/lib/general/constants";
 import { TEAM_PHOTOS } from "@/lib/general/team-blur";
+import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
+
+const ACCENT = PAGE_ACCENTS.about;
 
 export const generateMetadata = async ({ params }: BasePageProps): Promise<Metadata> => {
   const { locale } = await params;
@@ -30,14 +33,14 @@ const AboutPage = async ({ params }: BasePageProps) => {
         title={t("title")}
         intro={t("intro")}
         doodle={
-          <ChalkPi className="absolute top-[34%] right-[7%] hidden size-24 text-yellow/45 md:block lg:size-32" />
+          <ChalkPi className={cn("absolute top-[34%] right-[7%] hidden size-24 md:block lg:size-32", ACCENT.doodle)} />
         }
       />
 
       <BoardSection tone="deep">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <ChalkHeading title={t("storyTitle")} />
+            <ChalkHeading accent={ACCENT.rule} title={t("storyTitle")} />
             {/* The slogan from the roll-up banners, written back onto the board
                 so the empty half of the column carries the brand voice. */}
             <p className="mt-10 max-w-[16ch] font-chalk text-[clamp(1.6rem,2.6vw,2.2rem)] leading-[1.35] text-yellow">
@@ -59,7 +62,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
           className="pointer-events-none absolute top-10 right-[6%] hidden size-20 text-yellow/40 lg:block"
         />
 
-        <ChalkHeading title={t("teamTitle")} intro={t("teamIntro")} />
+        <ChalkHeading accent={ACCENT.rule} title={t("teamTitle")} intro={t("teamIntro")} />
 
         <ul className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {STAFF.map((person) => {
@@ -127,7 +130,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
         </ul>
       </BoardSection>
 
-      <Gallery />
+      <Gallery accent={ACCENT.rule} />
     </>
   );
 };

@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ChalkPlane } from "@/components/chalk/chalk-marks";
-import { BoardSection, ChalkHeading } from "@/components/sections/board-blocks";
+import { BoardSection, ChalkHeading, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { PageIntro } from "@/components/sections/page-intro";
 import { EVENTS } from "@/lib/general/constants";
+import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
 
 const EVENT_ITEMS = EVENTS.filter((item) => item.kind === "event");
 const OUTDOOR_ITEMS = EVENTS.filter((item) => item.kind === "activity");
+
+const ACCENT = PAGE_ACCENTS.activities;
 
 export const generateMetadata = async ({ params }: BasePageProps): Promise<Metadata> => {
   const { locale } = await params;
@@ -29,14 +32,14 @@ const ActivitiesPage = async ({ params }: BasePageProps) => {
         title={t("title")}
         intro={t("intro")}
         doodle={
-          <ChalkPlane className="absolute top-[30%] right-[9%] hidden size-24 text-sky/35 md:block lg:size-32" />
+          <ChalkPlane className={cn("absolute top-[30%] right-[9%] hidden size-24 md:block lg:size-32", ACCENT.doodle)} />
         }
       />
 
       {/* A timeline down the left edge: the year is the anchor, the way it is
           written next to an entry on a board. */}
       <BoardSection tone="deep">
-        <ChalkHeading title={t("eventsTitle")} />
+        <ChalkHeading accent={ACCENT.rule} title={t("eventsTitle")} />
 
         <ul className="mt-12 border-l border-chalk/15 pl-6 sm:pl-10">
           {EVENT_ITEMS.map((item) => (
@@ -58,7 +61,7 @@ const ActivitiesPage = async ({ params }: BasePageProps) => {
       </BoardSection>
 
       <BoardSection>
-        <ChalkHeading title={t("outdoorTitle")} />
+        <ChalkHeading accent={ACCENT.rule} title={t("outdoorTitle")} />
 
         <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-14">
           {OUTDOOR_ITEMS.map((item) => (

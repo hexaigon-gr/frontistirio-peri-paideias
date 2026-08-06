@@ -58,18 +58,43 @@ export const ChalkRule = ({ className }: { className?: string }) => (
   </svg>
 );
 
+/**
+ * One stick of chalk per page. Yellow is the brand's emphasis colour, so using
+ * it as every page's accent as well spends it on nothing: it has to mean "look
+ * here", which it cannot do if it rules every heading on the site.
+ *
+ * The classes are written out rather than composed, because Tailwind extracts
+ * class names from the source and a template literal produces none. The map
+ * lives here once, so a card on the landing page and the page it opens cannot
+ * drift into different colours.
+ */
+export const PAGE_ACCENTS = {
+  about: { rule: "text-rose", doodle: "text-rose/45", card: "text-rose/70" },
+  services: { rule: "text-violet", doodle: "text-violet/45", card: "text-violet/70" },
+  programme: { rule: "text-sky", doodle: "text-sky/45", card: "text-sky/70" },
+  activities: { rule: "text-rose", doodle: "text-rose/45", card: "text-rose/70" },
+  contact: { rule: "text-yellow", doodle: "text-yellow/45", card: "text-yellow/70" },
+} as const;
+
 interface ChalkHeadingProps {
   title: string;
   intro?: string;
   className?: string;
+  /** A `text-*` class for the rule. Defaults to yellow so old calls are unchanged. */
+  accent?: string;
 }
 
-export const ChalkHeading = ({ title, intro, className }: ChalkHeadingProps) => (
+export const ChalkHeading = ({
+  title,
+  intro,
+  className,
+  accent = "text-yellow",
+}: ChalkHeadingProps) => (
   <div className={cn("max-w-[46ch]", className)}>
     <h2 className="font-display text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.06] font-black tracking-[-0.01em] text-chalk">
       {title}
     </h2>
-    <ChalkRule className="mt-3 h-1.5 w-28 text-yellow" />
+    <ChalkRule className={cn("mt-3 h-1.5 w-28", accent)} />
     {intro ? <p className="mt-5 leading-[1.75] text-chalk-dim">{intro}</p> : null}
   </div>
 );
