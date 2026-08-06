@@ -183,6 +183,7 @@
       "middleAll": "Middle school, years 1 to 3",
       "highA": "High school, year 1",
       "highB": "High school, year 2",
+      "highC": "Third year of high school",
       "epal": "Vocational high school, years 1 to 3"
     },
     "subjects": {
@@ -228,7 +229,8 @@
     },
     "tracks": {
       "humanities": "Humanities orientation",
-      "sciences": "Science orientation"
+      "sciences": "Science orientation",
+      "informaticsEconomics": "Computer science and economics track"
     },
     "subjectNotes": {
       "humanitiesExtraHour": "Plus one more hour for humanities students",
