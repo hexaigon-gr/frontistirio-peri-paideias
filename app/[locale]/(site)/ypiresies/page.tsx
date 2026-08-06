@@ -10,7 +10,7 @@ import { EXTERNAL_TOOLS, METHOD_ITEMS, PARTNER_SPECIALISTS } from "@/lib/general
 import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
 
-const EXTRA_ITEMS = ["oefeSimulation", "personalityTest"] as const;
+const EXTRA_ITEMS = ["oefeSimulation", "personalityTest", "learningStyle"] as const;
 const FEATURED_TOOLS = EXTERNAL_TOOLS.filter((tool) => tool.featured);
 
 const ACCENT = PAGE_ACCENTS.services;
@@ -69,7 +69,7 @@ const ServicesPage = async ({ params }: BasePageProps) => {
       <BoardSection>
         <ChalkHeading accent={ACCENT.rule} title={t("extrasTitle")} />
 
-        <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+        <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-3">
           {EXTRA_ITEMS.map((item) => (
             <div key={item}>
               <h3 className="font-display text-xl font-bold text-chalk">
@@ -80,7 +80,12 @@ const ServicesPage = async ({ params }: BasePageProps) => {
               </p>
             </div>
           ))}
+        </div>
 
+        {/* The platforms sit in their own row rather than flowing on from the
+            list above. Mixed into one grid, an odd number of entries pushes each
+            badge away from the service it belongs to. */}
+        <div className="mt-14 grid gap-x-12 gap-y-10 border-t border-chalk/10 pt-12 md:grid-cols-2">
           {FEATURED_TOOLS.map((tool) => (
             <a
               key={tool.key}

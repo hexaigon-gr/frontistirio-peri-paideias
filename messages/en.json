@@ -151,6 +151,10 @@
       "personalityTest": {
         "title": "Personality and careers testing",
         "text": "Specialised tests that show a student their strengths and the studies that suit them."
+      },
+      "learningStyle": {
+        "title": "Learning style assessment",
+        "text": "We work out how each child learns best, so the teaching adapts to them rather than the child adapting to us."
       }
     }
   },
