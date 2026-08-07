@@ -68,7 +68,6 @@ const AboutPage = async ({ params }: BasePageProps) => {
           {STAFF.map((person) => {
             const photo = TEAM_PHOTOS[person.key];
             const credentials = tStaff(`credentials.${person.key}`);
-            const quote = tStaff(`quote.${person.key}`);
 
             return (
               <li key={person.key}>
@@ -104,6 +103,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
                 <p className="mt-5 font-display text-xl font-bold text-chalk sm:text-2xl">
                   {person.name}
                 </p>
+                {/* What they teach. */}
                 <p className="mt-1 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
                   {person.roles.map((role) => tStaff(role)).join(" · ")}
                   {person.isFounder ? (
@@ -111,19 +111,21 @@ const AboutPage = async ({ params }: BasePageProps) => {
                   ) : null}
                 </p>
 
+                {/* What they are responsible for. A different kind of fact from
+                    the subject above and the degrees below, so it gets its own
+                    line in the chalk hand instead of being crammed into either. */}
+                {person.responsibility ? (
+                  <p className="mt-2 font-chalk text-lg leading-none text-yellow">
+                    {tStaff(`responsibility.${person.responsibility}`)}
+                  </p>
+                ) : null}
+
+                {/* Where they studied. */}
                 {credentials ? (
-                  <p className="mt-3 text-[0.9rem] leading-[1.7] text-chalk">{credentials}</p>
+                  <p className="mt-3 text-[0.85rem] leading-[1.6] text-chalk">{credentials}</p>
                 ) : null}
 
                 <p className="mt-3 leading-[1.75] text-chalk-dim">{tStaff(`bio.${person.key}`)}</p>
-
-                {/* Written in the chalk hand, because a line someone chose to
-                    teach by belongs on the board rather than set in body type. */}
-                {quote ? (
-                  <p className="mt-4 border-l-2 border-yellow/40 pl-4 font-chalk text-lg leading-snug text-yellow">
-                    {quote}
-                  </p>
-                ) : null}
 
               </li>
             );

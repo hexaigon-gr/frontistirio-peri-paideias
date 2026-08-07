@@ -78,6 +78,7 @@ export const STAFF = [
     key: "karatzis",
     name: "Βασίλης Καράτζης",
     roles: ["mathematician", "specialEducatorM"],
+    responsibility: "scienceHead",
     isFounder: true,
     phone: { display: "697 923 6257", href: "tel:+306979236257" },
   },
@@ -85,13 +86,15 @@ export const STAFF = [
     key: "manthaiaki",
     name: "Μαρία Μανθαιάκη",
     roles: ["philologist", "specialEducatorF"],
+    responsibility: "humanitiesHead",
     isFounder: true,
     phone: { display: "698 163 9440", href: "tel:+306981639440" },
   },
   {
     key: "athanasaki",
     name: "Μαρία Αθανασάκη",
-    roles: ["philologist", "studyCentreHead"],
+    roles: ["philologist"],
+    responsibility: "studyCentreHead",
     isFounder: false,
     phone: null,
   },
@@ -99,6 +102,7 @@ export const STAFF = [
     key: "triamatakis",
     name: "Κώστας Τριαματάκης",
     roles: ["mathematician"],
+    responsibility: null,
     isFounder: false,
     phone: null,
   },
@@ -106,6 +110,7 @@ export const STAFF = [
     key: "kallergi",
     name: "Γιάννα Καλλέργη",
     roles: ["informatics"],
+    responsibility: null,
     isFounder: false,
     phone: null,
   },
@@ -271,15 +276,18 @@ export const WEEKLY_PROGRAMME = [
   },
 ] as const;
 
-/** Events and out-of-class activities, newest first. */
-export const EVENTS = [
-  { key: "anxietyTalk2026", year: "2026", kind: "event" },
-  { key: "careerAdvisor2026", year: "2026", kind: "event" },
-  { key: "excursion2026", year: "2026", kind: "activity" },
-  { key: "sifmeni2025", year: "2025", kind: "event" },
-  { key: "escapeRoom2025", year: "2025", kind: "activity" },
-  { key: "sifmeni2024", year: "2024", kind: "event" },
-  { key: "careerAdvisor2024", year: "2024", kind: "event" },
+/**
+ * What the school runs every year. Deliberately undated: these repeat, and a
+ * year label next to "κάθε χρόνο" reads as if it happened once. This replaced a
+ * dated timeline in which the same conference appeared twice, one entry per
+ * year, and the careers advisor twice as well.
+ */
+export const STANDING_ACTIVITIES = ["psychologist", "careerGuidance", "sifmeni"] as const;
+
+/** One-off outings, newest first. Here the year IS the point, so it stays. */
+export const OUTINGS = [
+  { key: "excursion2026", year: "2026" },
+  { key: "escapeRoom2025", year: "2025" },
 ] as const;
 
 /**

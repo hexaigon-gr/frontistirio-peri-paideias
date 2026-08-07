@@ -28,28 +28,25 @@
     "informatics": "Computer science",
     "specialEducatorM": "Special educator",
     "specialEducatorF": "Special educator",
-    "studyCentreHead": "Head of the study centre",
     "founder": "Founding member",
+    "responsibility": {
+      "scienceHead": "Head of science studies",
+      "humanitiesHead": "Head of humanities studies",
+      "studyCentreHead": "Head of the study centre"
+    },
     "bio": {
       "karatzis": "Maths from the first year of middle school to advanced high school maths, backed by many years in the classroom. He starts from where the gap was left, not from today's chapter, and he has a gift for inspiring his students: they leave wanting to solve the problem, not just hand it in.",
-      "manthaiaki": "Language, literature, ancient Greek and Latin, from the first year of middle school to the national exams. Her second specialisation in learning difficulties means that when a child struggles, the route changes rather than the goal.",
-      "athanasaki": "For her, philology is far more than an academic subject; it is a field that keeps inspiring her and moving her forward. With a love for education and for teaching, her aim is to pass on knowledge in a way that is substantial and creative, building critical thinking, confidence and a love of learning in her students. She believes every student can grow when they feel supported, inspired and encouraged to discover what they are capable of. She also runs the study centre, where primary school children study every day and leave with the next day's homework done.",
-      "triamatakis": "His academic interests lie in mathematical physics, and lately in the study of mathematical general relativity. He cares deeply about teaching and about communicating science, and his aim is to explain difficult ideas in plain words. For the 2026-27 academic year he will be a doctoral candidate at the Max Planck Institute in Leipzig, working on mathematical general relativity.",
-      "kallergi": "Computer science, from the basic ideas to the exam. She insists on understanding before recipes, so a student can solve something they have not seen before."
+      "manthaiaki": "Language subjects from the first year of middle school to the national exams. With many years of teaching behind her and a structured method that simplifies even the most demanding material, she guides students step by step towards success. Her second specialisation in learning difficulties means that when a child struggles, the route changes rather than the goal.",
+      "athanasaki": "Language subjects, and the daily study sessions for primary school children. With deep affection and real dedication for teaching, she does not simply deliver material, she inspires. She builds an environment of genuine support and confidence, where every child unlocks what they are capable of, develops their critical thinking and gains the self belief they need to love learning.",
+      "triamatakis": "Maths for every year group. With a high scientific level and a rare gift for getting it across, he has a way of explaining difficult things in the plainest words: «as simple as possible, but not simpler». He unlocks how students think, answers every question patiently, and helps them believe in what they can do and come to love the subject.",
+      "kallergi": "Computer science, from the basic ideas to the exams. With a passion for technology and an organised method, she insists on a real understanding of the logic before the application, so a student can confidently solve even a problem they have not seen before. She develops analytical thinking and adapts the lesson to each child, leading them to success with confidence."
     },
     "credentials": {
-      "karatzis": "Applied Mathematics, University of Crete, with a postgraduate degree in specific learning difficulties.",
-      "manthaiaki": "Philology, University of Crete, with postgraduate degrees in classical studies and in specific learning difficulties.",
-      "athanasaki": "Philology, University of Crete, specialising in history.",
-      "triamatakis": "Mathematics, University of Patras, with a 2026 master's in Mathematics and Applications from the Department of Mathematics and Applied Mathematics, University of Crete.",
-      "kallergi": "Computer Science, University of Crete, undergraduate and postgraduate."
-    },
-    "quote": {
-      "karatzis": "",
-      "manthaiaki": "",
-      "athanasaki": "",
-      "triamatakis": "As simple as possible, but not simpler",
-      "kallergi": ""
+      "karatzis": "BSc Applied Mathematics (University of Crete) | MSc Specific Learning Difficulties (University of Calabria)",
+      "manthaiaki": "BA Philology (University of Crete) | MSc Classical Studies (University of Crete) | MSc Specific Learning Difficulties (University of Calabria)",
+      "athanasaki": "BA Philology (University of Crete) | Specialisation in history",
+      "triamatakis": "BSc Mathematics (University of Patras) | MSc Mathematics and Applications (University of Crete) | Doctoral candidate (Max Planck Institute)",
+      "kallergi": "BSc and MSc Computer Science (University of Crete)"
     }
   },
   "Hero": {
@@ -253,34 +250,28 @@
     "intro": "Learning does not stop at the board. Conferences, talks and trips bring the theory to life and widen what our students see.",
     "eventsTitle": "Events",
     "outdoorTitle": "Outside the classroom",
+    "outdoorIntro": "Learning is not confined to the four walls of a classroom. Every year we run something different, from trips and escape rooms to themed evenings, team games and cinema nights.",
+    "outdoorClosing": "That gives our students a break from the daily studying, makes us stronger as a group, and creates memories that stay with them for good.",
     "items": {
-      "careerAdvisor2024": {
-        "title": "Careers advisor",
-        "text": "Guidance on choosing studies, so students reach their application with less uncertainty."
-      },
-      "sifmeni2024": {
-        "title": "SIFMENI conference",
-        "text": "Taking part in the conference of the Heraklion tutoring schools association."
-      },
-      "sifmeni2025": {
-        "title": "SIFMENI conference",
-        "text": "A second year of taking part, with access to professionals and academics."
-      },
-      "escapeRoom2025": {
-        "title": "Escape room",
-        "text": "A team activity where the children solve puzzles together and work their critical thinking."
-      },
-      "careerAdvisor2026": {
-        "title": "Careers advisor",
-        "text": "Individual support, so students discover their strengths and set realistic goals."
-      },
-      "anxietyTalk2026": {
+      "psychologist": {
         "title": "Psychologist's talk on anxiety",
-        "text": "Practical ways to manage exam anxiety for students, and guidance for parents."
+        "text": "At our school, preparing for success is not only about the syllabus, it is also about our students' emotional resilience. That is why our psychologist takes a standing part in what we do, through talks and through sessions."
+      },
+      "careerGuidance": {
+        "title": "Careers advisor",
+        "text": "We believe that success in the exams is the result of a clear goal. That is why career guidance is one of our standing annual activities, giving our students the tools to discover what they are drawn to and to plan their academic and professional future with confidence."
+      },
+      "sifmeni": {
+        "title": "SIFMENI conference days",
+        "text": "As a member of the association of secondary tutoring school owners of Heraklion, our school takes part every year in the association's annual conference on careers guidance, where our students get the chance to meet professionals and academics."
       },
       "excursion2026": {
         "title": "School trip, years 2 and 3",
         "text": "Argyroupoli, Lake Kournas and Bali, an educational trip away from the desks."
+      },
+      "escapeRoom2025": {
+        "title": "Escape room",
+        "text": "A team activity where the children solve puzzles together and work their critical thinking."
       }
     }
   },
