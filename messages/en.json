@@ -34,15 +34,22 @@
       "karatzis": "Maths from the first year of middle school to advanced high school maths, backed by many years in the classroom. He starts from where the gap was left, not from today's chapter, and he has a gift for inspiring his students: they leave wanting to solve the problem, not just hand it in.",
       "manthaiaki": "Language, literature, ancient Greek and Latin, from the first year of middle school to the national exams. Her second specialisation in learning difficulties means that when a child struggles, the route changes rather than the goal.",
       "athanasaki": "Language subjects across middle and high school, with the emphasis on understanding a text before memorising it. She runs the study centre, where primary school children study every day and leave with the next day's homework done.",
-      "triamatakis": "Maths for middle and high school. He starts from where the gap was left, not from today's chapter.",
+      "triamatakis": "His academic interests lie in mathematical physics, and lately in the study of mathematical general relativity. He cares deeply about teaching and about communicating science, and his aim is to explain difficult ideas in plain words. For the 2026-27 academic year he will be a doctoral candidate at the Max Planck Institute in Leipzig, working on mathematical general relativity.",
       "kallergi": "Computer science, from the basic ideas to the exam. She insists on understanding before recipes, so a student can solve something they have not seen before."
     },
     "credentials": {
       "karatzis": "Applied Mathematics, University of Crete, with a postgraduate degree in specific learning difficulties.",
       "manthaiaki": "Philology, University of Crete, with postgraduate degrees in classical studies and in specific learning difficulties.",
       "athanasaki": "",
-      "triamatakis": "",
+      "triamatakis": "Mathematics, University of Patras, with a 2026 master's in Mathematics and Applications from the Department of Mathematics and Applied Mathematics, University of Crete.",
       "kallergi": "Computer Science, University of Crete, undergraduate and postgraduate."
+    },
+    "quote": {
+      "karatzis": "",
+      "manthaiaki": "",
+      "athanasaki": "",
+      "triamatakis": "As simple as possible, but not simpler",
+      "kallergi": ""
     }
   },
   "Hero": {

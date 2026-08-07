@@ -68,6 +68,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
           {STAFF.map((person) => {
             const photo = TEAM_PHOTOS[person.key];
             const credentials = tStaff(`credentials.${person.key}`);
+            const quote = tStaff(`quote.${person.key}`);
 
             return (
               <li key={person.key}>
@@ -115,6 +116,14 @@ const AboutPage = async ({ params }: BasePageProps) => {
                 ) : null}
 
                 <p className="mt-3 leading-[1.75] text-chalk-dim">{tStaff(`bio.${person.key}`)}</p>
+
+                {/* Written in the chalk hand, because a line someone chose to
+                    teach by belongs on the board rather than set in body type. */}
+                {quote ? (
+                  <p className="mt-4 border-l-2 border-yellow/40 pl-4 font-chalk text-lg leading-snug text-yellow">
+                    {quote}
+                  </p>
+                ) : null}
 
               </li>
             );

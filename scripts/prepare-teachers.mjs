@@ -22,20 +22,36 @@ const WIDTH = 900;
 const HEIGHT = 1125;
 const BLUR_EDGE = 16;
 
-/** Explicit, so a new file dropped into `photos/` never silently reshuffles the map. */
+/**
+ * Explicit, so a new file dropped into `photos/` never silently reshuffles the map.
+ *
+ * `crop` is an optional region taken before the resize, in pixels of the source.
+ * Two of these are already framed as portraits; the third is a wide shot of a
+ * teacher at a whiteboard, and `sharp.strategy.attention` keeps the formulas as
+ * happily as it keeps the face, which leaves his head a third the size of the
+ * others in the same grid. The board is worth keeping, so the region is chosen
+ * by hand rather than the photo being cropped to a headshot.
+ */
 const SOURCES = [
   { file: "photos/Καλλεργη Γιαννα.jpg", slug: "kallergi" },
   { file: "photos/Μανθαιάκη Μαρία.png", slug: "manthaiaki" },
+  {
+    file: "photos/Τριαματακης κωστας.jpg",
+    slug: "triamatakis",
+    crop: { left: 480, top: 330, width: 720, height: 900 },
+  },
 ];
 
 const run = async () => {
   const entries = [];
 
-  for (const { file, slug } of SOURCES) {
+  for (const { file, slug, crop } of SOURCES) {
     const target = `${OUT_DIR}/${slug}.webp`;
 
-    await sharp(file)
-      .rotate()
+    const pipeline = sharp(file).rotate();
+    if (crop) pipeline.extract(crop);
+
+    await pipeline
       // Flatten first: one portrait arrived as a PNG with an alpha channel, and
       // WebP would carry the transparency into the tile.
       .flatten({ background: "#ffffff" })
