@@ -27,6 +27,7 @@ const delay = (seconds: number) => ({ "--rise-delay": `${seconds}s` }) as CSSPro
 export const Hero = async () => {
   const t = await getTranslations("Hero");
   const tStaff = await getTranslations("Staff");
+  const tCommon = await getTranslations("Common");
 
   return (
     <section className="relative isolate flex min-h-svh flex-col justify-end overflow-hidden bg-board md:justify-center">
@@ -129,9 +130,11 @@ export const Hero = async () => {
           >
             <p className="flex items-center gap-3 text-[0.65rem] tracking-[0.22em] text-chalk-faint uppercase">
               <span className="h-px w-5 bg-chalk/25" />
-              {t("staffTitle")}
+              {tCommon("studiesDirection")}
             </p>
 
+            {/* Names and roles only. The mobile numbers are personal, so they are
+                published once, on the contact page, and nowhere else. */}
             <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-4">
               {FOUNDERS.map((person) => (
                 <li key={person.key} className="flex items-baseline gap-3">
@@ -139,12 +142,6 @@ export const Hero = async () => {
                   <span className="text-[0.65rem] tracking-[0.18em] text-chalk-faint uppercase">
                     {person.roles.map((role) => tStaff(role)).join(" · ")}
                   </span>
-                  <a
-                    href={person.phone.href}
-                    className="cursor-pointer font-display font-extrabold tabular-nums text-chalk-dim transition-colors duration-200 hover:text-yellow"
-                  >
-                    {person.phone.display}
-                  </a>
                 </li>
               ))}
             </ul>

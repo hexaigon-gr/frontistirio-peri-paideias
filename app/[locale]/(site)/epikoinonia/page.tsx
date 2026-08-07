@@ -40,11 +40,19 @@ const ContactPage = async ({ params }: BasePageProps) => {
           <ChalkBulb className={cn("absolute top-[30%] right-[8%] hidden size-24 md:block lg:size-32", ACCENT.doodle)} />
         }
       >
-        {/* The only call button outside the navbar and the home hero. */}
-        <CallButton className="mt-10" />
+        {/* The only call button outside the navbar and the home hero. It is
+            labelled here because this is the one page that shows both the
+            landline and the two personal numbers, and the reader has to know
+            which is which before dialling. */}
+        <p className="mt-10 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
+          {tCommon("secretariat")}
+        </p>
+        <CallButton className="mt-3" />
       </PageIntro>
 
       <BoardSection tone="deep">
+        <ChalkHeading accent={ACCENT.rule} title={tCommon("studiesDirection")} className="mb-12" />
+
         <ul className="grid gap-8 sm:grid-cols-2">
           {FOUNDERS.map((person) => (
             <li key={person.key} className="relative p-7">

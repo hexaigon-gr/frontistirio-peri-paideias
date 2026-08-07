@@ -20,6 +20,7 @@ const Footer = async () => {
   const t = await getTranslations("Footer");
   const tNav = await getTranslations("Nav");
   const tStaff = await getTranslations("Staff");
+  const tCommon = await getTranslations("Common");
   const tProgramme = await getTranslations("Programme");
   const year = new Date().getFullYear();
   const { address } = BUSINESS;
@@ -94,28 +95,31 @@ const Footer = async () => {
         <div className="lg:col-span-4">
           <h2 className="font-chalk text-xl text-yellow">{t("contactTitle")}</h2>
 
+          {/* The landline is labelled, because the page also names the two people
+              who run the studies and a bare number between them is ambiguous. */}
+          <p className="mt-5 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
+            {tCommon("secretariat")}
+          </p>
           <a
             href={BUSINESS.phone.href}
-            className="mt-5 flex items-center gap-2.5 font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
+            className="mt-1.5 flex items-center gap-2.5 font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
           >
             <Phone className="size-4 shrink-0 text-yellow" strokeWidth={2.5} />
             {BUSINESS.phone.display}
           </a>
 
-          <ul className="mt-5 space-y-5">
+          {/* Names and roles, no numbers: the mobiles are personal and are
+              published once, on the contact page. */}
+          <p className="mt-7 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
+            {tCommon("studiesDirection")}
+          </p>
+          <ul className="mt-2 space-y-3">
             {FOUNDERS.map((person) => (
               <li key={person.key}>
                 <p className="font-display text-lg font-bold text-chalk">{person.name}</p>
                 <p className="text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
                   {person.roles.map((role) => tStaff(role)).join(" · ")}
                 </p>
-                <a
-                  href={person.phone.href}
-                  className="mt-1.5 flex items-center gap-2.5 font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
-                >
-                  <Phone className="size-4 shrink-0 text-yellow" strokeWidth={2.5} />
-                  {person.phone.display}
-                </a>
               </li>
             ))}
           </ul>

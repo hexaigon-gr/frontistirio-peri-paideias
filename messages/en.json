@@ -18,7 +18,9 @@
     "hours": "Opening hours",
     "switchLanguage": "Change language",
     "opensInNewTab": "Opens in a new tab",
-    "seeMore": "See more"
+    "seeMore": "See more",
+    "secretariat": "Front desk",
+    "studiesDirection": "Academic direction"
   },
   "Staff": {
     "philologist": "Philologist",
@@ -52,7 +54,6 @@
     "description": "Small classes for primary, middle and high school in Venerato. Teachers with postgraduate degrees and training in special education.",
     "secondaryCta": "About us",
     "imageAlt": "Hands writing with chalk on a blackboard",
-    "staffTitle": "Academic direction",
     "brand": "Περί...Παιδείας"
   },
   "Home": {

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 import { LocaleSwitch } from "@/components/layout/locale-switch";
 import { Button } from "@/components/ui/button";
-import { BUSINESS, FOUNDERS, NAV_LINKS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
+import { BUSINESS, NAV_LINKS, PRIMARY_PHONE, ROUTES } from "@/lib/general/constants";
 import { cn } from "@/lib/general/utils";
 import { Link, usePathname } from "@/lib/i18n/navigation";
 
@@ -54,7 +54,6 @@ const LinkStroke = ({ isActive }: { isActive: boolean }) => (
 
 export const Navbar = () => {
   const t = useTranslations("Nav");
-  const tStaff = useTranslations("Staff");
   /* Locale-agnostic: next-intl strips the /el or /en prefix, so this compares
      against the bare hrefs in NAV_LINKS without special-casing either locale. */
   const pathname = usePathname();
@@ -217,24 +216,10 @@ export const Navbar = () => {
           })}
         </nav>
 
-        <div className="relative mt-auto space-y-4 p-6">
-          {FOUNDERS.map((person) => (
-            <a
-              key={person.key}
-              href={person.phone.href}
-              className="block cursor-pointer"
-              onClick={closeMenu}
-            >
-              <span className="block font-display text-lg font-bold text-chalk">{person.name}</span>
-              <span className="block text-xs tracking-[0.16em] text-chalk-faint uppercase">
-                {person.roles.map((role) => tStaff(role)).join(" · ")}
-              </span>
-              <span className="mt-1 block font-display text-xl font-extrabold tabular-nums text-yellow">
-                {person.phone.display}
-              </span>
-            </a>
-          ))}
-        </div>
+        {/* The panel used to end with the two founders as quick-dial links. Their
+            mobile numbers are personal and now live only on the contact page, and
+            a name with nothing to tap is not worth the space in a menu. The
+            landline is one button away in the bar above. */}
       </aside>
     </>
   );

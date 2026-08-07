@@ -23,10 +23,10 @@ export const SchoolJsonLd = ({ locale }: { locale: string }) => {
     slogan: BUSINESS.slogan,
     url: `${SITE_URL}/${locale}`,
     logo: `${SITE_URL}/images/logo/wordmark.png`,
-    telephone: [
-      BUSINESS.phone.href.replace("tel:", ""),
-      ...STAFF.flatMap((person) => (person.phone ? [person.phone.href.replace("tel:", "")] : [])),
-    ],
+    /* The landline only. The founders' mobiles are personal, and structured data
+       is precisely where a number is harvested and reused: it is machine readable
+       and it sits on every page. They stay on the contact page and nowhere else. */
+    telephone: BUSINESS.phone.href.replace("tel:", ""),
     address: {
       "@type": "PostalAddress",
       ...(address.street ? { streetAddress: address.street } : {}),

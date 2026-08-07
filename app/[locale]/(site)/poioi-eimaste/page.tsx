@@ -116,14 +116,6 @@ const AboutPage = async ({ params }: BasePageProps) => {
 
                 <p className="mt-3 leading-[1.75] text-chalk-dim">{tStaff(`bio.${person.key}`)}</p>
 
-                {person.phone ? (
-                  <a
-                    href={person.phone.href}
-                    className="mt-3 inline-block cursor-pointer font-display text-lg font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
-                  >
-                    {person.phone.display}
-                  </a>
-                ) : null}
               </li>
             );
           })}
