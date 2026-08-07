@@ -36,6 +36,11 @@ const SOURCES = [
   { file: "photos/Καλλεργη Γιαννα.jpg", slug: "kallergi" },
   { file: "photos/Μανθαιάκη Μαρία.png", slug: "manthaiaki" },
   {
+    file: "photos/Αθανασακη φωτο.jpg",
+    slug: "athanasaki",
+    crop: { left: 202, top: 140, width: 720, height: 900 },
+  },
+  {
     file: "photos/Τριαματακης κωστας.jpg",
     slug: "triamatakis",
     crop: { left: 480, top: 330, width: 720, height: 900 },
