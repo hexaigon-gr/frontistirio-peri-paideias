@@ -39,6 +39,7 @@ Rules learned from actual corrections. These are binding.
   registers a worker, so `public/sw.js` is a kill switch that wipes the caches and
   unregisters itself. Confirm the server is innocent with a headless browser before
   touching any code.
+- **Puppeteer's `clip` is in DOCUMENT coordinates, not viewport coordinates.** Scrolling to an element and then passing `clip: {x:0, y:0, ...}` captures the top of the page, not what is on screen, and it does so silently: the scroll position reports correctly and the screenshot still shows the header. Either compute `rect.top + window.scrollY` and clip against that with `captureBeyondViewport: true`, or skip clipping and use `elementHandle.screenshot()`. Related: `html { scroll-behavior: smooth }` in globals.css makes `window.scrollTo` animate, so a screenshot taken too soon catches the page mid-flight. Pass `behavior: "instant"` or inject `scroll-behavior: auto` first.
 - **A `fullPage` screenshot lies about scroll reveals.** Sections animate in with
   `whileInView`, so anything that never entered the viewport is captured at opacity 0
   and reads as a missing section with a tall empty gap. Scroll the page in steps first,

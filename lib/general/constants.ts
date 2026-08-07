@@ -15,11 +15,8 @@ export const BUSINESS = {
   /** Landline, read off the business card in `photos/`. */
   phone: { display: "2815 306051", href: "tel:+302815306051" },
 
-  /**
-   * PLACEHOLDER. The card shows an address that reads pp.peripaideias@gmail.com
-   * but the photo is too blurry to publish it. Confirm before rendering it.
-   */
-  email: "",
+  /** Read off the business card, then confirmed by the client. */
+  email: "pp.peripaideias@gmail.com",
 
   address: {
     street: "Επαρχιακή Οδός Ηρακλείου - Πενταμοδίου 12",

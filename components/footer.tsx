@@ -1,4 +1,4 @@
-import { Hexagon, MapPin, Phone } from "lucide-react";
+import { Hexagon, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
@@ -12,9 +12,8 @@ import { Link } from "@/lib/i18n/navigation";
 const PARTNER_TOOLS = EXTERNAL_TOOLS.filter((tool) => tool.logo !== null);
 
 /**
- * Only verified details are printed here. The street address, the postal code
- * and the email are still placeholders in `constants.ts`, so they are left out
- * rather than published as invented facts.
+ * Every detail here is confirmed. Anything still unknown in `constants.ts` is
+ * guarded rather than printed, so a placeholder can never ship as a fact.
  */
 const Footer = async () => {
   const t = await getTranslations("Footer");
@@ -124,7 +123,17 @@ const Footer = async () => {
             ))}
           </ul>
 
-          <p className="mt-6 flex items-start gap-2.5 text-chalk-dim">
+          {BUSINESS.email ? (
+            <a
+              href={`mailto:${BUSINESS.email}`}
+              className="mt-6 flex items-center gap-2.5 break-all text-chalk-dim transition-colors duration-200 hover:text-yellow"
+            >
+              <Mail className="size-4 shrink-0 text-yellow" strokeWidth={2.2} />
+              {BUSINESS.email}
+            </a>
+          ) : null}
+
+          <p className="mt-4 flex items-start gap-2.5 text-chalk-dim">
             <MapPin className="mt-0.5 size-4 shrink-0 text-yellow" />
             <span>
               {address.street}

@@ -1,4 +1,4 @@
-import { Clock, Phone } from "lucide-react";
+import { Clock, Mail, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -75,6 +75,21 @@ const ContactPage = async ({ params }: BasePageProps) => {
         {/* The landline is not repeated here: the call button at the top of the
             page already dials it. */}
         <div className="mt-14 grid gap-10 sm:grid-cols-2">
+          {BUSINESS.email ? (
+            <div className="sm:col-span-2">
+              <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-chalk">
+                <Mail className="size-4.5 text-yellow" strokeWidth={2.5} />
+                {tCommon("email")}
+              </h2>
+              <a
+                href={`mailto:${BUSINESS.email}`}
+                className="mt-3 inline-block cursor-pointer break-all font-display text-xl font-bold text-yellow transition-opacity duration-200 hover:opacity-80 sm:text-2xl"
+              >
+                {BUSINESS.email}
+              </a>
+            </div>
+          ) : null}
+
           <div>
             <h2 className="flex items-center gap-2.5 font-display text-lg font-bold text-chalk">
               <Clock className="size-4.5 text-yellow" strokeWidth={2.5} />

@@ -27,6 +27,9 @@ export const SchoolJsonLd = ({ locale }: { locale: string }) => {
        is precisely where a number is harvested and reused: it is machine readable
        and it sits on every page. They stay on the contact page and nowhere else. */
     telephone: BUSINESS.phone.href.replace("tel:", ""),
+    /* The school's own address, unlike the mobiles, so it belongs here. Still
+       guarded: an empty string would publish an organisation with no contact. */
+    ...(BUSINESS.email ? { email: BUSINESS.email } : {}),
     address: {
       "@type": "PostalAddress",
       ...(address.street ? { streetAddress: address.street } : {}),
