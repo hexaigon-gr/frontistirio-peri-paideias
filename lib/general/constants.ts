@@ -242,11 +242,10 @@ export const WEEKLY_PROGRAMME = [
     ],
   },
   {
-    /* Γ΄ Λυκείου is taught entirely per track, so it carries no common subjects
-       of its own. Only the two groups the client sent are listed: an orientation
+    /* Only the two orientation groups the client sent are listed: an orientation
        nobody asked for is a promise the school has not made. */
     key: "highC",
-    subjects: [],
+    subjects: [{ key: "modernGreekHigh", hours: 3 }],
     tracks: [
       {
         key: "humanities",

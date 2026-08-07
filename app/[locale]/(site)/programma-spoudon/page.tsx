@@ -126,8 +126,8 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
               </h3>
               <ChalkRule className="mt-2 h-1.5 w-20 text-yellow/50" />
 
-              {/* Γ΄ Λυκείου has no subjects outside its tracks, and an empty list
-                  still renders its own top margin. */}
+              {/* A year taught entirely per track has no common subjects, and an
+                  empty list still renders its own top margin. */}
               {group.subjects.length ? <SubjectList subjects={group.subjects} t={t} /> : null}
 
               {"tracks" in group
