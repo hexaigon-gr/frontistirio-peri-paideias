@@ -68,6 +68,7 @@ const AboutPage = async ({ params }: BasePageProps) => {
           {STAFF.map((person) => {
             const photo = TEAM_PHOTOS[person.key];
             const credentials = tStaff(`credentials.${person.key}`);
+            const bioExtra = tStaff(`bioExtra.${person.key}`);
 
             return (
               <li key={person.key}>
@@ -126,6 +127,12 @@ const AboutPage = async ({ params }: BasePageProps) => {
                 ) : null}
 
                 <p className="mt-3 leading-[1.75] text-chalk-dim">{tStaff(`bio.${person.key}`)}</p>
+
+                {/* A second paragraph, for the one member of staff whose write-up
+                    the client wanted kept alongside the newer one. */}
+                {bioExtra ? (
+                  <p className="mt-3 leading-[1.75] text-chalk-dim">{bioExtra}</p>
+                ) : null}
 
               </li>
             );
