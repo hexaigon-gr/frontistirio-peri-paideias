@@ -3,9 +3,13 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 
 import { FacebookIcon, InstagramIcon } from "@/components/brand-icons";
+import { PartnerLogo } from "@/components/partner-logo";
 import { SocialIcon } from "@/components/social-icon";
-import { BUSINESS, CREDIT, FOUNDERS, NAV_LINKS } from "@/lib/general/constants";
+import { BUSINESS, CREDIT, EXTERNAL_TOOLS, FOUNDERS, NAV_LINKS } from "@/lib/general/constants";
 import { Link } from "@/lib/i18n/navigation";
+
+/** The tools that have a mark of their own, from the same source as the pages that describe them. */
+const PARTNER_TOOLS = EXTERNAL_TOOLS.filter((tool) => tool.logo !== null);
 
 /**
  * Only verified details are printed here. The street address, the postal code
@@ -16,6 +20,7 @@ const Footer = async () => {
   const t = await getTranslations("Footer");
   const tNav = await getTranslations("Nav");
   const tStaff = await getTranslations("Staff");
+  const tProgramme = await getTranslations("Programme");
   const year = new Date().getFullYear();
   const { address } = BUSINESS;
 
@@ -49,6 +54,24 @@ const Footer = async () => {
               icon={<InstagramIcon className="size-5" />}
               isMobile
             />
+          </div>
+
+          {/* The partner marks, badges only, no copy: the pages that explain them
+              already do. They carry no visible text, so the link needs an
+              accessible name of its own and the image stays decorative. */}
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            {PARTNER_TOOLS.map((tool) => (
+              <a
+                key={tool.key}
+                href={tool.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={tProgramme(`tools.${tool.key}.title`)}
+                className="cursor-pointer transition-opacity duration-200 hover:opacity-80"
+              >
+                <PartnerLogo logo={tool.logo} className="mb-0 h-14" />
+              </a>
+            ))}
           </div>
         </div>
 
