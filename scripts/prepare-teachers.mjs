@@ -26,13 +26,18 @@ const BLUR_EDGE = 16;
  * Explicit, so a new file dropped into `photos/` never silently reshuffles the map.
  *
  * `crop` is an optional region taken before the resize, in pixels of the source.
- * Two of these are already framed as portraits; the third is a wide shot of a
- * teacher at a whiteboard, and `sharp.strategy.attention` keeps the formulas as
- * happily as it keeps the face, which leaves his head a third the size of the
- * others in the same grid. The board is worth keeping, so the region is chosen
- * by hand rather than the photo being cropped to a headshot.
+ * Some of these are already framed as portraits; the rest are wide shots taken
+ * across a classroom, and `sharp.strategy.attention` keeps the whiteboard and
+ * the desk as happily as it keeps the face, which leaves those heads a third
+ * the size of the others in the same grid. The context is worth keeping, so the
+ * region is chosen by hand rather than the photo being cropped to a headshot.
  */
 const SOURCES = [
+  {
+    file: "photos/Βασίλης Καράτζης.jpg",
+    slug: "karatzis",
+    crop: { left: 269, top: 151, width: 854, height: 1067 },
+  },
   { file: "photos/Καλλεργη Γιαννα.jpg", slug: "kallergi" },
   { file: "photos/Μανθαιάκη Μαρία.png", slug: "manthaiaki" },
   {

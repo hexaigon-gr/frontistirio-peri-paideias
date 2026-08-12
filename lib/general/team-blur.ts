@@ -7,6 +7,13 @@
 import type { GalleryImage } from "@/lib/general/gallery-blur";
 
 export const TEAM_PHOTOS: Record<string, GalleryImage> = {
+  "karatzis": {
+    src: "/images/team/karatzis.webp",
+    width: 900,
+    height: 1125,
+    blurDataURL:
+      "data:image/jpeg;base64,/9j/2wBDABIMDRANCxIQDhAUExIVGywdGxgYGzYnKSAsQDlEQz85Pj1HUGZXR0thTT0+WXlaYWltcnNyRVV9hnxvhWZwcm7/2wBDARMUFBsXGzQdHTRuST5Jbm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubm7/wAARCAAQAA0DASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABgQH/8QAIRAAAgICAgEFAAAAAAAAAAAAAQIDEQAEBRIhExRBUoH/xAAVAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAEAIf/aAAwDAQACEQMRAD8ASb+82rEhjUOzNQDEgV+A5WrdlViKsXWZdubu97+UTys8nmqYkC/riviuR5CLQjTYHrOPPZgSa+AcDaky/9k=",
+  },
   "kallergi": {
     src: "/images/team/kallergi.webp",
     width: 900,
