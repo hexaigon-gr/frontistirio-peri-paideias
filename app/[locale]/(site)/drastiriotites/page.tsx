@@ -4,7 +4,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ChalkPlane } from "@/components/chalk/chalk-marks";
 import { BoardSection, ChalkHeading, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { PageIntro } from "@/components/sections/page-intro";
-import { OUTINGS, STANDING_ACTIVITIES } from "@/lib/general/constants";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { OUTINGS, ROUTES, STANDING_ACTIVITIES } from "@/lib/general/constants";
+import { buildPageMetadata } from "@/lib/general/seo";
 import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
 
@@ -14,7 +16,7 @@ export const generateMetadata = async ({ params }: BasePageProps): Promise<Metad
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Activities" });
 
-  return { title: t("title"), description: t("intro") };
+  return buildPageMetadata({ locale, path: ROUTES.activities, title: t("title"), description: t("intro") });
 };
 
 const ActivitiesPage = async ({ params }: BasePageProps) => {
@@ -25,6 +27,8 @@ const ActivitiesPage = async ({ params }: BasePageProps) => {
 
   return (
     <>
+      <BreadcrumbJsonLd locale={locale} routeKey="activities" />
+
       <PageIntro
         title={t("title")}
         intro={t("intro")}

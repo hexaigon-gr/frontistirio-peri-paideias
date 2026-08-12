@@ -25,15 +25,25 @@ const sitemap = (): MetadataRoute.Sitemap => {
   return PAGES.flatMap(({ path, priority }) =>
     routing.locales.map((locale) => ({
       url: `${SITE_URL}/${locale}${path}`,
-      lastModified: new Date(),
+      /* No `lastModified` on purpose. It used to be `new Date()`, which stamped
+         all twelve URLs with the build time, so every deploy claimed the whole
+         site had changed. A crawler that catches a `lastmod` lying once starts
+         ignoring it for the domain permanently, and there is no honest value
+         available here: the pages are static, and per-file git dates are not
+         reliable on a shallow CI clone. An absent lastmod beats a false one. */
       changeFrequency: "monthly" as const,
       priority,
       /* Each page declares its own translations, which is what tells a crawler
-         the two locales are the same page and not duplicate content. */
+         the two locales are the same page and not duplicate content. The
+         `x-default` has to match the one in the page's own head tags, or the
+         two sources disagree and the whole cluster gets dropped. */
       alternates: {
-        languages: Object.fromEntries(
-          routing.locales.map((code) => [code, `${SITE_URL}/${code}${path}`]),
-        ),
+        languages: {
+          ...Object.fromEntries(
+            routing.locales.map((code) => [code, `${SITE_URL}/${code}${path}`]),
+          ),
+          "x-default": `${SITE_URL}/${routing.defaultLocale}${path}`,
+        },
       },
     })),
   );

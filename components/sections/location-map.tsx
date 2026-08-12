@@ -52,7 +52,10 @@ export const LocationMap = async () => {
         <div className="pointer-events-none absolute inset-0 bg-radial from-transparent from-70% to-board/50" />
 
         {/* The tiles carry no place names, so the village is named in chalk here. */}
-        <span className="pointer-events-none absolute bottom-5 left-5 font-display text-sm font-bold tracking-[0.28em] text-chalk/45 uppercase sm:bottom-7 sm:left-8 sm:text-base">
+        {/* 60%, not 45%. Measured against the board this label came out at
+            4.13:1 and AA needs 4.5, which made the one word naming the village
+            the only failing colour on the site. */}
+        <span className="pointer-events-none absolute bottom-5 left-5 font-display text-sm font-bold tracking-[0.28em] text-chalk/60 uppercase sm:bottom-7 sm:left-8 sm:text-base">
           {mapLabel}
         </span>
 

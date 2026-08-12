@@ -28,11 +28,14 @@ const Footer = async () => {
     <footer className="board-texture relative overflow-hidden bg-board-deep">
       <div className="relative mx-auto grid w-full max-w-[84rem] gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-5">
+          {/* Fixed `h-14` at a 2.37:1 aspect, so the box is 133px wide at every
+              breakpoint. See the note on the same image in the navbar. */}
           <Image
             src="/images/logo/wordmark.png"
             alt={BUSINESS.name}
             width={1459}
             height={616}
+            sizes="133px"
             className="h-14 w-auto"
           />
           <p className="mt-7 max-w-[42ch] leading-relaxed text-chalk-dim">{t("tagline")}</p>
@@ -77,12 +80,16 @@ const Footer = async () => {
 
         <div className="lg:col-span-3">
           <h2 className="font-chalk text-xl text-yellow">{t("navTitle")}</h2>
-          <ul className="mt-5 space-y-3">
+          {/* `block py-2.5` with a tighter list gap, rather than bare inline
+              links in a roomy list. Same rhythm on the page, but each target
+              grows from 16px tall to 44 and the whole row becomes tappable
+              instead of just the glyphs. */}
+          <ul className="mt-4 space-y-1">
             {NAV_LINKS.map((link) => (
               <li key={link.key}>
                 <Link
                   href={link.href}
-                  className="text-chalk-dim transition-colors duration-200 hover:text-yellow"
+                  className="block py-2.5 text-chalk-dim transition-colors duration-200 hover:text-yellow"
                 >
                   {tNav(link.key)}
                 </Link>
@@ -99,9 +106,12 @@ const Footer = async () => {
           <p className="mt-5 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
             {tCommon("secretariat")}
           </p>
+          {/* `min-h-11` on both this and the email below. They are the two
+              highest-intent taps in the footer and they measured 32px and 24px
+              tall, so the glyphs were the only target. */}
           <a
             href={BUSINESS.phone.href}
-            className="mt-1.5 flex items-center gap-2.5 font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
+            className="mt-1 flex min-h-11 items-center gap-2.5 font-display text-xl font-extrabold tabular-nums text-chalk transition-colors duration-200 hover:text-yellow"
           >
             <Phone className="size-4 shrink-0 text-yellow" strokeWidth={2.5} />
             {BUSINESS.phone.display}
@@ -126,7 +136,7 @@ const Footer = async () => {
           {BUSINESS.email ? (
             <a
               href={`mailto:${BUSINESS.email}`}
-              className="mt-6 flex items-center gap-2.5 break-all text-chalk-dim transition-colors duration-200 hover:text-yellow"
+              className="mt-5 flex min-h-11 items-center gap-2.5 break-all text-chalk-dim transition-colors duration-200 hover:text-yellow"
             >
               <Mail className="size-4 shrink-0 text-yellow" strokeWidth={2.2} />
               {BUSINESS.email}
@@ -154,7 +164,7 @@ const Footer = async () => {
             href={CREDIT.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex cursor-pointer items-center gap-1.5 transition-colors duration-300 hover:text-chalk"
+            className="flex min-h-11 cursor-pointer items-center gap-1.5 transition-colors duration-300 hover:text-chalk"
           >
             <Hexagon className="size-3.5 shrink-0 text-primary" strokeWidth={2.5} />
             {t("madeBy", { name: CREDIT.name })}

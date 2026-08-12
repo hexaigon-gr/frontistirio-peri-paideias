@@ -8,8 +8,10 @@ import { ChalkBulb } from "@/components/chalk/chalk-marks";
 import { BoardSection, ChalkFrame, ChalkHeading, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { LocationMap } from "@/components/sections/location-map";
 import { PageIntro } from "@/components/sections/page-intro";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
 import { SocialIcon } from "@/components/social-icon";
-import { BUSINESS, FOUNDERS } from "@/lib/general/constants";
+import { BUSINESS, FOUNDERS, ROUTES } from "@/lib/general/constants";
+import { buildPageMetadata } from "@/lib/general/seo";
 import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
 
@@ -19,7 +21,7 @@ export const generateMetadata = async ({ params }: BasePageProps): Promise<Metad
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Contact" });
 
-  return { title: t("title"), description: t("intro") };
+  return buildPageMetadata({ locale, path: ROUTES.contact, title: t("title"), description: t("intro") });
 };
 
 const ContactPage = async ({ params }: BasePageProps) => {
@@ -33,6 +35,8 @@ const ContactPage = async ({ params }: BasePageProps) => {
 
   return (
     <>
+      <BreadcrumbJsonLd locale={locale} routeKey="contact" />
+
       <PageIntro
         title={t("title")}
         intro={t("intro")}
@@ -61,9 +65,11 @@ const ContactPage = async ({ params }: BasePageProps) => {
               <p className="mt-1 text-[0.7rem] tracking-[0.2em] text-chalk-faint uppercase">
                 {person.roles.map((role) => tStaff(role)).join(" · ")}
               </p>
+              {/* `min-h-11`: these two numbers are the highest-intent taps on
+                  the whole site and the anchors measured 32px tall. */}
               <a
                 href={person.phone.href}
-                className="mt-4 flex cursor-pointer items-center gap-3 font-display text-2xl font-extrabold tabular-nums text-yellow transition-opacity duration-200 hover:opacity-80 sm:text-3xl"
+                className="mt-3 flex min-h-11 cursor-pointer items-center gap-3 font-display text-2xl font-extrabold tabular-nums text-yellow transition-opacity duration-200 hover:opacity-80 sm:text-3xl"
               >
                 <Phone className="size-5 shrink-0" strokeWidth={2.5} />
                 {person.phone.display}
@@ -83,7 +89,7 @@ const ContactPage = async ({ params }: BasePageProps) => {
               </h2>
               <a
                 href={`mailto:${BUSINESS.email}`}
-                className="mt-3 inline-block cursor-pointer break-all font-display text-xl font-bold text-yellow transition-opacity duration-200 hover:opacity-80 sm:text-2xl"
+                className="mt-2 inline-flex min-h-11 cursor-pointer items-center break-all font-display text-xl font-bold text-yellow transition-opacity duration-200 hover:opacity-80 sm:text-2xl"
               >
                 {BUSINESS.email}
               </a>

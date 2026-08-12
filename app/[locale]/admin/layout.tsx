@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { setRequestLocale } from "next-intl/server";
 
@@ -9,6 +10,16 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { authOptions } from "@/lib/auth/auth";
 import { BaseLayoutProps } from "@/types/page-props";
+
+/**
+ * Second line of defence behind `robots.txt`.
+ *
+ * A disallow rule stops a crawl, not an index entry: a URL discovered from a
+ * link or a browser toolbar can still be listed with no snippet. This also
+ * stops the panel inheriting a canonical from the site pages, since it sits
+ * outside the `(site)` group and builds no metadata of its own.
+ */
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 const AdminLayout = async ({ children, params }: BaseLayoutProps) => {
   const { locale } = await params;

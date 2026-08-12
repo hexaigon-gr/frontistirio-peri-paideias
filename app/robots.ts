@@ -12,7 +12,14 @@ const robots = (): MetadataRoute.Robots => {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/admin/"],
+      // A wildcard locale segment, NOT a plain "/admin/" rule. robots.txt paths
+      // are literal prefix matches and the panel lives at "/el/admin" and
+      // "/en/admin", so the plain rule matched no real URL and left the whole
+      // panel crawlable. The wildcard form is honoured by Google, Bing and the
+      // major AI crawlers, and the explicit per-locale paths cover anything
+      // that is not. Blocking a crawl does not prevent indexing of a URL
+      // discovered elsewhere, so the admin layout also sets robots: noindex.
+      disallow: ["/api/", "/*/admin", "/el/admin", "/en/admin"],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

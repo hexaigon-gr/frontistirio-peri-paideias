@@ -79,6 +79,21 @@ export const Navbar = () => {
     };
   }, [isMenuOpen]);
 
+  /* Escape is the only dismissal a keyboard user has here: the panel has no
+     visible backdrop to click and the close button may not be where focus is.
+     Without it the scroll lock also stayed on with the page frozen underneath. */
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu();
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isMenuOpen]);
+
   return (
     <>
       <header
@@ -95,13 +110,28 @@ export const Navbar = () => {
             isScrolled ? "h-16" : "h-20 md:h-24",
           )}
         >
-          <Link href={ROUTES.home} aria-label={BUSINESS.name} className="shrink-0">
+          {/* `flex min-h-11 items-center` rather than a bare inline wrapper: the
+              logo is 40px tall at the smallest breakpoint, so the link around it
+              was a 40px target. */}
+          <Link
+            href={ROUTES.home}
+            aria-label={BUSINESS.name}
+            className="flex min-h-11 shrink-0 items-center"
+          >
+            {/* `sizes` is not optional here. Without it `next/image` cannot
+                know the rendered box, falls back to a 1x/2x density srcset off
+                the 1459px intrinsic width, and serves 33 KB for a slot that is
+                at most 133 px wide. Worse, `priority` preloads it, so the
+                oversized file competed with the real LCP image for the first
+                bytes on the wire. The heights below are the same ones in the
+                className, at the 2.37:1 aspect of the wordmark. */}
             <Image
               src="/images/logo/wordmark.png"
               alt={BUSINESS.name}
               width={1459}
               height={616}
               priority
+              sizes="(min-width: 1280px) 133px, (min-width: 768px) 114px, 95px"
               className={cn(
                 "w-auto transition-all duration-300",
                 isScrolled ? "h-9" : "h-10 md:h-12 xl:h-14",
@@ -136,11 +166,15 @@ export const Navbar = () => {
           <div className="flex items-center gap-2.5">
             <LocaleSwitch className="hidden lg:flex" />
 
+            {/* The number is spelled out at every width, including 360. It used
+                to collapse to a bare yellow circle below 640, which is the size
+                most parents are actually holding, and a phone icon with no
+                digits is a worse call-to-action than the digits alone. It fits:
+                the bar has room to spare once the logo is capped. */}
             <Button asChild variant="chalk" size="pill-sm">
-              <a href={PRIMARY_PHONE.href}>
+              <a href={PRIMARY_PHONE.href} aria-label={`${t("call")} ${PRIMARY_PHONE.display}`}>
                 <Phone className="size-4 shrink-0" strokeWidth={2.5} />
-                <span className="hidden tabular-nums sm:inline">{PRIMARY_PHONE.display}</span>
-                <span className="sr-only sm:hidden">{t("call")}</span>
+                <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
               </a>
             </Button>
 
@@ -171,7 +205,13 @@ export const Navbar = () => {
           "board-texture fixed inset-y-0 right-0 z-70 flex w-76 max-w-[86vw] flex-col overflow-hidden bg-board-deep transition-transform duration-300 ease-out lg:hidden",
           isMenuOpen ? "translate-x-0" : "translate-x-full",
         )}
-        aria-hidden={!isMenuOpen}
+        /* `inert`, not `aria-hidden`. The closed panel is only translated off
+           screen, so it still took nine tab stops: focus walked into it and
+           disappeared with no visible ring. `aria-hidden` on a subtree that
+           contains focusable children is also an accessibility violation in its
+           own right. `inert` removes it from the tab order AND from the
+           accessibility tree, which is what was meant all along. */
+        inert={!isMenuOpen}
       >
         <div className="relative flex h-20 items-center justify-between px-5">
           <LocaleSwitch className="pl-1" />
@@ -218,8 +258,25 @@ export const Navbar = () => {
 
         {/* The panel used to end with the two founders as quick-dial links. Their
             mobile numbers are personal and now live only on the contact page, and
-            a name with nothing to tap is not worth the space in a menu. The
-            landline is one button away in the bar above. */}
+            a name with nothing to tap is not worth the space in a menu.
+
+            The landline is NOT "one button away in the bar above", which is what
+            this comment used to claim: the backdrop sits at z-60 and the header
+            at z-50, so while the menu is open the call button is behind it and
+            unreachable. A parent who opened the menu looking for a phone number
+            had to close it again first. */}
+        {/* Not the shared `CallButton`: that one is an async server component
+            and this file is a client boundary. Same primitives, same variant. */}
+        <div className="relative mt-auto px-6 pb-8">
+          <Button asChild variant="chalk" size="pill" className="w-full">
+            <a href={PRIMARY_PHONE.href} onClick={closeMenu}>
+              <Phone className="size-5 shrink-0" strokeWidth={2.5} />
+              {t("call")}
+              <span className="opacity-45">·</span>
+              <span className="tabular-nums">{PRIMARY_PHONE.display}</span>
+            </a>
+          </Button>
+        </div>
       </aside>
     </>
   );

@@ -31,7 +31,10 @@ const buttonVariants = cva(
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         // Pills size by padding, not a fixed height, so they grow with their text.
         pill: "h-auto gap-2.5 px-6 py-4 text-base has-[>svg]:px-6 sm:gap-3 sm:px-7 sm:text-lg",
-        "pill-sm": "h-auto gap-2.5 px-4 py-2.5 text-base has-[>svg]:px-4 sm:px-5",
+        // `min-h-11` because this is the navbar call button, the one control on
+        // the site a parent is most likely to tap, and padding alone left it
+        // 36px tall against the 44px minimum.
+        "pill-sm": "h-auto min-h-11 gap-2.5 px-4 py-2.5 text-base has-[>svg]:px-4 sm:px-5",
         xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",

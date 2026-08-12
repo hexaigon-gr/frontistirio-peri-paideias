@@ -38,7 +38,9 @@ const SocialIcon = ({
       rel="noopener noreferrer"
       className={cn(
         "flex items-center justify-center rounded-md transition-all duration-300 hover:scale-110 hover:shadow-lg",
-        isMobile ? "h-10 w-10" : "h-12 w-12",
+        // 44px, not 40: the mobile size sat exactly under the minimum tap
+        // target and these are round icon-only buttons with no label to aim at.
+        isMobile ? "h-11 w-11" : "h-12 w-12",
         colorClasses,
         className,
       )}

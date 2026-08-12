@@ -52,29 +52,41 @@ export const Hero = async () => {
 
       <div className="relative z-10 mx-auto w-full max-w-[84rem] px-5 pt-28 pb-14 sm:px-8 md:py-24">
         <div className="max-w-[34rem] lg:max-w-[38rem]">
-          {/* The name is read first, written in the chalk hand rather than the
-              display face: on a photographed board a typeset brand line reads as
-              a sticker laid over the picture. */}
-          <p
-            className="rise-in font-chalk text-[clamp(1.9rem,4.4vw,2.9rem)] leading-none text-yellow"
-            style={delay(0)}
-          >
-            {t("brand")}
-          </p>
+          {/* The H1 is the name and the place, not the slogan.
 
-          {/* Chalk white, not yellow: the brand line above it is already yellow,
-              and two golden lines in a row spend the emphasis colour on nothing. */}
-          <p
-            className="rise-in mt-3.5 flex items-start gap-3 font-display text-[0.72rem] font-bold tracking-[0.16em] text-chalk-dim uppercase sm:text-xs sm:tracking-[0.28em]"
-            style={delay(0.06)}
-          >
-            {/* Aligned to the first line, not to the block: on a phone the line
-                wraps and a vertically centred rule floats between the two. */}
-            <span className="mt-[0.55em] h-px w-7 shrink-0 bg-chalk/40" />
-            {t("eyebrow")}
-          </p>
+              Nothing here moved or changed colour: the two lines are exactly the
+              ones that were already at the top of the hero, and the slogan below
+              keeps its size, weight and chalk underline. Only the tag changed.
+              The slogan, "Γιατί η επιτυχία δεν είναι τύχη", is a good line and a
+              bad H1: it names no school, no service and no village, and the H1 is
+              the single string a search engine and an assistant weigh hardest.
+              The information was already on the page, sitting in an eyebrow that
+              carries no semantic weight at all. */}
+          <h1>
+            {/* The name is read first, written in the chalk hand rather than the
+                display face: on a photographed board a typeset brand line reads
+                as a sticker laid over the picture. */}
+            <span
+              className="rise-in block font-chalk text-[clamp(1.9rem,4.4vw,2.9rem)] leading-none text-yellow"
+              style={delay(0)}
+            >
+              {t("brand")}
+            </span>
 
-          <h1
+            {/* Chalk white, not yellow: the brand line above it is already yellow,
+                and two golden lines in a row spend the emphasis colour on nothing. */}
+            <span
+              className="rise-in mt-3.5 flex items-start gap-3 font-display text-[0.72rem] font-bold tracking-[0.16em] text-chalk-dim uppercase sm:text-xs sm:tracking-[0.28em]"
+              style={delay(0.06)}
+            >
+              {/* Aligned to the first line, not to the block: on a phone the line
+                  wraps and a vertically centred rule floats between the two. */}
+              <span className="mt-[0.55em] h-px w-7 shrink-0 bg-chalk/40" />
+              {t("eyebrow")}
+            </span>
+          </h1>
+
+          <p
             className="rise-in mt-5 font-display text-[clamp(2.35rem,7vw,4.75rem)] leading-[1.05] font-black tracking-[-0.015em] text-chalk md:mt-6 md:leading-[0.98]"
             style={delay(0.14)}
           >
@@ -93,7 +105,7 @@ export const Hero = async () => {
               {/* No space before it: the closing mark hangs on the emphasised word. */}
               {t("titleAfter")}
             </span>
-          </h1>
+          </p>
 
           <p
             className="rise-in mt-5 max-w-[46ch] leading-[1.75] text-chalk-dim md:mt-7 md:text-lg"

@@ -6,7 +6,9 @@ import { ChalkSetSquare } from "@/components/chalk/chalk-marks";
 import { PartnerLogo } from "@/components/partner-logo";
 import { BoardSection, ChalkFrame, ChalkHeading, ChalkRule, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { PageIntro } from "@/components/sections/page-intro";
-import { BUSINESS, EXTERNAL_TOOLS, LEVELS, WEEKLY_PROGRAMME } from "@/lib/general/constants";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { BUSINESS, EXTERNAL_TOOLS, LEVELS, ROUTES, WEEKLY_PROGRAMME } from "@/lib/general/constants";
+import { buildPageMetadata } from "@/lib/general/seo";
 import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
 
@@ -19,33 +21,48 @@ type ProgrammeSubject =
  * One row per subject. The note sits under the subject rather than behind an
  * asterisk: a marker makes the reader hunt for its meaning, and the hours column
  * has to stay a single scannable number.
+ *
+ * A real `<table>`, not a styled list. This is the most quotable content on the
+ * site, and as `<li><span>Άλγεβρα</span><span>2 ώρες</span></li>` every text
+ * extractor produced "Άλγεβρα2 ώρες" glued together, because adjacent inline
+ * spans carry no separator. A search engine or an assistant reading that gets a
+ * mangled token instead of a subject and its hours. `<th scope="row">` also
+ * states the relationship rather than leaving it to visual proximity.
+ *
+ * The caption names which class the hours belong to, so a row lifted out of the
+ * page still says what it is a row of.
  */
-const SubjectList = ({
+const SubjectTable = ({
   subjects,
+  caption,
   t,
 }: {
   subjects: readonly ProgrammeSubject[];
+  caption: string;
   t: Awaited<ReturnType<typeof getTranslations<"Programme">>>;
 }) => (
-  <ul className="mt-3 divide-y divide-chalk/10">
-    {subjects.map((subject) => (
-      <li key={subject.key} className="flex items-baseline justify-between gap-5 py-2.5">
-        <span className="min-w-0">
-          <span className="text-chalk">{t(`subjects.${subject.key}`)}</span>
-          {"noteKey" in subject ? (
-            <span className="mt-1 block text-[0.78rem] leading-snug text-chalk-faint">
-              {t(`subjectNotes.${subject.noteKey}`)}
-            </span>
-          ) : null}
-        </span>
-        <span className="shrink-0 font-display font-bold tabular-nums text-chalk-dim">
-          {"unit" in subject && subject.unit === "day"
-            ? t("hoursDaily", { hours: subject.hours })
-            : t("hoursWeekly", { hours: subject.hours })}
-        </span>
-      </li>
-    ))}
-  </ul>
+  <table className="mt-3 w-full border-collapse text-left">
+    <caption className="sr-only">{caption}</caption>
+    <tbody className="divide-y divide-chalk/10">
+      {subjects.map((subject) => (
+        <tr key={subject.key}>
+          <th scope="row" className="py-2.5 pr-5 text-left font-normal">
+            <span className="text-chalk">{t(`subjects.${subject.key}`)}</span>
+            {"noteKey" in subject ? (
+              <span className="mt-1 block text-[0.78rem] leading-snug text-chalk-faint">
+                {t(`subjectNotes.${subject.noteKey}`)}
+              </span>
+            ) : null}
+          </th>
+          <td className="w-px py-2.5 text-right font-display font-bold whitespace-nowrap tabular-nums text-chalk-dim">
+            {"unit" in subject && subject.unit === "day"
+              ? t("hoursDaily", { hours: subject.hours })
+              : t("hoursWeekly", { hours: subject.hours })}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
 );
 
 const ACCENT = PAGE_ACCENTS.programme;
@@ -54,7 +71,7 @@ export const generateMetadata = async ({ params }: BasePageProps): Promise<Metad
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Programme" });
 
-  return { title: t("title"), description: t("intro") };
+  return buildPageMetadata({ locale, path: ROUTES.programme, title: t("title"), description: t("intro") });
 };
 
 const ProgrammePage = async ({ params }: BasePageProps) => {
@@ -67,6 +84,8 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
 
   return (
     <>
+      <BreadcrumbJsonLd locale={locale} routeKey="programme" />
+
       <PageIntro
         title={t("title")}
         intro={t("intro")}
@@ -128,7 +147,13 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
 
               {/* A year taught entirely per track has no common subjects, and an
                   empty list still renders its own top margin. */}
-              {group.subjects.length ? <SubjectList subjects={group.subjects} t={t} /> : null}
+              {group.subjects.length ? (
+                <SubjectTable
+                  subjects={group.subjects}
+                  caption={t(`classes.${group.key}`)}
+                  t={t}
+                />
+              ) : null}
 
               {"tracks" in group
                 ? group.tracks.map((track) => (
@@ -136,7 +161,11 @@ const ProgrammePage = async ({ params }: BasePageProps) => {
                       <p className="text-[0.7rem] tracking-[0.18em] text-chalk-faint uppercase">
                         {t(`tracks.${track.key}`)}
                       </p>
-                      <SubjectList subjects={track.subjects} t={t} />
+                      <SubjectTable
+                        subjects={track.subjects}
+                        caption={`${t(`classes.${group.key}`)} · ${t(`tracks.${track.key}`)}`}
+                        t={t}
+                      />
                     </div>
                   ))
                 : null}

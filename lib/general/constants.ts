@@ -24,6 +24,13 @@ export const BUSINESS = {
     /** Venerato sits in Δημοτική Ενότητα Παλιανής, Δήμος Ηρακλείου. Not Malevizi. */
     municipality: "Δήμος Ηρακλείου",
     city: "Ηράκλειο Κρήτης",
+    /**
+     * The administrative region, for `addressRegion` in structured data only.
+     * `city` above is display copy ("Ηράκλειο Κρήτης" is how the school writes
+     * it) and a geocoder reads `addressRegion` as a region, not a city with the
+     * island appended.
+     */
+    region: "Κρήτη",
     postalCode: "70011",
   },
 
@@ -73,6 +80,16 @@ export const BUSINESS = {
  *
  * Names are proper nouns and stay as written.
  */
+/**
+ * `alumniOf` duplicates institutions that also appear inside the display string
+ * in `Staff.credentials`, and that duplication is deliberate. The message is one
+ * pipe-delimited sentence written for a parent to read; string-parsing it back
+ * into data would break the moment someone rewords a degree. Structured data
+ * gets its own field.
+ *
+ * These are the real institutions behind the real degrees. Do not add one that
+ * is not already written in the credentials line.
+ */
 export const STAFF = [
   {
     key: "karatzis",
@@ -81,6 +98,7 @@ export const STAFF = [
     responsibility: "scienceHead",
     isFounder: true,
     phone: { display: "697 923 6257", href: "tel:+306979236257" },
+    alumniOf: ["Πανεπιστήμιο Κρήτης", "University of Calabria"],
   },
   {
     key: "manthaiaki",
@@ -89,6 +107,7 @@ export const STAFF = [
     responsibility: "humanitiesHead",
     isFounder: true,
     phone: { display: "698 163 9440", href: "tel:+306981639440" },
+    alumniOf: ["Πανεπιστήμιο Κρήτης", "University of Calabria"],
   },
   {
     key: "athanasaki",
@@ -97,6 +116,7 @@ export const STAFF = [
     responsibility: "studyCentreHead",
     isFounder: false,
     phone: null,
+    alumniOf: ["Πανεπιστήμιο Κρήτης"],
   },
   {
     key: "triamatakis",
@@ -105,6 +125,7 @@ export const STAFF = [
     responsibility: null,
     isFounder: false,
     phone: null,
+    alumniOf: ["Πανεπιστήμιο Πατρών", "Πανεπιστήμιο Κρήτης", "Max Planck Institute"],
   },
   {
     key: "kallergi",
@@ -113,6 +134,7 @@ export const STAFF = [
     responsibility: null,
     isFounder: false,
     phone: null,
+    alumniOf: ["Πανεπιστήμιο Κρήτης"],
   },
 ] as const;
 

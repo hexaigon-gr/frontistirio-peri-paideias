@@ -6,7 +6,9 @@ import { ChalkAtom, ChalkFlask } from "@/components/chalk/chalk-marks";
 import { PartnerLogo } from "@/components/partner-logo";
 import { BoardSection, ChalkFrame, ChalkHeading, PAGE_ACCENTS } from "@/components/sections/board-blocks";
 import { PageIntro } from "@/components/sections/page-intro";
-import { EXTERNAL_TOOLS, METHOD_ITEMS, PARTNER_SPECIALISTS } from "@/lib/general/constants";
+import { BreadcrumbJsonLd } from "@/components/seo/breadcrumb-jsonld";
+import { EXTERNAL_TOOLS, METHOD_ITEMS, PARTNER_SPECIALISTS, ROUTES } from "@/lib/general/constants";
+import { buildPageMetadata } from "@/lib/general/seo";
 import { cn } from "@/lib/general/utils";
 import { BasePageProps } from "@/types/page-props";
 
@@ -19,7 +21,7 @@ export const generateMetadata = async ({ params }: BasePageProps): Promise<Metad
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Services" });
 
-  return { title: t("title"), description: t("intro") };
+  return buildPageMetadata({ locale, path: ROUTES.services, title: t("title"), description: t("intro") });
 };
 
 const ServicesPage = async ({ params }: BasePageProps) => {
@@ -32,6 +34,8 @@ const ServicesPage = async ({ params }: BasePageProps) => {
 
   return (
     <>
+      <BreadcrumbJsonLd locale={locale} routeKey="services" />
+
       <PageIntro
         title={t("title")}
         intro={t("intro")}
